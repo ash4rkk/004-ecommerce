@@ -1,4 +1,4 @@
-import { productType } from '@/constants/data';
+import { DATA_productType } from '@/constants/data';
 import Link from 'next/link';
 import React from 'react';
 import { Button } from './ui/button';
@@ -11,7 +11,7 @@ const HomeTabBar = ({ selectedTab, onTabSelect }: Props) => {
   return (
     <div className='flex items-center justify-between flex-wrap gap-5'>
       <div className='flex items-center gap-3 text-sm font-semibold'>
-        {productType?.map((item) => (
+        {DATA_productType?.map((item) => (
           <Button
             key={item?.title}
             onClick={() => onTabSelect(item?.title)}

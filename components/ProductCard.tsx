@@ -7,6 +7,7 @@ import React from 'react';
 import AddToWishlistButton from './AddToWishlistButton';
 import { Title } from './ui/text';
 import PriceView from './PriceView';
+import AddToCartButton from './AddToCartButton';
 
 interface Props {
   product?: Product;
@@ -84,6 +85,7 @@ const ProductCard = ({ product }: Props) => {
           discount={product?.discount}
           className='text-sm'
         />
+        <AddToCartButton product={product} className='w-36 rounded-full'/>
       </div>
     </div>
   );

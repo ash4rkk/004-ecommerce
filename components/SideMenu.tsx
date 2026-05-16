@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Logo from './Logo';
 import { X } from 'lucide-react';
-import { headerData } from '@/constants/data';
+import { DATA_headerData } from '@/constants/data';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import SocialMedia from './SocialMedia';
@@ -34,7 +34,7 @@ const SideMenu: FC<SidebarProps> = ({ isOpen, onClose }) => {
         </div>
 
         <div className='flex flex-col items-start space-y-3.5 font-semibold tracking-wide'>
-          {headerData?.map((item) => (
+          {DATA_headerData?.map((item) => (
             <Link
               className={`hover:text-shop_light_green hoverEffect ${pathname === item?.href && 'text-shop_light_green' }`}
               href={item?.href}
