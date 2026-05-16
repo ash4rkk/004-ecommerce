@@ -19,7 +19,6 @@ export const DATA_quickLinks = [
 ];
 
 export const DATA_categories = [
-  { title: 'Mobiles', href: 'mobiles' },
   { title: 'Appliances', href: 'appliances' },
   { title: 'Smartphones', href: 'smartphones' },
   { title: 'Air Conditioners', href: 'air-conditioners' },
