@@ -3,12 +3,13 @@ import { Title } from './ui/text';
 import { Category, Product } from '@/sanity.types';
 import { urlFor } from '@/sanity/lib/image';
 import Link from 'next/link';
+import { CategoryWithCount } from '@/sanity/queries';
 interface Props {
-  categories: Category[];
+  categories: CategoryWithCount[];
 }
 const HomeCategories = ({ categories }: Props) => {
   return (
-    <div className='bg-white border border-shop_light_green/20 my-10 md:my-20 p-5 lg:p-7 rounded-md'>
+    <div className='bg-white border border-dark_blue/20 my-10 md:my-20 p-5 lg:p-7 rounded-md'>
       <Title className='border-b pb-3'>Popular Categories</Title>
       <div className='mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
         {categories?.map((category) => (
@@ -19,7 +20,7 @@ const HomeCategories = ({ categories }: Props) => {
             <Link href={`/category/${category?.slug?.current}`} className='flex items-center gap-3'>
             {/* Image */}
             {category?.image && (
-              <div className='overflow-hidden border border-shop_orange/30 hover:border-shop_orange hoverEffect w-20 h-20 p-1'>
+              <div className='overflow-hidden hoverEffect w-20 h-20 p-1'>
                   <Image
                     src={urlFor(category?.image).url()}
                     alt='categoryImage'
