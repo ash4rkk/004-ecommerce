@@ -5,7 +5,7 @@ import FooterBottom from './FooterBottom';
 import Logo from './Logo';
 import SocialMedia from './SocialMedia';
 import { SubText, SubTitle } from './ui/text';
-import { categoriesData, quickLinksData } from '@/constants/data';
+import { DATA_categories, DATA_quickLinks } from '@/constants/data';
 import Link from 'next/link';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
@@ -32,7 +32,7 @@ function Footer() {
             <div>
               <SubTitle>Quick Links</SubTitle>
               <ul className='space-y-3 mt-4 '>
-                {quickLinksData?.map((item) => (
+                {DATA_quickLinks?.map((item) => (
                   <li key={item?.title}>
                     <Link
                       href={item?.href}
@@ -47,7 +47,7 @@ function Footer() {
             <div>
               <SubTitle>Categories</SubTitle>
               <ul className='space-y-3 mt-4 '>
-                {categoriesData?.map((item) => (
+                {DATA_categories?.map((item) => (
                   <li key={item?.title}>
                     <Link
                       href={`/categories/${item?.href}`}

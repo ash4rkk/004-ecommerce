@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import HomeTabBar from './HomeTabBar';
-import { productType } from '@/constants/data';
+import { DATA_productType } from '@/constants/data';
 import { client } from '@/sanity/lib/client';
 import { AnimatePresence, motion } from 'motion/react';
 import { Loader2 } from 'lucide-react';
@@ -12,7 +12,7 @@ import { Product } from '@/sanity.types';
 const ProductGrid = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
-  const [selectedTab, setSelectedTab] = useState(productType[0]?.title || '');
+  const [selectedTab, setSelectedTab] = useState(DATA_productType[0]?.title || '');
 
   const query = /* groq */ `*[_type == 'product' && variant == $variant] | order(name asc) {
   name,
@@ -36,7 +36,7 @@ const ProductGrid = () => {
   }, [selectedTab]);
 
   return (
-    <div>
+    <div className='py-10'>
       <HomeTabBar
         selectedTab={selectedTab}
         onTabSelect={setSelectedTab}

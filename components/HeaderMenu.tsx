@@ -1,5 +1,5 @@
 'use client';
-import { headerData } from '@/constants/data';
+import { DATA_headerData } from '@/constants/data';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
@@ -9,11 +9,11 @@ function HeaderMenu({ className }: { className?: string }) {
 
   return (
     <div className='hidden md:inline-flex w-1/3 items-center gap-7 text-sm capitalize font-semibold text-lightColor'>
-      {headerData?.map((item) => (
+      {DATA_headerData?.map((item) => (
         <Link
           href={item?.href}
           key={item?.title}
-          className={`hover:text-shop_light_green hoverEffect relative group ${pathname === item?.href && 'text-shop_light_green'}`}
+          className={`hover:text-shop_light_green hoverEffect text-nowrap relative group ${pathname === item?.href && 'text-shop_light_green'}`}
         >
           {item?.title}
 
