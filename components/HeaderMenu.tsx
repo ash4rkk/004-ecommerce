@@ -8,7 +8,7 @@ function HeaderMenu({ className }: { className?: string }) {
   const pathname = usePathname(); // ex. '/blog
 
   return (
-    <div className='hidden md:inline-flex w-1/3 items-center gap-7 text-sm capitalize font-semibold text-lightColor'>
+    <div className='hidden md:inline-flex w-1/3 justify-center items-center gap-7 text-sm capitalize font-semibold text-lightColor'>
       {DATA_headerData?.map((item) => (
         <Link
           href={item?.href}
