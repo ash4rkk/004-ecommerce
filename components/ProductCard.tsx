@@ -11,7 +11,6 @@ import AddToCartButton from './AddToCartButton';
 
 interface Props {
   product?: Product;
-
 }
 
 const ProductCard = ({ product }: Props) => {
@@ -19,6 +18,7 @@ const ProductCard = ({ product }: Props) => {
     <div className='text-sm border border-dark_blue/20 rounded-md bg-white group'>
       <div className='relative group overflow-hidden bg-shop_light_bg'>
         {product?.images?.[0] && (
+          <Link href={`/product/${product?.slug?.current}`}>
           <Image
             src={urlFor(product?.images[0]).url()}
             alt='ProductImage'
@@ -26,7 +26,8 @@ const ProductCard = ({ product }: Props) => {
             width={700}
             height={700}
             className={`w-full h-64 object-contain overflow-hidden transition-transform bg-shop_light_bg hoverEffect ${product?.stock !== 0 ? 'group-hover:scale-105' : 'opacity-50'}`}
-          />
+            />
+            </Link>
         )}
         <AddToWishlistButton product={product} />
         {product?.status === 'sale' && (
@@ -82,7 +83,7 @@ const ProductCard = ({ product }: Props) => {
         </div>
         <PriceView
           price={product?.price}
-          discount={product?.discount}
+          discount={ product?.discount && product.discount > 0 ? product.discount : undefined}
           className='text-sm'
         />
         <AddToCartButton product={product} className='w-36 rounded-full'/>
