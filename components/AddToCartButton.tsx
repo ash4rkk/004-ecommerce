@@ -5,7 +5,7 @@ import { Button } from './ui/button';
 import { ShoppingBag } from 'lucide-react';
 import { cn } from '@/lib/utils';
 interface Props {
-  product?: Product;
+  product?: Product | null;
   className?: string;
 }
 const AddToCartButton = ({ product, className }: Props) => {
@@ -14,7 +14,7 @@ const AddToCartButton = ({ product, className }: Props) => {
     
   }
   return (
-    <div>
+    <div className={cn('w-full', className)}> 
       <Button
         onClick={handleAddToCart}
         disabled={isOutOfStock}

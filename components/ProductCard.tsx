@@ -86,7 +86,7 @@ const ProductCard = ({ product }: Props) => {
           discount={ product?.discount && product.discount > 0 ? product.discount : undefined}
           className='text-sm'
         />
-        <AddToCartButton product={product} className='w-36 rounded-full'/>
+        <AddToCartButton product={product} className='rounded-full'/>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { Brand, Category } from '@/sanity.types';
 import { sanityFetch } from '../lib/live';
-import { BRANDS_QUERY, DEAL_PRODUCTS, LATEST_BLOG_QUERY, PRODUCT_BY_SLUG_QUERY } from './query';
+import { BRANDS_QUERY, DEAL_PRODUCTS, LATEST_BLOG_QUERY, PRODUCT_BY_SLUG_QUERY, BRAND_QUERY } from './query';
+
 export type CategoryWithCount = Category & { productCount: number };
 const getCategories = async (quantity?: number) => {
   try {
@@ -55,16 +56,31 @@ const getDealProducts = async () => {
 
 const getProductBySlug = async (slug: string) => {
   try {
-    const product = await sanityFetch({
+    const {data} = await sanityFetch({
       query: PRODUCT_BY_SLUG_QUERY,
       params: {
         slug,
       }
     })
-    return product?.data || null
+    return data || null
   } catch (error) {
     console.log('Error fetching product by slug', error)  
     return null  
+  }
+}
+
+const getBrand = async (slug: string) => {
+  try {
+    const { data } = await sanityFetch({
+      query: BRAND_QUERY,
+      params: {
+        slug,
+      }
+    })
+    return data || null
+  } catch (error) {
+    console.log('Error fetching brands', error)
+    return null
   }
 }
 
@@ -73,5 +89,6 @@ export {
   getAllBrands, 
   getLatestBlogs, 
   getDealProducts,
-  getProductBySlug 
+  getProductBySlug,
+  getBrand
 };
