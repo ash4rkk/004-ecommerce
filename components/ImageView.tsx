@@ -32,19 +32,19 @@ const ImageView = ({ images = [], isStock }: Props) => {
           />
         </motion.div>
       </AnimatePresence>
-      <div className='grid grid-cols-6 gap-2 h-20 md:h-24'>
+      <div className='grid grid-cols-4 gap-2 h-20 md:h-24'>
         {images?.map((image) => (
           <button 
           key={image?._key}
           onClick={() => setActive(image)}
-          className={`border border-muted overflow-hidden ${active?._key === image?._key ? 'border-darkColor' : ''}`}
+          className={`border-3 rounded-md border-muted overflow-hidden ${active?._key === image?._key ? 'border-shop_dark_green/50 opacity-100': 'opacity-80'}`}
           >
             <Image 
               src={urlFor(image).url()}
               alt={`Thumbnail ${image._key}`}
               width={100}
               height={100}
-              className='w-full h-auto object-contain'
+              className='w-full hoverEffect hover:scale-110 object-cover h-full'
             />
           </button>
         ))}
