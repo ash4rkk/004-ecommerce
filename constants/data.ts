@@ -55,3 +55,49 @@ export const DATA_shopByBrands = [
     icon: ShieldCheck, 
   },
 ];
+
+export const DATA_review = [
+  {
+    name: "Sarah M.",
+    rating: 5,
+    date: "March 12, 2025",
+    comment:
+      "Absolutely love this product! The sound quality is outstanding and the battery lasts way longer than expected. Best purchase I've made this year.",
+  },
+  {
+    name: "James K.",
+    rating: 4,
+    date: "February 28, 2025",
+    comment:
+      "Great build quality and the Bluetooth connection is rock solid. Only minor complaint is the carry case could be better. Overall very happy.",
+  },
+  {
+    name: "Anna W.",
+    rating: 5,
+    date: "January 15, 2025",
+    comment:
+      "Incredible audio experience. I use it daily for work calls and music — crystal clear every time. The aluminum finish looks premium too.",
+  },
+  {
+    name: "Tom R.",
+    rating: 3,
+    date: "December 4, 2024",
+    comment:
+      "Decent product for the price. Sound is good but the bass could be punchier. Setup was straightforward and it works with all my devices.",
+  },
+  {
+    name: "Emily C.",
+    rating: 5,
+    date: "November 20, 2024",
+    comment:
+      "Exceeded all my expectations. Paired instantly with my phone and laptop. The 18-hour battery claim is accurate — I barely need to charge it.",
+  },
+]
+
+export const DATA_PRICE_RANGE_ARRAY = [
+  { title: 'Under 100', value: '0-100'},
+  { title: '100 - 200', value: '100-300'},
+  { title: '200 - 300', value: '200-300'},
+  { title: '300 - 500', value: '300-500'},
+  { title: 'Over 500', value: '500-10000'},  
+]
