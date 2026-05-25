@@ -9,6 +9,8 @@ import BrandList from "./shop/BrandList";
 import PriceList from "./shop/PriceList";
 import { useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
+import { defineQuery } from "next-sanity";
+import { SHOP_QUERY } from "@/sanity/queries/query";
 
 interface Props {
   categories?: CategoryWithCount[];
@@ -27,6 +29,24 @@ const Shop = ({ categories, brands }: Props) => {
   );
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
 
+  const fetchProducts = async () => {
+    setLoading(true);
+    try {
+      let minPrice = 0;
+      let maxPrice = 10000;
+
+      if (selectedPrice) {
+        const [min, max] = selectedPrice.split("-").map(Number);
+        minPrice = min;
+        maxPrice = max;
+      }
+      const query = SHOP_QUERY
+    } catch (error) {
+      console.log("Shop product fetching error", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="border-t">
       <Container className="mt-5">
@@ -36,12 +56,15 @@ const Shop = ({ categories, brands }: Props) => {
               Get the products as your needs
             </Title>
             <motion.button
-              animate={{ opacity: (selectedBrand || selectedCategory || selectedPrice) ? 1 : 0 }}
+              animate={{
+                opacity:
+                  selectedBrand || selectedCategory || selectedPrice ? 1 : 0,
+              }}
               transition={{ duration: 0.3 }}
               onClick={() => {
-                setSelectedPrice(null)
-                setSelectedBrand(null)
-                setSelectedCategory(null)
+                setSelectedPrice(null);
+                setSelectedBrand(null);
+                setSelectedCategory(null);
               }}
               className="text-shop_dark_green hoverEffect hover:text-shop_orange mt-2 text-sm font-medium underline"
             >
