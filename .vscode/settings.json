@@ -4,5 +4,6 @@
     "groq",
     "hotspot",
     "Shopek"
-  ]
+  ],
+  "prettier.prettierPath": "./node_modules/prettier"
 }

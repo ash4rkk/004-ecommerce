@@ -17,7 +17,11 @@ const HomeCategories = ({ categories }: Props) => {
             key={category?._id}
             className='bg-shop_light_bg p-5 flex items-center gap-3 group'
           >
-            <Link href={`/category/${category?.slug?.current}`} className='flex items-center gap-3'>
+            <Link 
+            href={`/category/${category?.slug?.current}`} 
+            // href={{pathname: '/shop', query: { category: category?.slug?.current }}} 
+            className='flex items-center gap-3'
+            >
             {/* Image */}
             {category?.image && (
               <div className='overflow-hidden hoverEffect w-20 h-20 p-1'>
