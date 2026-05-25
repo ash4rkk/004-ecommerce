@@ -1,7 +1,7 @@
 "use client";
 import { Brand, Category, Product } from "@/sanity.types";
 import { CategoryWithCount } from "@/sanity/queries";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "./Container";
 import { Title } from "./ui/text";
 import CategoryList from "./shop/CategoryList";
@@ -11,6 +11,10 @@ import { useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
 import { defineQuery } from "next-sanity";
 import { SHOP_QUERY } from "@/sanity/queries/query";
+import { client } from "@/sanity/lib/client";
+import { Loader, Loader2 } from "lucide-react";
+import NoProductAvailable from "./NoProductAvailable";
+import ProductCard from "./ProductCard";
 
 interface Props {
   categories?: CategoryWithCount[];
@@ -20,33 +24,50 @@ interface Props {
 const Shop = ({ categories, brands }: Props) => {
   const searchParams = useSearchParams();
   const brandParams = searchParams?.get("brand");
+  const categoryParams = searchParams?.get('category')
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(categoryParams || null);
   const [selectedBrand, setSelectedBrand] = useState<string | null>(
     brandParams || null,
   );
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
 
-  const fetchProducts = async () => {
-    setLoading(true);
-    try {
-      let minPrice = 0;
-      let maxPrice = 10000;
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      try {
+        let minPrice = 0;
+        let maxPrice = 10000;
 
-      if (selectedPrice) {
-        const [min, max] = selectedPrice.split("-").map(Number);
-        minPrice = min;
-        maxPrice = max;
+        if (selectedPrice) {
+          const [min, max] = selectedPrice.split("-").map(Number);
+          minPrice = min;
+          maxPrice = max;
+        }
+        const query = SHOP_QUERY;
+        const data = await client.fetch(
+          query,
+          {
+            selectedCategory,
+            selectedBrand,
+            minPrice,
+            maxPrice,
+          },
+          {
+            next: { revalidate: 0 },
+          },
+        );
+        setProducts(data);
+      } catch (error) {
+        console.log("Shop product fetching error", error);
+      } finally {
+        setLoading(false);
       }
-      const query = SHOP_QUERY
-    } catch (error) {
-      console.log("Shop product fetching error", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
+    fetchProducts();
+  }, [selectedCategory, selectedBrand, selectedPrice]);
   return (
     <div className="border-t">
       <Container className="mt-5">
@@ -90,7 +111,30 @@ const Shop = ({ categories, brands }: Props) => {
               setSelectedPrice={setSelectedPrice}
             />
           </div>
-          <div>Products</div>
+          <div className="flex-1 pt-5">
+            <div className="scrollbar-hide h-[calc(100vh-160px)] overflow-y-auto pr-2">
+              {loading ? (
+                <div className="flex flex-col items-center justify-center gap-2 p-20">
+                  <Loader2 className="text-shop_dark_green h-10 w-10 animate-spin" />{" "}
+                  <p className="font-sans text-base tracking-wide">
+                    Product is loading ...
+                  </p>
+                </div>
+              ) : (
+                <div>
+                  {products?.length > 0 ? (
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
+                      {products?.map((product) => (
+                        <ProductCard key={product?._id} product={product} />
+                      ))}
+                    </div>
+                  ) : (
+                    <NoProductAvailable className="mt-0" />
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </Container>
     </div>
