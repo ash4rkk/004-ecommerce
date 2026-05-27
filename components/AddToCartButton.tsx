@@ -6,8 +6,10 @@ import { ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 import useStore from "@/store";
 import toast from "react-hot-toast";
+import PriceFormatter from "./PriceFormatter";
+import QuantityButtons from "./QuantityButtons";
 interface Props {
-  product?: Product;
+  product: Product;
   className?: string;
 }
 const AddToCartButton = ({ product, className }: Props) => {
@@ -22,21 +24,34 @@ const AddToCartButton = ({ product, className }: Props) => {
         `${product?.name?.substring(0, 12)}... added successfully!`,
       );
     } else {
-      toast.error('Not enough items in stock.')
+      toast.error("Not enough items in stock.");
     }
   };
   return (
-    <div className={cn("w-full", className)}>
-      <Button
-        onClick={handleAddToCart}
-        disabled={isOutOfStock}
-        className={cn(
-          "bg-shop_dark_green/80 text-shop_light_bg border-shop_dark_green/80 hover:bg-shop_dark_green hover:border-shop_dark_green hoverEffect w-full border font-semibold tracking-wide shadow-none hover:text-white",
-        )}
-      >
-        <ShoppingBag />
-        {isOutOfStock ? "Out of stock" : "Add to Cart"}
-      </Button>
+    <div className={cn("w-full h-12 flex items-center", className)}>
+      {itemCount ? (
+        <div className="text-sm w-full">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-darkColor/80">Quantity</span>
+            <QuantityButtons product={product}/>
+          </div>
+          <div className="flex items-center justify-between border-t pt-2">
+            <span className="text-xs font-semibold">Subtotal</span>
+            <PriceFormatter amount={product?.price ? product?.price * itemCount : 0} />
+          </div>
+        </div>
+      ) : (
+        <Button
+          onClick={handleAddToCart}
+          disabled={isOutOfStock}
+          className={cn(
+            "bg-shop_dark_green/80 text-shop_light_bg border-shop_dark_green/80 hover:bg-shop_dark_green hover:border-shop_dark_green hoverEffect w-full border font-semibold tracking-wide shadow-none hover:text-white",
+          )}
+        >
+          <ShoppingBag />
+          {isOutOfStock ? "Out of stock" : "Add to Cart"}
+        </Button>
+      )}
     </div>
   );
 };

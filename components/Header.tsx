@@ -3,7 +3,7 @@ import Container from './Container';
 import Logo from './Logo';
 import HeaderMenu from './HeaderMenu';
 import SearchBar from './SearchBar';
-import CardIcon from './CardIcon';
+import CartIcon from './CartIcon';
 import FavoriteButton from './FavoriteButton';
 import SignIn from './SignIn';
 import MobileMenu from './MobileMenu';
@@ -27,7 +27,7 @@ async function Header() {
 
         <div className='w-auto md:w-1/3 flex items-center justify-end gap-5'>
           <SearchBar />
-          <CardIcon />
+          <CartIcon />
           <FavoriteButton />
           <ClerkLoaded>
             <Show when='signed-in'>
