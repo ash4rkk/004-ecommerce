@@ -1,29 +1,30 @@
-import React from 'react';
-import Link from 'next/link';
-import { Heart } from 'lucide-react';
-import { Product } from '@/sanity.types';
+'use client'
+import React from "react";
+import Link from "next/link";
+import { Heart } from "lucide-react";
+import { Product } from "@/sanity.types";
+import useStore from "@/store";
 interface Props {
   showProduct?: boolean;
   product?: Product | null;
 }
 
 function FavoriteButton({ showProduct = false, product }: Props) {
+  const { favoriteProduct } = useStore();
   return (
     <>
-      {!showProduct ?
-        <Link
-          href={'/wishlist'}
-          className='group relative'
-        >
-          <Heart className='w-5 h-5 hover:text-shop_light_green hoverEffect' />
-          <span className='absolute -top-1 -right-1 bg-shop_dark_green text-white h-3.5 w-3.5 rounded-full font-semibold flex items-center justify-center'>
-            0
+      {!showProduct ? (
+        <Link href={"/wishlist"} className="group relative">
+          <Heart className="hover:text-shop_light_green hoverEffect h-5 w-5" />
+          <span className=" bg-shop_btn_dark_green absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full  font-semibold text-white">
+            {favoriteProduct?.length ? favoriteProduct.length : 0}
           </span>
         </Link>
-      : <button className='group relative hover:border-shop_light_green hoverEffect border border-shop_light_green/80 hover:text-shop_light_green p-1 px-1.5 rounded-sm'>
-          <Heart className='text-shop_light_green/80 group-hover:text-shop_light_green hoverEffect mt-0.5 w-5 h-5' />
+      ) : (
+        <button className="group hover:border-shop_light_green hoverEffect border-shop_light_green/80 hover:text-shop_light_green relative rounded-sm border p-1 px-1.5">
+          <Heart className="text-shop_light_green/80 group-hover:text-shop_light_green hoverEffect mt-0.5 h-5 w-5" />
         </button>
-      }
+      )}
     </>
   );
 }

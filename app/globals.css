@@ -1,11 +1,11 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
-@import 'shadcn/tailwind.css';
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-poppins: 'Poppins', sans-serif;
+  --font-poppins: "Poppins", sans-serif;
   --color-shop_light_pink: #fcf0e4;
   --color-shop_dark_green: #063c28;
   --color-shop_btn_dark_green: #063d29;
@@ -15,7 +15,7 @@
   --color-lightColor: #52525b;
   --color-lightOrange: #fca99b;
   --color-shop_light_green: #3b9c3c;
-  --color-shop_lighter_green: #93D991;
+  --color-shop_lighter_green: #93d991;
   --color-dark_blue: #6c7fd8;
   --color-shop_lighter_bg: #f1f3f8;
   --color-shop_light_text: #686e7d;
