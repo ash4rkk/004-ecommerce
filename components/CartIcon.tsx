@@ -7,7 +7,7 @@ import useStore from "@/store";
 function CartIcon() {
   const { items } = useStore();
   return (
-    <Link href={"/card"} className="group relative">
+    <Link href={"/cart"} className="group relative">
       <ShoppingBag className="hover:text-shop_light_green hoverEffect h-5 w-5" />
       <span className="bg-shop_dark_green absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full font-semibold text-white">
         {" "}
