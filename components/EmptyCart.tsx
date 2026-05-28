@@ -1,0 +1,61 @@
+import React from "react";
+import { motion } from "motion/react";
+import Image from "next/image";
+import { emptyCart } from "@/images";
+import { ShoppingCart } from "lucide-react";
+import Link from "next/link";
+const EmptyCart = () => {
+  return (
+    <div className="flex items-center justify-center bg-linear-to-b from-gray-50 to-white p-4 py-10 md:py-20">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-md space-y-8 rounded-2xl bg-white p-8 shadow-xl"
+      >
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            rotate: [0, 5, -5, 0],
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 5,
+            ease: "easeInOut",
+          }}
+          className="relative mx-auto h-48 w-48"
+        >
+          <Image
+            src={emptyCart}
+            alt="Empty shopping cart"
+            layout="fill"
+            objectFit="contain"
+            className="drop-shadow-lg"
+          />
+          <motion.div>
+            <ShoppingCart size={24} className="text-white" />
+          </motion.div>
+        </motion.div>
+        <div className="text-center space-y-4">
+          <h2 className="text-3xl font-bold text-gray-800">
+            Your cart is feeling lonely
+          </h2>
+          <p className="text-gray-600">
+            It looks like you haven&apos;t added anything to your cart yet.
+            Let&apos;s change that and find some amazing products for you!
+          </p>
+        </div>
+        <div>
+          <Link
+            href="/"
+            className="block bg-shop_btn_dark_green/80 border text-white text-center py-2.5 rounded-full text-sm font-semibold tracking-wide hover:bg-shop_btn_dark_green hover:bg-dark-color hoverEffect"
+          >
+            Discover Products
+          </Link>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+export default EmptyCart;
