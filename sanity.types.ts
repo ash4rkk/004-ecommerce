@@ -582,6 +582,45 @@ export type BRAND_QUERY_RESULT = Array<{
   brandName: string | null;
 }>;
 
+// Source: sanity/queries/query.ts
+// Variable: SHOP_QUERY
+// Query: *[_type == 'product'    && (!defined($selectedCategory) || references(*[_type == "category" && slug.current == $selectedCategory]._id))    && (!defined($selectedBrand) || references(*[_type == "brand" && slug.current == $selectedBrand]._id))    && price >= $minPrice && price <= $maxPrice  ]  | order(name asc) {    ...,"categories": categories[]->title  }
+export type SHOP_QUERY_RESULT = Array<{
+  _id: string;
+  _type: "product";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  images?: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+  description?: string;
+  price?: number;
+  discount?: number;
+  categories: Array<string | null> | null;
+  stock?: number;
+  brand?: BrandReference;
+  status?: "hot" | "new" | "sale";
+  variant?: "appliances" | "gadget" | "others" | "refrigerators";
+  isFeatured?: boolean;
+  averageRating?: number;
+  totalReviews?: number;
+  ratingDistribution?: {
+    fiveStars?: number;
+    fourStars?: number;
+    threeStars?: number;
+    twoStars?: number;
+    oneStar?: number;
+  };
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -591,5 +630,6 @@ declare module "@sanity/client" {
     "*[_type == 'product' && status == 'hot'] | order(name asc) {\n  ...,\n  'categories': categories[] -> title\n}": DEAL_PRODUCTS_RESULT;
     "\n  *[_type == 'product' && slug.current == $slug] | order(name asc) [0]\n  ": PRODUCT_BY_SLUG_QUERY_RESULT;
     "*[_type == 'product' && slug.current == $slug]{'brandName': brand -> title}": BRAND_QUERY_RESULT;
+    '\n  *[_type == \'product\'\n    && (!defined($selectedCategory) || references(*[_type == "category" && slug.current == $selectedCategory]._id))\n    && (!defined($selectedBrand) || references(*[_type == "brand" && slug.current == $selectedBrand]._id))\n    && price >= $minPrice && price <= $maxPrice\n  ]\n  | order(name asc) {\n    ...,"categories": categories[]->title\n  }\n  ': SHOP_QUERY_RESULT;
   }
 }

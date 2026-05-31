@@ -4,7 +4,7 @@ import React from 'react'
 
 const NotFoundPage = () => {
   return (
-    <div className='bg-white flex flex-col items-center justify-cente px-4 sm:px-6 lg:px-8 py-10 md:py-32'>
+    <div className=' flex flex-col items-center justify-cente px-4 sm:px-6 lg:px-8 py-10 md:py-32'>
       <div className='max-w-md w-full space-y-8'>
         <div className='text-center'>
           <Logo />
@@ -15,7 +15,7 @@ const NotFoundPage = () => {
           <div className='rounded-md shadow-sm space-y-4'>
           <Link
               href='/'
-              className='w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-semibold rounded-md text-white bg-shop_light_green hover:bg-shop_dark_green focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-shop_light_green hoverEffect'
+              className='w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-semibold rounded-md text-white bg-shop_dark_green/80 hover:bg-shop_dark_green focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-shop_light_green hoverEffect'
             >
             Go to Shopek&apos;s home page
             </Link>

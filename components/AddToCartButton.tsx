@@ -1,6 +1,6 @@
 "use client";
 import { Product } from "@/sanity.types";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -13,8 +13,9 @@ interface Props {
   className?: string;
 }
 const AddToCartButton = ({ product, className }: Props) => {
+  const [isMounted, setIsMounted] = useState(false);
   const { addItem, getItemCount } = useStore();
-  const itemCount = getItemCount(product?._id ?? "");
+  const itemCount = isMounted ? getItemCount(product?._id ?? "") : 0;
   const isOutOfStock = product?.stock === 0;
   const handleAddToCart = () => {
     if (!product) return;
@@ -27,6 +28,10 @@ const AddToCartButton = ({ product, className }: Props) => {
       toast.error("Not enough items in stock.");
     }
   };
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
   return (
     <div className={cn("w-full h-12 flex items-center", className)}>
       {itemCount ? (

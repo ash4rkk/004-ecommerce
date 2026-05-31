@@ -73,7 +73,7 @@ const Shop = ({ categories, brands }: Props) => {
       <Container className="mt-5">
         <div className="sticky top-0 z-10 mb-5">
           <div className="flex items-center justify-between">
-            <Title className="text-lg tracking-wide uppercase">
+            <Title className="text-lg font-semibold tracking-wide uppercase">
               Get the products as your needs
             </Title>
             <motion.button

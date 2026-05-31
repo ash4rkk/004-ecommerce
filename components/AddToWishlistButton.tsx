@@ -34,7 +34,7 @@ const AddToWishlistButton = ({ product, className }: Props) => {
     >
       <div
         onClick={handleFavorite}
-        className={`hover:bg-shop_dark_green hoverEffect rounded-full p-1 hover:text-white ${existingProduct ? "bg-shop_dark_green/80 text-white" : "bg-shop_light_text/20"}`}
+        className={`hover:bg-shop_dark_green/80 hoverEffect rounded-full p-1 hover:text-white ${existingProduct ? "bg-shop_dark_green/80 text-white" : "bg-shop_light_text/20"}`}
       >
         <Heart size={18} />
       </div>

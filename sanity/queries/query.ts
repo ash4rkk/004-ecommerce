@@ -35,11 +35,15 @@ const SHOP_QUERY = defineQuery(`
   }
   `);
 
+
+const ADRESSES_QUERY = `*[_type =='address'] | order(publishedAt desc)`
+
 export {
   BRANDS_QUERY,
   LATEST_BLOG_QUERY,
   DEAL_PRODUCTS,
   PRODUCT_BY_SLUG_QUERY,
   BRAND_QUERY,
-  SHOP_QUERY
+  SHOP_QUERY,
+  ADRESSES_QUERY
 };
