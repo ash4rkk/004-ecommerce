@@ -13,15 +13,15 @@ function HeaderMenu({ className }: { className?: string }) {
         <Link
           href={item?.href}
           key={item?.title}
-          className={`hover:text-shop_light_green hoverEffect text-nowrap relative group ${pathname === item?.href && 'text-shop_light_green'}`}
+          className={`hover:text-shop_dark_green hoverEffect text-nowrap relative group ${pathname === item?.href && 'text-gray-900'}`}
         >
           {item?.title}
 
           <span
-            className={`absolute -bottom-0.5 left-1/2 w-0 h-0.5 bg-shop_light_green group-hover:w-1/2 hoverEffect group-hover:left-0 ${pathname === item?.href && 'w-1/2'}`}
+            className={`absolute -bottom-0.5 left-1/2 w-0 h-0.5 bg-gray-800 group-hover:w-1/2 hoverEffect group-hover:left-0 ${pathname === item?.href && 'w-1/2'}`}
           />
           <span
-            className={`absolute -bottom-0.5 right-1/2 w-0 h-0.5 bg-shop_light_green group-hover:w-1/2 hoverEffect group-hover:right-0 ${pathname === item?.href && 'w-1/2'}`}
+            className={`absolute -bottom-0.5 right-1/2 w-0 h-0.5 bg-gray-800 group-hover:w-1/2 hoverEffect group-hover:right-0 ${pathname === item?.href && 'w-1/2'}`}
           />
         </Link>
       ))}

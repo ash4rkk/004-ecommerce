@@ -28,7 +28,7 @@ const ImageView = ({ images = [], isStock }: Props) => {
             width={700}
             height={700}
             priority
-            className={`w-full h-96 max-h-137.5 min-h-125 object-contain group-hover:scale-110 hoverEffect rounded-md ${!isStock && 'opacity-50'}`}
+            className={`w-full h-96 max-h-137.5 min-h-125 object-contain group-hover:scale-110 hoverEffect bg-white rounded-md ${!isStock && 'opacity-50'}`}
           />
         </motion.div>
       </AnimatePresence>

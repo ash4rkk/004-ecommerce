@@ -13,20 +13,21 @@ const ProductDetailsReviews = () => {
         <div className="inline-flex w-full flex-col">
           <div className="flex flex-col gap-2.5 border-t pt-5 md:flex-row md:px-20">
             <Button
+            variant='default'
               onClick={() => setDetails("desc")}
-              className={`border-lightColor/35 rounded-none border py-5 text-black transition-all duration-300 md:w-1/3 md:rounded-sm ${details === "desc" ? "bg-shop_light_bg" : "bg-white"}`}
+              className={` hover:text-white hover:bg-shop_btn_dark_green/80 border-darkColor/10 rounded-none border py-5 text-black transition-all duration-300 md:w-1/3 md:rounded-sm ${details === "desc" ? "text-white bg-shop_btn_dark_green/80" : "bg-white"}`}
             >
               Description
             </Button>
             <Button
               onClick={() => setDetails("info")}
-              className={`border-lightColor/35 rounded-none border py-5 text-black transition-all duration-300 md:w-1/3 md:rounded-sm ${details === "info" ? "bg-shop_light_bg" : "bg-white"}`}
+              className={`hover:text-white hover:bg-shop_btn_dark_green/80 border-darkColor/10 rounded-none border py-5 text-black transition-all duration-300 md:w-1/3 md:rounded-sm ${details === "info" ? "text-white bg-shop_btn_dark_green/80" : "bg-white"}`}
             >
               Additional Information
             </Button>
             <Button
               onClick={() => setDetails("rev")}
-              className={`border-lightColor/35 rounded-none border py-5 text-black transition-all duration-300 md:w-1/3 md:rounded-sm ${details === "rev" ? "bg-shop_light_bg" : "bg-white"}`}
+              className={`hover:text-white hover:bg-shop_btn_dark_green/80 border-darkColor/20 hover:bg-shop_dark_green/70 rounded-none border py-5 text-black transition-all duration-300 md:w-1/3 md:rounded-sm ${details === "rev" ? "text-white bg-shop_btn_dark_green/80" : "bg-white"}`}
             >
               Reviews
             </Button>

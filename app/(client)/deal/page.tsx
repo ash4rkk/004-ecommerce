@@ -7,9 +7,9 @@ import React from 'react';
 const DealPage = async () => {
   const products = await getDealProducts();
   return (
-    <div className='py-10 bg-white'>
+    <div className='py-10'>
       <Container>
-        <Title className='mb-5 underline underline-offset-4 decoration-1 text-md font-bold uppercase tracking-wide'>
+        <Title className='mb-5  underline-offset-4 decoration-1 text-lg font-semibold uppercase tracking-wide'>
           Hot Deals of the Week
         </Title>
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5'>

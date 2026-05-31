@@ -101,21 +101,21 @@ export const addressType = defineType({
     //   description: "Sub area, district, or neighborhood",
     //   validation: (Rule) => Rule.max(100),
     // }),
-    // defineField({
-    //   name: "type",
-    //   title: "Address Type",
-    //   type: "string",
-    //   description: "Type of address (home, office, other)",
-    //   options: {
-    //     list: [
-    //       { title: "Home", value: "home" },
-    //       { title: "Office", value: "office" },
-    //       { title: "Other", value: "other" },
-    //     ],
-    //   },
-    //   initialValue: "home",
-    //   validation: (Rule) => Rule.required(),
-    // }),
+    defineField({
+      name: "type",
+      title: "Address Type",
+      type: "string",
+      description: "Type of address (home, office, other)",
+      options: {
+        list: [
+          { title: "Home", value: "home" },
+          { title: "Office", value: "office" },
+          { title: "Other", value: "other" },
+        ],
+      },
+      initialValue: "home",
+      validation: (Rule) => Rule.required(),
+    }),
     defineField({
       name: "default",
       title: "Default Address",
