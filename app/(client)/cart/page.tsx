@@ -1,4 +1,5 @@
 "use client";
+import { createCheckoutSession } from "@/actions/createCheckoutSession";
 import AddToWishlistButton from "@/components/AddToWishlistButton";
 import Container from "@/components/Container";
 import EmptyCart from "@/components/EmptyCart";
@@ -24,6 +25,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { ADRESSES_QUERY } from "@/sanity/queries/query";
 import useStore from "@/store";
 import { useAuth, useUser } from "@clerk/nextjs";
+import { add } from "date-fns";
 import { ShoppingBag, Trash } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -48,26 +50,27 @@ const CartPage = () => {
 
   const confirm = useConfirm();
 
-  const fetchAddresses = async () => {
-    setLoading(true);
-    try {
-      const query = ADRESSES_QUERY;
-      const data = await client.fetch(query);
-      setAddresses(data);
-      const defaultAddress = data.find((addr: Address) => addr.default);
-      if (defaultAddress) {
-        setSelectedAddress(defaultAddress);
-      } else if (data.length > 0) {
-        setSelectedAddress(data[0]);
-      }
-    } catch (error) {
-      console.log("Addresses fetching error", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+
 
   useEffect(() => {
+    const fetchAddresses = async () => {
+      setLoading(true);
+      try {
+        const query = ADRESSES_QUERY;
+        const data = await client.fetch(query);
+        setAddresses(data);
+        const defaultAddress = data.find((addr: Address) => addr.default);
+        if (defaultAddress) {
+          setSelectedAddress(defaultAddress);
+        } else if (data.length > 0) {
+          setSelectedAddress(data[0]);
+        }
+      } catch (error) {
+        console.log("Addresses fetching error", error);
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchAddresses();
   }, []);
 
@@ -88,6 +91,32 @@ const CartPage = () => {
       toast.success("Cart cleared");
     }
   };
+
+
+  const handleCheckout = async () => {
+    setLoading(true)
+    try {
+      const metadata={
+        orderNumber:crypto.randomUUID(),
+        customerName:user?.fullName ?? "Unknown",
+        customerEmail:user?.emailAddresses[0]?.emailAddress ?? "Unknown",
+        clerkUserId:user?.id ?? "",
+        address:selectedAddress
+      }
+      const checkoutURL = await createCheckoutSession(groupedItems, metadata)
+      if (groupedItems && groupedItems?.length > 0) {
+        if (checkoutURL) {
+          window.location.href=checkoutURL
+        }
+      }
+    } catch (error) {
+      console.error('Error creating checkout session', error)
+    } finally {
+      setLoading(false)
+    }
+
+  }
+
 
   return (
     <div className="pb-52 md:pb-10">
@@ -232,6 +261,8 @@ const CartPage = () => {
                         <Button
                           className="hoverEffect w-full rounded-full font-semibold tracking-wide"
                           size="lg"
+                          disabled={loading}
+                          onClick={handleCheckout}
                         >
                           {loading ? "Please wait..." : "Proceed to Checkout"}
                         </Button>
