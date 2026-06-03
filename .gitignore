@@ -40,3 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 /scripts*
+/.claude*
+AGENTS.md
+CLAUDE.md
+/.vscode*
+extensions.txt

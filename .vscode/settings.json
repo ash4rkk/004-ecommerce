@@ -5,5 +5,12 @@
     "hotspot",
     "Shopek"
   ],
-  "prettier.prettierPath": "./node_modules/prettier"
+  "prettier.prettierPath": "./node_modules/prettier",
+  "files.exclude": {
+    ".claude": true,
+    ".next": true,
+    ".vscode": true,
+    "extensions.txt": true,
+    "node_modules": true
+  }
 }
