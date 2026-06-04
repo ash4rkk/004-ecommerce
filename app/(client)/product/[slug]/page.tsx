@@ -103,7 +103,7 @@ const SingleProductPage = async ({ params }: { params: Promise<{ slug: string }>
               </p>
             </div>
           </div>
-          <div className='border border-lightColor/25 border-b-1 p-3 flex items-center gap-2.5'>
+          <div className='border border-lightColor/25 border-b p-3 flex items-center gap-2.5'>
             <CornerDownLeft
               size={30}
               className='text-shop_orange'
