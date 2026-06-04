@@ -316,6 +316,7 @@ export type Address = {
   city?: string;
   state?: string;
   zip?: string;
+  type?: "home" | "office" | "other";
   default?: boolean;
   createdAt?: string;
 };
@@ -621,6 +622,118 @@ export type SHOP_QUERY_RESULT = Array<{
   };
 }>;
 
+// Source: sanity/queries/query.ts
+// Variable: MY_ORDERS_QUERY
+// Query: *[_type == 'order' && clerkUserId == $userId] | order(orderDate desc) {  ...,  products[] {    ...,    product->  }}
+export type MY_ORDERS_QUERY_RESULT = Array<{
+  _id: string;
+  _type: "order";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  orderNumber?: string;
+  invoice?: {
+    id?: string;
+    number?: string;
+    hosted_invoice_url?: string;
+  };
+  stripeCheckoutSessionId?: string;
+  stripeCustomerId?: string;
+  clerkUserId?: string;
+  customerName?: string;
+  email?: string;
+  stripePaymentIntentId?: string;
+  products: Array<{
+    product: {
+      _id: string;
+      _type: "product";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      name?: string;
+      slug?: Slug;
+      images?: Array<{
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+        _key: string;
+      }>;
+      description?: string;
+      price?: number;
+      discount?: number;
+      categories?: Array<
+        {
+          _key: string;
+        } & CategoryReference
+      >;
+      stock?: number;
+      brand?: BrandReference;
+      status?: "hot" | "new" | "sale";
+      variant?: "appliances" | "gadget" | "others" | "refrigerators";
+      isFeatured?: boolean;
+      averageRating?: number;
+      totalReviews?: number;
+      ratingDistribution?: {
+        fiveStars?: number;
+        fourStars?: number;
+        threeStars?: number;
+        twoStars?: number;
+        oneStar?: number;
+      };
+    } | null;
+    quantity?: number;
+    _key: string;
+  }> | null;
+  totalPrice?: number;
+  currency?: string;
+  amountDiscount?: number;
+  address?: {
+    state?: string;
+    zip?: string;
+    city?: string;
+    address?: string;
+    name?: string;
+  };
+  status?:
+    | "cancelled"
+    | "delivered"
+    | "out_for_delivery"
+    | "paid"
+    | "pending"
+    | "processing"
+    | "shipped";
+  orderDate?: string;
+}>;
+
+// Source: sanity/queries/query.ts
+// Variable: ALL_BLOGS_QUERY
+// Query: *[_type == 'blog'] | order(publishedAt desc) [0...$quantity]{  ...,  blogcategories[]->{title}}
+export type ALL_BLOGS_QUERY_RESULT = Array<{
+  _id: string;
+  _type: "blog";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  author?: AuthorReference;
+  mainImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  blogcategories: Array<{
+    title: string | null;
+  }> | null;
+  publishedAt?: string;
+  isLatest?: boolean;
+  body?: BlockContent;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -631,5 +744,7 @@ declare module "@sanity/client" {
     "\n  *[_type == 'product' && slug.current == $slug] | order(name asc) [0]\n  ": PRODUCT_BY_SLUG_QUERY_RESULT;
     "*[_type == 'product' && slug.current == $slug]{'brandName': brand -> title}": BRAND_QUERY_RESULT;
     '\n  *[_type == \'product\'\n    && (!defined($selectedCategory) || references(*[_type == "category" && slug.current == $selectedCategory]._id))\n    && (!defined($selectedBrand) || references(*[_type == "brand" && slug.current == $selectedBrand]._id))\n    && price >= $minPrice && price <= $maxPrice\n  ]\n  | order(name asc) {\n    ...,"categories": categories[]->title\n  }\n  ': SHOP_QUERY_RESULT;
+    "*[_type == 'order' && clerkUserId == $userId] | order(orderDate desc) {\n  ...,\n  products[] {\n    ...,\n    product->\n  }\n}": MY_ORDERS_QUERY_RESULT;
+    "*[_type == 'blog'] | order(publishedAt desc) [0...$quantity]{\n  ...,\n  blogcategories[]->{title}\n}": ALL_BLOGS_QUERY_RESULT;
   }
 }

@@ -36,7 +36,23 @@ const SHOP_QUERY = defineQuery(`
   `);
 
 
-const ADRESSES_QUERY = `*[_type =='address'] | order(publishedAt desc)`
+const ADRESSES_QUERY = `*[_type =='address'] | order(publishedAt desc)`;
+
+const MY_ORDERS_QUERY = defineQuery(`*[_type == 'order' && clerkUserId == $userId] | order(orderDate desc) {
+  ...,
+  products[] {
+    ...,
+    product->
+  }
+}`);
+
+
+const ALL_BLOGS_QUERY = defineQuery(`*[_type == 'blog'] | order(publishedAt desc) [0...$quantity]{
+  ...,
+  blogcategories[]->{title}
+}`)
+
+
 
 export {
   BRANDS_QUERY,
@@ -45,5 +61,7 @@ export {
   PRODUCT_BY_SLUG_QUERY,
   BRAND_QUERY,
   SHOP_QUERY,
-  ADRESSES_QUERY
+  ADRESSES_QUERY,
+  MY_ORDERS_QUERY,
+  ALL_BLOGS_QUERY
 };

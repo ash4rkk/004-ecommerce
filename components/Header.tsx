@@ -1,43 +1,57 @@
-import React from 'react';
-import Container from './Container';
-import Logo from './Logo';
-import HeaderMenu from './HeaderMenu';
-import SearchBar from './SearchBar';
-import CartIcon from './CartIcon';
-import FavoriteButton from './FavoriteButton';
-import SignIn from './SignIn';
-import MobileMenu from './MobileMenu';
-import { currentUser } from '@clerk/nextjs/server';
-import { ClerkLoaded, Show, UserButton } from '@clerk/nextjs';
+import React from "react";
+import Container from "./Container";
+import Logo from "./Logo";
+import HeaderMenu from "./HeaderMenu";
+import SearchBar from "./SearchBar";
+import CartIcon from "./CartIcon";
+import FavoriteButton from "./FavoriteButton";
+import SignIn from "./SignIn";
+import MobileMenu from "./MobileMenu";
+import { currentUser, auth } from "@clerk/nextjs/server";
+import { ClerkLoaded, Show, UserButton } from "@clerk/nextjs";
+import OrderButton from "./OrderButton";
+import { TooltipProvider } from "./ui/tooltip";
+import { getMyOrders } from "@/sanity/queries";
+import { MY_ORDERS_QUERY_RESULT } from "@/sanity.types";
 
 async function Header() {
   const user = await currentUser();
-
+  const {userId} = await auth()
+  let orders: MY_ORDERS_QUERY_RESULT = []
+  if (userId) {
+    const result = await getMyOrders(userId)
+    orders = result ?? []
+  }
   return (
-    <header className='bg-white/70 backdrop-blur-md top-0 sticky z-50 py-5'>
-      <Container className='flex items-center justify-between text-lightColor'>
+    <header className="sticky top-0 z-50 bg-white/70 py-5 backdrop-blur-md">
+      <Container className="text-lightColor flex items-center justify-between">
         {/* Logo */}
-        <div className='w-auto md:w-1/3 flex items-center gap-2.5 justify-start md:gap-0'>
+        <div className="flex w-auto items-center justify-start gap-2.5 md:w-1/3 md:gap-0">
           <MobileMenu />
           <Logo />
         </div>
 
         {/* NavButton */}
         <HeaderMenu />
+        <TooltipProvider>
+          <div className="flex w-auto items-center justify-end gap-5 md:w-1/3">
+            <SearchBar />
+            <CartIcon />
+            <FavoriteButton />
+            <ClerkLoaded>
+              {userId && (
+                <OrderButton orders={orders}/>
 
-        <div className='w-auto md:w-1/3 flex items-center justify-end gap-5'>
-          <SearchBar />
-          <CartIcon />
-          <FavoriteButton />
-          <ClerkLoaded>
-            <Show when='signed-in'>
-              <UserButton />
-            </Show>
-            <Show when='signed-out'>
-              <SignIn />
-            </Show>
-          </ClerkLoaded>
-        </div>
+              )}
+              <Show when="signed-in">
+                <UserButton />
+              </Show>
+              <Show when="signed-out">
+                <SignIn />
+              </Show>
+            </ClerkLoaded>
+          </div>
+        </TooltipProvider>
 
         {/* NavAdmin */}
       </Container>

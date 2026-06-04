@@ -1,6 +1,6 @@
 import { Brand, Category } from '@/sanity.types';
 import { sanityFetch } from '../lib/live';
-import { BRANDS_QUERY, DEAL_PRODUCTS, LATEST_BLOG_QUERY, PRODUCT_BY_SLUG_QUERY, BRAND_QUERY } from './query';
+import { BRANDS_QUERY, DEAL_PRODUCTS, LATEST_BLOG_QUERY, PRODUCT_BY_SLUG_QUERY, BRAND_QUERY, MY_ORDERS_QUERY, ALL_BLOGS_QUERY } from './query';
 
 export type CategoryWithCount = Category & { productCount: number };
 const getCategories = async (quantity?: number) => {
@@ -83,6 +83,33 @@ const getBrand = async (slug: string) => {
     return null
   }
 }
+const getMyOrders = async (userId: string) => {
+  try {
+    const { data } = await sanityFetch({
+      query: MY_ORDERS_QUERY,
+      params: {
+        userId,
+      }
+    })
+    return data || null
+  } catch (error) {
+    console.log('Error fetching brands', error)
+    return null
+  }
+}
+
+const getAllBlogs = async (quantity?: number) => {
+  try {
+    const { data } = await sanityFetch({
+      query: ALL_BLOGS_QUERY,
+      params: { quantity: quantity ?? 100 },
+    });
+    return data ?? [];
+  } catch (error) {
+    console.log("Error fetching all blogs", error);
+    return [];
+  }
+};
 
 export { 
   getCategories, 
@@ -90,5 +117,7 @@ export {
   getLatestBlogs, 
   getDealProducts,
   getProductBySlug,
-  getBrand
+  getBrand,
+  getMyOrders,
+  getAllBlogs
 };
