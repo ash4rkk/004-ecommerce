@@ -1,30 +1,37 @@
-import React from 'react';
-import { Title } from './ui/text';
-import Link from 'next/link';
-import Image from 'next/image';
-import { banner_1 } from '@/images';
+import React from "react";
+import { Title } from "./ui/text";
+import Link from "next/link";
+import Image from "next/image";
+import { banner_1 } from "@/images";
+import { Button } from "./ui/button";
 
 function HomeBanner() {
   return (
-    <div className='py-16 md:py-0 bg-shop_light_pink rounded-lg px-10 lg:px-24 flex items-center justify-between'>
-      <div className='space-y-5'>
-        <Title>
-          Grab Upto 50% off on <br />
-          Selected headphone
-        </Title>
-        <Link
-          href={'/shop'}
-          className='bg-shop_dark_green/90 text-white/90 px-5 py-2 text-sm font-semibold hover:text-white hover:bg-shop_dark_green hoverEffect'
-        >
-          Buy Now
-        </Link>
-      </div>
+    <div className="flex flex-col items-center justify-between space-y-4 rounded-lg bg-white px-10 py-16 md:pt-22 md:pb-14 lg:px-24">
+      <p className="text-accent-p uppercase">new collection·2026</p>
+      <Title className=" tracking-tight text-center text-7xl">
+        Technology,
+        <br />
+        Simplified.
+      </Title>
+      <p className="max-w-2xl text-center text-lg">
+        Only the gear we&apos;d choose ourselves. No noise,
+        <br /> no compromises.
+      </p>
       <div>
-        <Image
-          src={banner_1}
-          alt='banner_1'
-          className='hidden md:inline-flex w-96'
-        />
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link href='/shop'>
+          <Button
+            size="lg"
+            className="rounded-full  bg-ink px-8 text-white hover:bg-gray-900"
+          >
+            Shop now
+          </Button>
+          </Link>
+          <Button size="lg" variant="outline" className="border-none rounded-full bg-surface hover:bg-surface-2 px-8">
+            Learn more
+          </Button>
+        </div>
       </div>
     </div>
   );

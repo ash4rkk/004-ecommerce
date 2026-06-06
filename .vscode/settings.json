@@ -13,8 +13,10 @@
   "files.exclude": {
     ".claude": true,
     ".next": true,
-    ".vscode": true,
     "extensions.txt": true,
     "node_modules": true
-  }
+  },
+  "typescript.preferences.autoImportFileExcludePatterns": [
+  "**/node_modules/@radix-ui/**"
+],
 }

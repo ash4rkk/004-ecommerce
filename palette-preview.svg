@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1272" height="946" viewBox="0 0 1272 946">
+<rect x="0" y="0" width="1272" height="946" fill="#f7f6f3"/>
+<text x="40" y="52" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" fill="#1a1a1a">SHOPEK — Palety kolorów</text>
+<text x="40" y="96" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="600" fill="#333">Kierunek A — Sage (zielono-mosiężny)</text>
+<rect x="40" y="110" width="120" height="76" rx="8" fill="#F4F1EA" stroke="#d8d5cd" stroke-width="1"/>
+<text x="50" y="132" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">Tło</text>
+<text x="50" y="174" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#F4F1EA</text>
+<rect x="174" y="110" width="120" height="76" rx="8" fill="#FBFAF6" stroke="#d8d5cd" stroke-width="1"/>
+<text x="184" y="132" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">Powierzchnia</text>
+<text x="184" y="174" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#FBFAF6</text>
+<rect x="308" y="110" width="120" height="76" rx="8" fill="#15201A"/>
+<text x="318" y="132" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">Ink</text>
+<text x="318" y="174" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#15201A</text>
+<rect x="442" y="110" width="120" height="76" rx="8" fill="#5C675E"/>
+<text x="452" y="132" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">Muted</text>
+<text x="452" y="174" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#5C675E</text>
+<rect x="576" y="110" width="120" height="76" rx="8" fill="#E2DDD1" stroke="#d8d5cd" stroke-width="1"/>
+<text x="586" y="132" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">Linie</text>
+<text x="586" y="174" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#E2DDD1</text>
+<rect x="710" y="110" width="120" height="76" rx="8" fill="#1E3D2C"/>
+<text x="720" y="132" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">Zieleń</text>
+<text x="720" y="174" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#1E3D2C</text>
+<rect x="844" y="110" width="120" height="76" rx="8" fill="#2C5840"/>
+<text x="854" y="132" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">Zieleń 2</text>
+<text x="854" y="174" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#2C5840</text>
+<rect x="978" y="110" width="120" height="76" rx="8" fill="#9C7A3C"/>
+<text x="988" y="132" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">Mosiądz</text>
+<text x="988" y="174" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#9C7A3C</text>
+<rect x="1112" y="110" width="120" height="76" rx="8" fill="#EFE3CB" stroke="#d8d5cd" stroke-width="1"/>
+<text x="1122" y="132" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">Mosiądz soft</text>
+<text x="1122" y="174" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#EFE3CB</text>
+<text x="40" y="264" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="600" fill="#333">Kierunek B — Mono (niebieski akcent)</text>
+<rect x="40" y="278" width="120" height="76" rx="8" fill="#FFFFFF" stroke="#d8d5cd" stroke-width="1"/>
+<text x="50" y="300" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">Tło</text>
+<text x="50" y="342" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#FFFFFF</text>
+<rect x="174" y="278" width="120" height="76" rx="8" fill="#F5F5F7" stroke="#d8d5cd" stroke-width="1"/>
+<text x="184" y="300" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">Powierzchnia</text>
+<text x="184" y="342" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#F5F5F7</text>
+<rect x="308" y="278" width="120" height="76" rx="8" fill="#0B0B0C"/>
+<text x="318" y="300" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">Ink</text>
+<text x="318" y="342" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#0B0B0C</text>
+<rect x="442" y="278" width="120" height="76" rx="8" fill="#6E6E73"/>
+<text x="452" y="300" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">Muted</text>
+<text x="452" y="342" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#6E6E73</text>
+<rect x="576" y="278" width="120" height="76" rx="8" fill="#E6E6E8" stroke="#d8d5cd" stroke-width="1"/>
+<text x="586" y="300" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">Linie</text>
+<text x="586" y="342" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#E6E6E8</text>
+<rect x="710" y="278" width="120" height="76" rx="8" fill="#2D5BFF"/>
+<text x="720" y="300" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">Akcent</text>
+<text x="720" y="342" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#2D5BFF</text>
+<rect x="844" y="278" width="120" height="76" rx="8" fill="#EBF0FF" stroke="#d8d5cd" stroke-width="1"/>
+<text x="854" y="300" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">Akcent soft</text>
+<text x="854" y="342" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#EBF0FF</text>
+<text x="40" y="432" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="600" fill="#333">Kierunek C — Warm (terakota + oliwka)</text>
+<rect x="40" y="446" width="120" height="76" rx="8" fill="#F7F0E6" stroke="#d8d5cd" stroke-width="1"/>
+<text x="50" y="468" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">Tło</text>
+<text x="50" y="510" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#F7F0E6</text>
+<rect x="174" y="446" width="120" height="76" rx="8" fill="#FFFCF6" stroke="#d8d5cd" stroke-width="1"/>
+<text x="184" y="468" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">Papier</text>
+<text x="184" y="510" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#FFFCF6</text>
+<rect x="308" y="446" width="120" height="76" rx="8" fill="#241B12"/>
+<text x="318" y="468" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">Ink</text>
+<text x="318" y="510" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#241B12</text>
+<rect x="442" y="446" width="120" height="76" rx="8" fill="#7A6A56"/>
+<text x="452" y="468" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">Muted</text>
+<text x="452" y="510" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#7A6A56</text>
+<rect x="576" y="446" width="120" height="76" rx="8" fill="#E7DCC9" stroke="#d8d5cd" stroke-width="1"/>
+<text x="586" y="468" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">Linie</text>
+<text x="586" y="510" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#E7DCC9</text>
+<rect x="710" y="446" width="120" height="76" rx="8" fill="#C0552F"/>
+<text x="720" y="468" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">Terakota</text>
+<text x="720" y="510" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#C0552F</text>
+<rect x="844" y="446" width="120" height="76" rx="8" fill="#9A3F1E"/>
+<text x="854" y="468" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">Terra deep</text>
+<text x="854" y="510" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#9A3F1E</text>
+<rect x="978" y="446" width="120" height="76" rx="8" fill="#5C6B3D"/>
+<text x="988" y="468" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">Oliwka</text>
+<text x="988" y="510" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#5C6B3D</text>
+<rect x="1112" y="446" width="120" height="76" rx="8" fill="#E9B949" stroke="#d8d5cd" stroke-width="1"/>
+<text x="1122" y="468" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">Złoto</text>
+<text x="1122" y="510" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#E9B949</text>
+<text x="40" y="600" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="600" fill="#333">Monochrome — Light</text>
+<rect x="40" y="614" width="120" height="76" rx="8" fill="#FFFFFF" stroke="#d8d5cd" stroke-width="1"/>
+<text x="50" y="636" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">bg</text>
+<text x="50" y="678" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#FFFFFF</text>
+<rect x="174" y="614" width="120" height="76" rx="8" fill="#F5F5F7" stroke="#d8d5cd" stroke-width="1"/>
+<text x="184" y="636" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">surface</text>
+<text x="184" y="678" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#F5F5F7</text>
+<rect x="308" y="614" width="120" height="76" rx="8" fill="#ECECEF" stroke="#d8d5cd" stroke-width="1"/>
+<text x="318" y="636" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">surface-2</text>
+<text x="318" y="678" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#ECECEF</text>
+<rect x="442" y="614" width="120" height="76" rx="8" fill="#0B0B0C"/>
+<text x="452" y="636" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">ink</text>
+<text x="452" y="678" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#0B0B0C</text>
+<rect x="576" y="614" width="120" height="76" rx="8" fill="#6E6E73"/>
+<text x="586" y="636" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">muted</text>
+<text x="586" y="678" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#6E6E73</text>
+<rect x="710" y="614" width="120" height="76" rx="8" fill="#E6E6E8" stroke="#d8d5cd" stroke-width="1"/>
+<text x="720" y="636" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">line</text>
+<text x="720" y="678" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#E6E6E8</text>
+<rect x="844" y="614" width="120" height="76" rx="8" fill="#2D5BFF"/>
+<text x="854" y="636" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">accent</text>
+<text x="854" y="678" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#2D5BFF</text>
+<rect x="978" y="614" width="120" height="76" rx="8" fill="#EBF0FF" stroke="#d8d5cd" stroke-width="1"/>
+<text x="988" y="636" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">accent-soft</text>
+<text x="988" y="678" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#EBF0FF</text>
+<rect x="1112" y="614" width="120" height="76" rx="8" fill="#1FA463"/>
+<text x="1122" y="636" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">ok</text>
+<text x="1122" y="678" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#1FA463</text>
+<text x="40" y="768" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="600" fill="#333">Monochrome — Dark</text>
+<rect x="40" y="782" width="120" height="76" rx="8" fill="#0A0A0B"/>
+<text x="50" y="804" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">bg</text>
+<text x="50" y="846" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#0A0A0B</text>
+<rect x="174" y="782" width="120" height="76" rx="8" fill="#161618"/>
+<text x="184" y="804" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">surface</text>
+<text x="184" y="846" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#161618</text>
+<rect x="308" y="782" width="120" height="76" rx="8" fill="#202024"/>
+<text x="318" y="804" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">surface-2</text>
+<text x="318" y="846" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#202024</text>
+<rect x="442" y="782" width="120" height="76" rx="8" fill="#F4F4F6" stroke="#d8d5cd" stroke-width="1"/>
+<text x="452" y="804" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">ink</text>
+<text x="452" y="846" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#F4F4F6</text>
+<rect x="576" y="782" width="120" height="76" rx="8" fill="#9A9AA0" stroke="#d8d5cd" stroke-width="1"/>
+<text x="586" y="804" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#1a1a1a">muted</text>
+<text x="586" y="846" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#1a1a1a">#9A9AA0</text>
+<rect x="710" y="782" width="120" height="76" rx="8" fill="#2A2A2E"/>
+<text x="720" y="804" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">line</text>
+<text x="720" y="846" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#2A2A2E</text>
+<rect x="844" y="782" width="120" height="76" rx="8" fill="#5B7FFF"/>
+<text x="854" y="804" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">accent</text>
+<text x="854" y="846" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#5B7FFF</text>
+<rect x="978" y="782" width="120" height="76" rx="8" fill="#1A2138"/>
+<text x="988" y="804" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#ffffff">accent-soft</text>
+<text x="988" y="846" font-family="Consolas, monospace" font-size="13" font-weight="700" fill="#ffffff">#1A2138</text>
+</svg>
