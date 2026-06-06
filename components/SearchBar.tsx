@@ -3,8 +3,8 @@ import React from 'react'
 
 function SearchBar() {
   return (
-    <div>
-      <Search className='w-5 h-5 hover:text-shop_light_green'/>
+    <div className='bg-surface hover:bg-surface-2 p-3 rounded-xl hover:cursor-pointer'>
+      <Search className='w-4 text-ink hoverEffect h-4 hover:text-accent-p'/>
     </div>
   )
 }

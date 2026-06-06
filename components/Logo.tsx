@@ -4,17 +4,18 @@ import React from 'react';
 
 function Logo({ className, spanDesign }: { className?: string; spanDesign?: string }) {
   return (
-    <Link href={'/'} className=' inline-flex'>
+    <Link href={'/'} className='group inline-flex'>
       <h2
         className={cn(
-          'text-2xl text-shop_dark_green font-black tracking-wider uppercase hover:text-shop_light_green hoverEffect group font-sans',
+          'text-2xl text-ink font-black tracking-wider uppercase group-hover:text-accent-p hoverEffect  font-sans',
           className
         )}
       >
-        Shope
-        <span className={cn('text-shop_light_green group-hover:text-shop_dark_green hoverEffect', spanDesign)}>
-          k
+        Shop
+        <span className={cn('text-accent-p group-hover:text-ink hoverEffect', spanDesign)}>
+          e
         </span>
+        <span className='text-2xl text-ink font-black tracking-wider uppercase group-hover:text-accent-p hoverEffect font-sans'>k</span>
       </h2>
     </Link>
   );

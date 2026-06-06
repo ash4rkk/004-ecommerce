@@ -11,9 +11,12 @@ const OrderButton = ({orders}: Props) => {
     <Tooltip>
       <TooltipTrigger asChild>
         <Link href={"/orders"}className="group relative hoverEffect">
-          <PackageSearch className="h-5 w-5"/>
-          <span className="absolute -top-1 -right-1 bg-shop_btn_dark_green text-white h-3.5 w-3.5 rounded-full text-xs font-semibold flex items-center justify-center">{orders?.length ? orders?.length : 0}
+        <div className="bg-surface hover:bg-surface-2 rounded-xl p-3 hover:cursor-pointer">
+
+          <PackageSearch className="hover:text-accent-p hoverEffect h-4 w-4"/>
+          <span className="text-muted font-poppins bg-accent-p absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full p-2 text-sm font-medium">{orders?.length ? orders?.length : 0}
           </span>
+          </div>
         </Link>
       </TooltipTrigger>
       <TooltipContent>
