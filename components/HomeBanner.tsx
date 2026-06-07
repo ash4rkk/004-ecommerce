@@ -9,7 +9,7 @@ function HomeBanner() {
   return (
     <div className="flex flex-col items-center justify-between space-y-4 rounded-lg bg-white px-10 py-16 md:pt-22 md:pb-14 lg:px-24">
       <p className="text-accent-p uppercase">new collection·2026</p>
-      <Title className=" tracking-tight text-center text-7xl">
+      <Title className="text-center text-7xl tracking-tight">
         Technology,
         <br />
         Simplified.
@@ -20,15 +20,19 @@ function HomeBanner() {
       </p>
       <div>
         <div className="flex flex-wrap justify-center gap-4">
-          <Link href='/shop'>
+          <Link href="/shop">
+            <Button
+              size="lg"
+              className="hoverEffect bg-ink rounded-full px-8 text-white hover:scale-105 hover:bg-gray-900"
+            >
+              Shop now
+            </Button>
+          </Link>
           <Button
             size="lg"
-            className="rounded-full  bg-ink px-8 text-white hover:bg-gray-900"
+            variant="outline"
+            className="bg-surface hoverEffect hover:bg-surface-2 rounded-full border-none px-8 hover:scale-105"
           >
-            Shop now
-          </Button>
-          </Link>
-          <Button size="lg" variant="outline" className="border-none rounded-full bg-surface hover:bg-surface-2 px-8">
             Learn more
           </Button>
         </div>

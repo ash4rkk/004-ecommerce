@@ -11,10 +11,10 @@ const LatestBlog = async () => {
   const blogs = await getLatestBlogs();
   return (
     <div className='mb-10 lg:mb-20'>
-      <Title>Latest Blog</Title>
+      <Title className='font-bold'>Latest Blog</Title>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5'>
         {blogs.map((blog) => (
-          <div key={blog?._id} className='border overflow-hidden rounded-lg'>
+          <div key={blog?._id} className=' overflow-hidden rounded-lg'>
             {blog?.mainImage && (
               <Link href={`/blog/${blog?.slug?.current}`}>
                 <Image
@@ -22,31 +22,30 @@ const LatestBlog = async () => {
                   alt='blogImage'
                   width={500}
                   height={500}
-                  className='w-full h-125 max-h-80 object-cover hover:scale-105 transition-all duration-300'
+                  className='w-full h-55 max-h-80 object-cover hover:scale-105 transition-all hoverEffect'
                 />
               </Link>
             )}
-            <div className='bg-shop_light_bg p-5 '>
+            <div className='bg-surface p-5 '>
               <div className='text-xs flex items-center justify-between gap-5'>
                 <div className='flex items-center relative group cursor-pointer'>
                   {blog?.blogcategories?.map((item, index) => (
                     <p
                       key={index}
-                      className='font-semibold text-shop_dark_green tracking-wider line-clamp-1'
+                      className='font-semibold bg-accent-p py-1 px-2 rounded-full text-white tracking-wider line-clamp-1'
                     >
                       {item?.title}
                     </p>
                   ))}
-                  <span className='absolute left-0 -bottom-1.5 bg-lightColor/30 inline-block w-full h-0.5 group-hover:bg-shop_dark_green hover:cursor-pointer hoverEffect' />
+
                 </div>
-                <p className='flex items-center gap-1 text-lightColor relative group hover:cursor-pointer hover:text-shop_dark_green hoverEffect'>
+                <p className='flex items-center gap-1 text-gray-500 relative group hover:cursor-pointer hover:text-accent-p hoverEffect'>
                   <Calendar size={15} /> <span className='line-clamp-1'>
                     {dayjs(blog.publishedAt).format('MMMM D, YYYY')}
                     </span>
-                  <span className='absolute left-0 -bottom-1.5 bg-lightColor/30 inline-block w-full h-0.5 group-hover:bg-shop_dark_green hover:cursor-pointer hoverEffect' />{' '}
                 </p>
               </div>
-              <Link className='text-base font-semibold tracking-wide mt-5 line-clamp-2 hover:text-shop_dark_green hoverEffect' href={`/blog/${blog?.slug?.current}`}>{blog?.title}</Link>
+              <Link className='text-base font-semibold text-ink tracking-wide mt-3 line-clamp-2 hover:text-shop_dark_green hoverEffect' href={`/blog/${blog?.slug?.current}`}>{blog?.title}</Link>
             </div>
           </div>
         ))}
