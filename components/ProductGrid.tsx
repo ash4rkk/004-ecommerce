@@ -7,10 +7,10 @@ import { AnimatePresence, motion } from 'motion/react';
 import { Loader2 } from 'lucide-react';
 import NoProductAvailable from './NoProductAvailable';
 import ProductCard from './ProductCard';
-import { Product } from '@/sanity.types';
+import type { ProductListItem } from '@/lib/product-types';
 
 const ProductGrid = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductListItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedTab, setSelectedTab] = useState(DATA_productType[0]?.title || '');
 

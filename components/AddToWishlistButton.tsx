@@ -1,13 +1,13 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Product } from "@/sanity.types";
+import type { ProductCardProduct } from "@/lib/product-types";
 import useStore from "@/store";
 import { Heart } from "lucide-react";
 import React from "react";
 import toast from "react-hot-toast";
 
 interface Props {
-  product: Product;
+  product: ProductCardProduct;
   className?: string;
 }
 

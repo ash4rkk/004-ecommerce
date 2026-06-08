@@ -1,4 +1,4 @@
-import { Product } from "@/sanity.types";
+import type { ProductCardProduct } from "@/lib/product-types";
 import useStore from "@/store";
 import React from "react";
 import { Button } from "./ui/button";
@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import toast from "react-hot-toast";
 
 interface Props {
-  product: Product;
+  product: ProductCardProduct;
   className?: string;
 }
 const QuantityButtons = ({ product, className }: Props) => {
@@ -39,11 +39,11 @@ const QuantityButtons = ({ product, className }: Props) => {
         variant="outline"
         size="icon"
         disabled={itemCount === 0 || isOutOfStock}
-        className="hover:bg-shop_dark_green/20 hoverEffect h-6 w-6"
+        className="hover:bg-accent-p/20 hoverEffect h-6 w-6"
       >
         <MinusIcon />
       </Button>
-      <span className="text-darkColor w-6 text-center text-sm font-semibold">
+      <span className="text-ink w-6 text-center text-sm font-semibold">
         {itemCount}
       </span>
       <Button
@@ -51,7 +51,7 @@ const QuantityButtons = ({ product, className }: Props) => {
         variant="outline"
         size="icon"
         disabled={isOutOfStock}
-        className="hover:bg-shop_dark_green/20 hoverEffect h-6 w-6"
+        className="hover:bg-accent-p/20 hoverEffect h-6 w-6"
       >
         <Plus />
       </Button>

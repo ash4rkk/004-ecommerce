@@ -77,7 +77,7 @@ const OrdersComponent = ({orders}:Props) => {
                   >
                     <X
                       size={20}
-                      className="group-hover:text-shop_dark_green hoverEffect"
+                      className="group-hover:text-accent-p hoverEffect"
                     />
                   </TableCell>
                 </TableRow>

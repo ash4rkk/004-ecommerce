@@ -7,15 +7,15 @@
 @theme {
   --font-poppins: "Poppins", sans-serif;
   --color-shop_light_pink: #fcf0e4;
-  --color-shop_dark_green: #063c28;
-  --color-shop_btn_dark_green: #063d29;
+  --color-accent-p: #063c28;
+  --color-accent-p: #063d29;
   --color-shop_light_bg: #f6f6f6;
   --color-shop_orange: #fb6c08;
   --color-darkColor: #151515;
   --color-lightColor: #52525b;
   --color-lightOrange: #fca99b;
-  --color-shop_light_green: #3b9c3c;
-  --color-shop_lighter_green: #93d991;
+  --color-accent-p: #3b9c3c;
+  --color-accent-p: #93d991;
   --color-dark_blue: #6c7fd8;
   --color-shop_lighter_bg: #f1f3f8;
   --color-shop_light_text: #686e7d;
@@ -125,7 +125,8 @@
   --surface: #F5F5F7;
   --surface-2: #ECECEF;
   --line: #E6E6E8;
-  --ink: #0B0B0C;
+  --ink-2: #0B0B0C;
+  --ink:#242424;
   --muted: #6E6E73;
   --accent-p: #24875d;
   --accent-soft: #38c98c;
@@ -201,3 +202,14 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+.no-spinner::-webkit-inner-spin-button,
+  .no-spinner::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Ukrywa strzałki dla Firefox */
+  .no-spinner {
+    -moz-appearance: textfield;
+    appearance: textfield;
+
+  }

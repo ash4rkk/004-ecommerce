@@ -1,5 +1,6 @@
 "use client";
 import { createCheckoutSession } from "@/actions/createCheckoutSession";
+import getMyAddresses from "@/actions/getMyAddresses";
 import AddToWishlistButton from "@/components/AddToWishlistButton";
 import Container from "@/components/Container";
 import EmptyCart from "@/components/EmptyCart";
@@ -22,8 +23,8 @@ import { useConfirm } from "@/hooks/use-confirm";
 import { Address } from "@/sanity.types";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
-import { ADRESSES_QUERY } from "@/sanity/queries/query";
-import useStore from "@/store";
+import { ADDRESSES_QUERY } from "@/sanity/queries/query";
+import useStore, { useCartHydrated } from "@/store";
 import { useAuth, useUser } from "@clerk/nextjs";
 import { add } from "date-fns";
 import { ShoppingBag, Trash } from "lucide-react";
@@ -40,7 +41,6 @@ const CartPage = () => {
     getSubTotalPrice,
     resetCart,
   } = useStore();
-  const [isClient, setIsClient] = useState(false);
   const [loading, setLoading] = useState(false);
   const groupedItems = useStore((state) => state.getGroupedItem());
   const { isSignedIn } = useAuth();
@@ -49,15 +49,13 @@ const CartPage = () => {
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
 
   const confirm = useConfirm();
-
-
+  const isHydrated = useCartHydrated();
 
   useEffect(() => {
     const fetchAddresses = async () => {
       setLoading(true);
       try {
-        const query = ADRESSES_QUERY;
-        const data = await client.fetch(query);
+        const data = await getMyAddresses();
         setAddresses(data);
         const defaultAddress = data.find((addr: Address) => addr.default);
         if (defaultAddress) {
@@ -92,34 +90,38 @@ const CartPage = () => {
     }
   };
 
-
   const handleCheckout = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const metadata={
-        orderNumber:crypto.randomUUID(),
-        customerName:user?.fullName ?? "Unknown",
-        customerEmail:user?.emailAddresses[0]?.emailAddress ?? "Unknown",
-        clerkUserId:user?.id ?? "",
-        address:selectedAddress
-      }
-      const checkoutURL = await createCheckoutSession(groupedItems, metadata)
+      const metadata = {
+        orderNumber: crypto.randomUUID(),
+        customerName: user?.fullName ?? "Unknown",
+        customerEmail: user?.emailAddresses[0]?.emailAddress ?? "Unknown",
+        clerkUserId: user?.id ?? "",
+        address: selectedAddress,
+      };
+      const checkoutURL = await createCheckoutSession(groupedItems, metadata);
       if (groupedItems && groupedItems?.length > 0) {
         if (checkoutURL) {
-          window.location.href=checkoutURL
+          window.location.href = checkoutURL;
         }
       }
     } catch (error) {
-      console.error('Error creating checkout session', error)
+      console.error("Error creating checkout session", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
+  };
 
+  if (!isHydrated) {
+    return (
+      <div className="flex min-h-[40vh] items-center justify-center pb-52 md:pb-10">
+        <span className="text-sm text-gray-500">Loading cart...</span>
+      </div>
+    );
   }
-
-
   return (
-    <div className="pb-52 md:pb-10">
+    <div className="pb-52 mx-4 md:pb-10">
       {isSignedIn ? (
         <Container>
           {groupedItems?.length ? (
@@ -131,27 +133,30 @@ const CartPage = () => {
               </div>
               <div className="grid md:gap-8 lg:grid-cols-3">
                 <div className="rounded-lg bg-white lg:col-span-2">
-                  <div className="rounded-md border">
-                    {groupedItems?.map(({ product }) => {
+                  <div>
+                    {groupedItems?.map(({ product }, index) => {
                       const itemCount = getItemCount(product?._id);
+                      const toneNumber = (index % 8) + 1;
                       return (
                         <div
                           key={product?._id}
-                          className="flex items-center justify-between gap-5 border-b p-2.5 last:border-b-0"
+                          className="bg-surface border my-2 flex items-center justify-between gap-5 rounded-xl p-2.5"
                         >
-                          <div className="flex h-26 flex-1 items-start gap-2 md:h-44">
+                          <div className="flex h-26 flex-1 items-center gap-2 md:h-44">
                             {product?.images && (
                               <Link
                                 href={`/product/${product?.slug?.current}`}
-                                className="group overflow-hidden"
+                                className="group hover:scale-110 hoverEffect overflow-hidden rounded-l-xl"
                               >
                                 <Image
                                   src={urlFor(product?.images[0]).url()}
                                   alt="Product Image"
+                                  style={{ backgroundColor: `var(--tone-${toneNumber})` }}
+
                                   width={500}
                                   height={500}
                                   loading="lazy"
-                                  className="hoverEffect h-32 w-32 border-r object-contain group-hover:scale-110 md:h-40 md:w-40"
+                                  className="hoverEffect h-36 w-34 border-r object-contain group-hover:scale-110 md:h-44 md:w-42 bg-tone-1 rounded-xl"
                                 />
                               </Link>
                             )}
@@ -210,10 +215,10 @@ const CartPage = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="flex h-36 flex-col items-end justify-between p-0.5 md:h-44 md:p-1">
+                          <div className="flex h-36 flex-col items-center justify-end gap-5 p-0.5 md:h-44 md:p-1">
                             <PriceFormatter
                               amount={(product?.price as number) * itemCount}
-                              className="text-lg font-bold"
+                              className="text-xl font-bold lg:text-2xl"
                             />
                             <QuantityButtons product={product} />
                           </div>
@@ -222,7 +227,7 @@ const CartPage = () => {
                     })}
                     <Button
                       className="m-5 font-semibold"
-                      size='lg'
+                      size="lg"
                       onClick={handleResetCart}
                     >
                       Reset Cart
@@ -276,13 +281,17 @@ const CartPage = () => {
                           </CardHeader>
                           <CardContent>
                             <RadioGroup
-                              defaultValue={addresses
-                                ?.find((ad) => ad?.default)
-                                ?.toString()}
+                              value={selectedAddress?._id}
+                              onValueChange={(id) =>
+                                setSelectedAddress(
+                                  addresses?.find((addr) => addr._id === id) ??
+                                    null,
+                                )
+                              }
                             >
                               {addresses?.map((addr) => (
                                 <div
-                                  className={`mb-4 flex cursor-pointer items-center space-x-2 ${selectedAddress?._id === addr?._id ? "text-shop_dark_green" : 'opacity-50'}`}
+                                  className={`mb-4 flex cursor-pointer items-center space-x-2 ${selectedAddress?._id === addr?._id ? "text-accent-p" : "opacity-50"}`}
                                   key={addr?._id}
                                   onClick={() => setSelectedAddress(addr)}
                                 >
@@ -325,7 +334,10 @@ const CartPage = () => {
                       <div className="flex items-center justify-between text-sm text-green-600">
                         <span>Discount</span>
                         <span className="flex items-center gap-0.5">
-                          -<PriceFormatter amount={getSubTotalPrice() - getTotalPrice()} />
+                          -
+                          <PriceFormatter
+                            amount={getSubTotalPrice() - getTotalPrice()}
+                          />
                         </span>
                       </div>
                     )}
@@ -340,6 +352,8 @@ const CartPage = () => {
                     <Button
                       className="hoverEffect w-full rounded-full font-semibold tracking-wide"
                       size="lg"
+                      disabled={loading}
+                      onClick={handleCheckout}
                     >
                       {loading ? "Please wait..." : "Proceed to Checkout"}
                     </Button>

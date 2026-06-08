@@ -13,7 +13,7 @@ import { Button } from './ui/button';
 function Footer() {
   return (
     <>
-      <footer className='bg-white border-t'>
+      <footer className='bg-surface border-t'>
         <Container>
           <FooterTop />
           <div className='py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
@@ -25,7 +25,7 @@ function Footer() {
               </SubText>
               <SocialMedia
                 className='text-darkColor/60'
-                iconClassName='border-darkColor/60 hover:border-shop_light_green hover:text-shop_dark_green'
+                iconClassName='border-darkColor/60 hover:border-accent-p hover:text-accent-p'
                 tooltipClassName='bg-darkColor text-white'
               />
             </div>
@@ -36,7 +36,7 @@ function Footer() {
                   <li key={item?.title}>
                     <Link
                       href={item?.href}
-                      className='hover:text-shop_dark_green hoverEffect font-medium'
+                      className='hover:text-accent-p hoverEffect font-medium'
                     >
                       {item?.title}
                     </Link>
@@ -51,7 +51,7 @@ function Footer() {
                   <li key={item?.title}>
                     <Link
                       href={`/categories/${item?.href}`}
-                      className='hover:text-shop_dark_green hoverEffect font-medium'
+                      className='hover:text-accent-p hoverEffect font-medium'
                     >
                       {item?.title}
                     </Link>

@@ -14,7 +14,8 @@
     ".claude": true,
     ".next": true,
     "extensions.txt": true,
-    "node_modules": true
+    "node_modules": true,
+    "actions/getMyAddress.ts": true
   },
   "typescript.preferences.autoImportFileExcludePatterns": [
   "**/node_modules/@radix-ui/**"

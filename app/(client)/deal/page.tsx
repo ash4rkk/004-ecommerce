@@ -12,10 +12,9 @@ const DealPage = async () => {
         <Title className='mb-5  underline-offset-4 decoration-1 text-lg font-semibold uppercase tracking-wide'>
           Hot Deals of the Week
         </Title>
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5'>
-          {products?.map((product) => (
-            //! Fix type 
-            <ProductCard key={product?._id} product={product} />
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5'>
+          {products?.map((product, index) => (
+            <ProductCard key={product?._id} product={product} index={index} />
           ))}
         </div>
       </Container>

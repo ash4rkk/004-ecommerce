@@ -14,7 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { Product } from "@/sanity.types";
+import type { ProductCardProduct } from "@/lib/product-types";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import PriceFormatter from "./PriceFormatter";
@@ -54,7 +54,7 @@ const WishlistProducts = () => {
         <>
           {/* Mobile: card layout */}
           <div className="space-y-4 md:hidden">
-            {favoriteProduct?.slice(0, visibleProducts)?.map((product: Product) => (
+            {favoriteProduct?.slice(0, visibleProducts)?.map((product) => (
               <div key={product?._id} className="relative flex gap-4 rounded-xl border p-4 shadow-sm">
                 <button
                   onClick={() => removeFromFavorite(product._id)}
@@ -113,7 +113,7 @@ const WishlistProducts = () => {
               <TableBody>
                 {favoriteProduct
                   ?.slice(0, visibleProducts)
-                  ?.map((product: Product) => (
+                  ?.map((product) => (
                     <TableRow key={product?._id}>
                       <TableCell>
                         <button onClick={() => removeFromFavorite(product._id)}>

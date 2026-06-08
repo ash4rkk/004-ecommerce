@@ -43,9 +43,9 @@ const SuccessPage = () => {
         <div className="max-w-2xl mx-auto">
           {/* Success icon */}
           <div className="flex justify-center mb-8">
-            <div className="w-24 h-24 rounded-full bg-shop_dark_green/10 flex items-center justify-center animate-pulse">
+            <div className="w-24 h-24 rounded-full bg-accent-p/10 flex items-center justify-center animate-pulse">
               <CheckCircle
-                className="w-14 h-14 text-shop_dark_green/80"
+                className="w-14 h-14 text-accent-p/80"
                 strokeWidth={1.5}
               />
             </div>
@@ -66,7 +66,7 @@ const SuccessPage = () => {
           {/* Order details card */}
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-6">
             {/* Status bar */}
-            <div className="bg-shop_dark_green/80 px-6 py-3 flex items-center gap-2">
+            <div className="bg-accent-p/80 px-6 py-3 flex items-center gap-2">
               <ReceiptText className="w-4 h-4 text-white" />
               <span className="text-white text-sm font-medium">
                 Order Confirmation
@@ -107,7 +107,7 @@ const SuccessPage = () => {
 
                   <div className="flex items-center justify-between py-3 border-b border-gray-50">
                     <span className="text-sm text-lightColor">Payment Status</span>
-                    <span className="text-xs font-semibold text-shop_dark_green bg-shop_dark_green/10 px-3 py-1 rounded-full uppercase tracking-wide">
+                    <span className="text-xs font-semibold text-accent-p bg-accent-p/10 px-3 py-1 rounded-full uppercase tracking-wide">
                       {sessionData.paymentStatus === "paid" ? "Paid" : sessionData.paymentStatus}
                     </span>
                   </div>
@@ -126,9 +126,9 @@ const SuccessPage = () => {
           </div>
 
           {/* Info banner */}
-          <div className="bg-shop_dark_green/5 border border-shop_dark_green/20 rounded-xl p-4 mb-8 flex gap-3">
-            <ShoppingBag className="w-5 h-5 text-shop_dark_green/80 mt-0.5 shrink-0" />
-            <p className="text-sm text-shop_dark_green/80">
+          <div className="bg-accent-p/5 border border-accent-p/20 rounded-xl p-4 mb-8 flex gap-3">
+            <ShoppingBag className="w-5 h-5 text-accent-p/80 mt-0.5 shrink-0" />
+            <p className="text-sm text-accent-p/80">
               A confirmation email has been sent to your address. You can track
               your order status in your account dashboard.
             </p>
@@ -138,14 +138,14 @@ const SuccessPage = () => {
           <div className="flex flex-col sm:flex-row gap-3">
             <Button
               asChild
-              className="flex-1 bg-shop_dark_green/80 hover:bg-shop_dark_green text-white h-11"
+              className="flex-1 bg-accent-p/80 hover:bg-accent-p text-white h-11"
             >
               <Link href="/">Back to Home</Link>
             </Button>
             <Button
               asChild
               variant="outline"
-              className="flex-1 h-11 border-shop_dark_green/30 text-shop_dark_green hover:bg-shop_dark_green/5"
+              className="flex-1 h-11 border-accent-p/30 text-accent-p hover:bg-accent-p/5"
             >
               <Link href="/shop">Continue Shopping</Link>
             </Button>

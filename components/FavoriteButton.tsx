@@ -26,8 +26,8 @@ function FavoriteButton({ showProduct = false, product }: Props) {
             </div>
               </Link>
           ) : (
-            <button className="group hover:border-shop_light_green hoverEffect border-shop_light_green/80 hover:text-shop_light_green relative rounded-sm border p-1 px-1.5">
-              <Heart className="text-shop_light_green/80 group-hover:text-shop_light_green hoverEffect mt-0.5 h-5 w-5" />
+            <button className="group hover:border-accent-p hoverEffect border-accent-p/80 hover:text-accent-p relative rounded-sm border p-1 px-1.5">
+              <Heart className="text-accent-p/80 group-hover:text-accent-p hoverEffect mt-0.5 h-5 w-5" />
             </button>
           )}
         </TooltipTrigger>

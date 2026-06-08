@@ -15,19 +15,19 @@ const ProductDetailsReviews = () => {
             <Button
             variant='default'
               onClick={() => setDetails("desc")}
-              className={` hover:text-white hover:bg-shop_btn_dark_green/80 border-darkColor/10 rounded-none border py-5 text-black transition-all duration-300 md:w-1/3 md:rounded-sm ${details === "desc" ? "text-white bg-shop_btn_dark_green/80" : "bg-white"}`}
+              className={` hover:text-white hover:bg-accent-p/80 border-darkColor/10 rounded-none border py-5 text-black transition-all duration-300 md:w-1/3 md:rounded-sm ${details === "desc" ? "text-white bg-accent-p/80" : "bg-white"}`}
             >
               Description
             </Button>
             <Button
               onClick={() => setDetails("info")}
-              className={`hover:text-white hover:bg-shop_btn_dark_green/80 border-darkColor/10 rounded-none border py-5 text-black transition-all duration-300 md:w-1/3 md:rounded-sm ${details === "info" ? "text-white bg-shop_btn_dark_green/80" : "bg-white"}`}
+              className={`hover:text-white hover:bg-accent-p/80 border-darkColor/10 rounded-none border py-5 text-black transition-all duration-300 md:w-1/3 md:rounded-sm ${details === "info" ? "text-white bg-accent-p/80" : "bg-white"}`}
             >
               Additional Information
             </Button>
             <Button
               onClick={() => setDetails("rev")}
-              className={`hover:text-white hover:bg-shop_btn_dark_green/80 border-darkColor/20 hover:bg-shop_dark_green/70 rounded-none border py-5 text-black transition-all duration-300 md:w-1/3 md:rounded-sm ${details === "rev" ? "text-white bg-shop_btn_dark_green/80" : "bg-white"}`}
+              className={`hover:text-white hover:bg-accent-p/80 border-darkColor/20 hover:bg-accent-p/70 rounded-none border py-5 text-black transition-all duration-300 md:w-1/3 md:rounded-sm ${details === "rev" ? "text-white bg-accent-p/80" : "bg-white"}`}
             >
               Reviews
             </Button>
