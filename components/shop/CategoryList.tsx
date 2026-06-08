@@ -17,8 +17,8 @@ const CategoryList = ({
 }: Props) => {
   return (
     <div className="w-full p-2">
-      <Title className="text-base font-semibold text-black">
-        Product Categories
+      <Title className="text-base uppercase font-semibold text-black">
+        Categories
       </Title>
       <RadioGroup value={selectedCategory || ""} className="mt-2 space-y-1">
         {categories?.map((category) => (
@@ -36,7 +36,7 @@ const CategoryList = ({
             />
             <Label
               htmlFor={category?.slug?.current}
-              className={` cursor-pointer ${selectedCategory === category?.slug?.current ? "text-shop_dark_green font-semibold" : "font-normal"}`}
+              className={` cursor-pointer ${selectedCategory === category?.slug?.current ? "text-accent-p font-semibold" : "font-normal"}`}
             >
               {category?.title}
             </Label>
@@ -46,7 +46,7 @@ const CategoryList = ({
             animate={{ opacity: selectedCategory ? 1 : 0 }}
             transition={{ duration: 0.3 }}
             onClick={() => setSelectedCategory?.(null)}
-            className={`hover:text-shop_dark_green hoverEffect mt-2 text-sm font-medium underline decoration-1 underline-offset-2 ${!selectedCategory && "invisible"}`}
+            className={`hover:text-accent-p hoverEffect mt-2 text-sm font-medium underline decoration-1 underline-offset-2 ${!selectedCategory && "invisible"}`}
           >
             Reset Selection
           </motion.button>

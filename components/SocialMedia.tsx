@@ -45,7 +45,7 @@ function SocialMedia({ className, iconClassName, tooltipClassName }: Props) {
                 rel='noopener noreferrer'
                 href={item?.href}
                 className={cn(
-                  'p-2 border rounded-full hover:text-white hover:border-shop_light_green hoverEffects',
+                  'p-2 border rounded-full hover:text-white hover:border-accent-p hoverEffects',
                   iconClassName
                 )}
               >

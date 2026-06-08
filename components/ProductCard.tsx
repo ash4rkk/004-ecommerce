@@ -1,28 +1,38 @@
-import { Product } from "@/sanity.types";
+import type { ProductCardProduct } from "@/lib/product-types";
 import { urlFor } from "@/sanity/lib/image";
-import { FlameIcon, StarIcon } from "lucide-react";
+import { StarIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import AddToWishlistButton from "./AddToWishlistButton";
 import { Title } from "./ui/text";
-import PriceView from "./PriceView";
-import AddToCartButton from "./AddToCartButton";
+import ProductCardActions from "@/actions/ProductCardActions";
 
 interface Props {
-  product: Product;
-  index: number;
+  product: ProductCardProduct;
+  index?: number;
 }
 
-const ProductCard = ({ product, index }: Props) => {
+const formatCategories = (
+  categories: ProductCardProduct["categories"],
+): string => {
+  if (!categories?.length) return "";
+  return categories
+    .map((cat) => (typeof cat === "string" ? cat : null))
+    .filter(Boolean)
+    .join(", ");
+};
+
+const ProductCard = ({ product, index = 0 }: Props) => {
   const toneNumber = (index % 8) + 1; // 1-8 cycle
+  const categoryLabel = formatCategories(product?.categories);
   return (
     <div className="bg-surface group rounded-lg text-sm">
-      <div className="group bg-shop_light_bg rounded-lg relative overflow-hidden">
+      <div className="group bg-shop_light_bg relative overflow-hidden rounded-lg">
         {product?.images?.[0] && (
           <div
             style={{ backgroundColor: `var(--tone-${toneNumber})/20` }}
-            className="p-2 md:px-3 rounded-lg md:pt-3"
+            className="rounded-lg p-2 md:px-3 md:pt-3"
           >
             <Link className="" href={`/product/${product?.slug?.current}`}>
               <Image
@@ -39,68 +49,56 @@ const ProductCard = ({ product, index }: Props) => {
         )}
         <AddToWishlistButton product={product} />
         {product?.status === "sale" && (
-          <p className=" bg-white hoverEffect absolute shadow top-4 left-4 z-10 rounded-full p-1 px-2">
+          <p className="hoverEffect absolute top-4 left-4 z-10 rounded-full bg-white p-1 px-2 shadow">
             Sale!
           </p>
         )}
         {product?.status === "new" && (
-          <p className=" bg-white hoverEffect absolute shadow top-4 left-4 z-10 rounded-full p-1 px-2">
+          <p className="hoverEffect absolute top-4 left-4 z-10 rounded-full bg-white p-1 px-2 shadow">
             New Arrival
           </p>
         )}
         {product?.status === "hot" && (
           <Link
             href={"/deal"}
-            className=" bg-white hoverEffect absolute shadow top-4 left-4 z-10 rounded-full p-1 px-2"
+            className="hoverEffect absolute top-4 left-4 z-10 rounded-full bg-white p-1 px-2 shadow"
           >
             <p>Bestseller</p>
           </Link>
         )}
       </div>
       <div className="flex flex-col gap-2 p-3">
-        {product?.categories && (
+        {categoryLabel && (
           <p className="text-shop_light_text line-clamp-1 text-xs uppercase">
-            {product?.categories?.map((cat) => cat).join(", ")}
+            {categoryLabel}
           </p>
         )}
-        <Title className="line-clamp-1 text-sm">{product?.name}</Title>
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-0.5">
-            {[...Array(5)].map((_, index) => (
-              <StarIcon
-                size={13}
-                key={index}
-                className={
-                  index < 4
-                    ? "text-accent-soft"
-                    : "text-shop_lighter_text"
-                }
-                fill={index < 4 ? "#93D991" : "#ababab"}
-              />
-            ))}
-          </div>
-          <p className="text-shop_light_text text-xs tracking-wide">
-            {product?.totalReviews}
-          </p>
-        </div>
-        <div className="flex items-center gap-2.5">
-          <p className="font-medium">In Stock</p>
-          <p
-            className={`font-semibold ${product?.stock === 0 ? "text-red-600" : "text-accent-soft"}`}
-          >
-            {(product?.stock as number) > 0 ? product?.stock : "unavailable"}
-          </p>
-        </div>
-        <PriceView
-          price={product?.price}
-          discount={
-            product?.discount && product.discount > 0
-              ? product.discount
-              : undefined
-          }
-          className="text-sm"
-        />
-        <AddToCartButton product={product} className="rounded-full" />
+
+<div className="flex justify-between items-center gap-3">
+  <Title className="line-clamp-2 min-w-0 flex-1 text-lg font-semibold">
+    {product?.name}
+  </Title>
+  <div className="flex shrink-0 flex-col items-end gap-1.5">
+    <div className="flex items-center gap-1">
+      <StarIcon size={13} className="fill-ink" />
+      <p className="text-shop_light_text text-xs tracking-wide">
+        {product?.averageRating}
+      </p>
+    </div>
+    <div className="flex items-center gap-2 text-xs">
+      <p className="font-medium">In Stock</p>
+      <p
+        className={`font-semibold ${
+          product?.stock === 0 ? "text-red-600" : "text-accent-soft"
+        }`}
+      >
+        {(product?.stock as number) > 0 ? product?.stock : "unavailable"}
+      </p>
+    </div>
+  </div>
+</div>
+        <div className="flex items-center justify-end gap-2.5"></div>
+        <ProductCardActions product={product} />
       </div>
     </div>
   );

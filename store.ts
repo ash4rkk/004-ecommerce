@@ -1,15 +1,16 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { Product } from "./sanity.types";
+import type { ProductCardProduct } from "./lib/product-types";
+import { useSyncExternalStore } from "react";
 
 export interface CartItem {
-  product: Product;
+  product: ProductCardProduct;
   quantity: number;
 }
 
 interface StoreState {
   items: CartItem[];
-  addItem: (product: Product) => void;
+  addItem: (product: ProductCardProduct) => void;
   removeItem: (productId: string) => void;
   deleteCartProduct: (productId: string) => void;
   resetCart: () => void;
@@ -18,8 +19,8 @@ interface StoreState {
   getItemCount: (productId: string) => number;
   getGroupedItem: () => CartItem[];
 
-  favoriteProduct: Product[];
-  addToFavorite: (product: Product) => Promise<void>;
+  favoriteProduct: ProductCardProduct[];
+  addToFavorite: (product: ProductCardProduct) => Promise<void>;
   removeFromFavorite: (productId: string) => void;
   resetFavorite: () => void;
 }
@@ -104,9 +105,9 @@ const useStore = create<StoreState>()(
       // addToFavorite: generally Promise is not needed but later component can
       // write await.
       // isFavorite returns true or false based on some method
-      // if isFavorite = false, create new shallow copy without item 
+      // if isFavorite = false, create new shallow copy without item
       // if isFavorite = true, create array with product and update
-      addToFavorite: (product: Product) => {
+      addToFavorite: (product: ProductCardProduct) => {
         return new Promise<void>((resolve) => {
           set((state: StoreState) => {
             const isFavorite = state.favoriteProduct.some(
@@ -123,7 +124,7 @@ const useStore = create<StoreState>()(
           resolve();
         });
       },
-      // 
+      //
       removeFromFavorite: (productId: string) => {
         set((state: StoreState) => ({
           favoriteProduct: state.favoriteProduct.filter(
@@ -140,5 +141,10 @@ const useStore = create<StoreState>()(
     },
   ),
 );
-
-export default useStore
+export const useCartHydrated = () =>
+  useSyncExternalStore(
+    (cb) => useStore.persist.onFinishHydration(cb),
+    () => useStore.persist.hasHydrated(),
+    () => false,
+  );
+export default useStore;

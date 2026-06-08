@@ -23,7 +23,7 @@ async function Header() {
     orders = result ?? [];
   }
   return (
-    <header className="sticky border-b top-0 z-50 bg-white py-5 backdrop-blur-md shadow">
+    <header className="sticky border-b top-0 z-50 bg-white py-5 backdrop-blur-md border-border">
       <Container className="text-lightColor flex items-center justify-between">
         {/* Logo */}
         <div className="flex w-auto items-center justify-start gap-2.5 md:w-1/3 md:gap-0">

@@ -9,7 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-accent-p text-muted font-semibold shadow hover:bg-shop_btn_dark_green hoverEffect",
+        default: "bg-accent-p text-muted font-semibold shadow hover:bg-accent-p hoverEffect",
         outline:
           "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:

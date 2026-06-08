@@ -1,5 +1,10 @@
 "use client";
-import { Brand, Category, Product } from "@/sanity.types";
+import type { ProductListItem } from "@/lib/product-types";
+import {
+  DEFAULT_PRICE_BOUNDS,
+  normalizePriceBounds,
+} from "@/lib/price-bounds";
+import { Brand } from "@/sanity.types";
 import { CategoryWithCount } from "@/sanity/queries";
 import React, { useEffect, useState } from "react";
 import Container from "./Container";
@@ -9,10 +14,9 @@ import BrandList from "./shop/BrandList";
 import PriceList from "./shop/PriceList";
 import { useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
-import { defineQuery } from "next-sanity";
-import { SHOP_QUERY } from "@/sanity/queries/query";
+import { SHOP_PRICE_BOUNDS_QUERY, SHOP_QUERY } from "@/sanity/queries/query";
 import { client } from "@/sanity/lib/client";
-import { Loader, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import NoProductAvailable from "./NoProductAvailable";
 import ProductCard from "./ProductCard";
 
@@ -24,78 +28,119 @@ interface Props {
 const Shop = ({ categories, brands }: Props) => {
   const searchParams = useSearchParams();
   const brandParams = searchParams?.get("brand");
-  const categoryParams = searchParams?.get('category')
+  const categoryParams = searchParams?.get("category");
 
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductListItem[]>([]);
   const [loading, setLoading] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(categoryParams || null);
+  const [priceReady, setPriceReady] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(
+    categoryParams || null,
+  );
   const [selectedBrand, setSelectedBrand] = useState<string | null>(
     brandParams || null,
   );
-  const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
+  const [priceBounds, setPriceBounds] = useState<[number, number]>(
+    DEFAULT_PRICE_BOUNDS,
+  );
+  const [selectedPrice, setSelectedPrice] = useState<number[]>(
+    DEFAULT_PRICE_BOUNDS,
+  );
 
   useEffect(() => {
+    let cancelled = false;
+
+    const fetchPriceBounds = async () => {
+      setPriceReady(false);
+      try {
+        const result = await client.fetch(
+          SHOP_PRICE_BOUNDS_QUERY,
+          { selectedCategory, selectedBrand },
+          { next: { revalidate: 0 } },
+        );
+        if (cancelled) return;
+
+        const bounds = normalizePriceBounds(
+          result?.minPrice,
+          result?.maxPrice,
+        );
+        setPriceBounds(bounds);
+        setSelectedPrice(bounds);
+      } catch (error) {
+        console.log("Shop price bounds fetching error", error);
+        if (!cancelled) {
+          setPriceBounds(DEFAULT_PRICE_BOUNDS);
+          setSelectedPrice(DEFAULT_PRICE_BOUNDS);
+        }
+      } finally {
+        if (!cancelled) setPriceReady(true);
+      }
+    };
+
+    fetchPriceBounds();
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedCategory, selectedBrand]);
+
+  useEffect(() => {
+    if (!priceReady) return;
+
+    let cancelled = false;
+
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        let minPrice = 0;
-        let maxPrice = 10000;
-
-        if (selectedPrice) {
-          const [min, max] = selectedPrice.split("-").map(Number);
-          minPrice = min;
-          maxPrice = max;
-        }
-        const query = SHOP_QUERY;
+        const [minPrice, maxPrice] = selectedPrice;
         const data = await client.fetch(
-          query,
-          {
-            selectedCategory,
-            selectedBrand,
-            minPrice,
-            maxPrice,
-          },
-          {
-            next: { revalidate: 0 },
-          },
+          SHOP_QUERY,
+          { selectedCategory, selectedBrand, minPrice, maxPrice },
+          { next: { revalidate: 0 } },
         );
-        setProducts(data);
+        if (!cancelled) setProducts(data);
       } catch (error) {
         console.log("Shop product fetching error", error);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
+
     fetchProducts();
-  }, [selectedCategory, selectedBrand, selectedPrice]);
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedCategory, selectedBrand, selectedPrice, priceReady]);
+
+  const hasPriceFilter =
+    selectedPrice[0] !== priceBounds[0] ||
+    selectedPrice[1] !== priceBounds[1];
+  const hasActiveFilters =
+    Boolean(selectedBrand || selectedCategory || hasPriceFilter);
+
+  const handleResetFilters = () => {
+    setSelectedBrand(null);
+    setSelectedCategory(null);
+  };
+
   return (
-    <div className="border-t">
-      <Container className="mt-5">
+    <div>
+      <Container className="mt-5 mb-10">
         <div className="sticky top-0 z-10 mb-5">
           <div className="flex items-center justify-between">
             <Title className="text-lg font-semibold tracking-wide uppercase">
               Get the products as your needs
             </Title>
             <motion.button
-              animate={{
-                opacity:
-                  selectedBrand || selectedCategory || selectedPrice ? 1 : 0,
-              }}
+              animate={{ opacity: hasActiveFilters ? 1 : 0 }}
               transition={{ duration: 0.3 }}
-              onClick={() => {
-                setSelectedPrice(null);
-                setSelectedBrand(null);
-                setSelectedCategory(null);
-              }}
-              className="text-shop_dark_green hoverEffect hover:text-shop_orange mt-2 text-sm font-medium underline"
+              onClick={handleResetFilters}
+              className="text-ink hoverEffect hover:text-accent-p hover:bg-surface-2 mt-2 rounded-full bg-surface px-2 py-1 text-sm tracking-wide"
             >
               Reset Filters
             </motion.button>
           </div>
         </div>
-        {/* Filters + Main window */}
-        <div className="border-t-shop_dark_green/50 flex flex-col gap-5 border-t pt-3 md:flex-row">
-          <div className="md:border-r-shop_dark_green/50 scrollbar-hide pb-5 md:sticky md:top-20 md:h-[calc(100vh-160px)] md:min-w-64 md:self-start md:overflow-auto md:border-r">
+        <div className="flex flex-col gap-5 pt-3 md:flex-row">
+          <div className="md:border-r-accent-p/50 scrollbar-hide pb-5 md:sticky md:top-20 md:h-[calc(100vh-160px)] md:min-w-64 md:self-start md:overflow-auto">
             <CategoryList
               categories={categories}
               selectedCategory={selectedCategory}
@@ -106,32 +151,35 @@ const Shop = ({ categories, brands }: Props) => {
               selectedBrand={selectedBrand}
               setSelectedBrand={setSelectedBrand}
             />
-            <PriceList
-              selectedPrice={selectedPrice}
-              setSelectedPrice={setSelectedPrice}
-            />
+            {priceReady && (
+              <PriceList
+                selectedPrice={selectedPrice}
+                setSelectedPrice={setSelectedPrice}
+                bounds={priceBounds}
+              />
+            )}
           </div>
           <div className="flex-1 pt-5">
             <div className="scrollbar-hide h-[calc(100vh-160px)] overflow-y-auto pr-2">
-              {loading ? (
+              {loading || !priceReady ? (
                 <div className="flex flex-col items-center justify-center gap-2 p-20">
-                  <Loader2 className="text-shop_dark_green h-10 w-10 animate-spin" />{" "}
+                  <Loader2 className="text-accent-p h-10 w-10 animate-spin" />
                   <p className="font-sans text-base tracking-wide">
                     Product is loading ...
                   </p>
                 </div>
-              ) : (
-                <div>
-                  {products?.length > 0 ? (
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
-                      {products?.map((product) => (
-                        <ProductCard key={product?._id} product={product} />
-                      ))}
-                    </div>
-                  ) : (
-                    <NoProductAvailable className="mt-0" />
-                  )}
+              ) : products.length > 0 ? (
+                <div className="grid grid-cols-2 gap-2.5 md:grid-cols-3 lg:grid-cols-3">
+                  {products.map((product, index) => (
+                    <ProductCard
+                      key={product._id}
+                      product={product}
+                      index={index}
+                    />
+                  ))}
                 </div>
+              ) : (
+                <NoProductAvailable className="mt-0" />
               )}
             </div>
           </div>
