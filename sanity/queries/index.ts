@@ -1,7 +1,7 @@
 import type { ProductListItem } from '@/lib/product-types';
 import { Brand, Category } from '@/sanity.types';
 import { sanityFetch } from '../lib/live';
-import { BRANDS_QUERY, DEAL_PRODUCTS, LATEST_BLOG_QUERY, PRODUCT_BY_SLUG_QUERY, BRAND_QUERY, MY_ORDERS_QUERY, ALL_BLOGS_QUERY } from './query';
+import { BRANDS_QUERY, DEAL_PRODUCTS, LATEST_BLOG_QUERY, PRODUCT_BY_SLUG_QUERY, BRAND_QUERY, MY_ORDERS_QUERY, ALL_BLOGS_QUERY, SINGLE_BLOG_QUERY } from './query';
 
 export type CategoryWithCount = Category & { productCount: number };
 const getCategories = async (quantity?: number) => {
@@ -112,6 +112,19 @@ const getAllBlogs = async (quantity?: number) => {
   }
 };
 
+const getSingleBlog = async (slug: string) => {
+  try {
+    const { data } = await sanityFetch({
+      query: SINGLE_BLOG_QUERY,
+      params: { slug }
+    })
+    return data ?? null
+  } catch (error) {
+    console.log('Error fetching single blog', error)
+    return null
+  }
+}
+
 export { 
   getCategories, 
   getAllBrands, 
@@ -120,5 +133,6 @@ export {
   getProductBySlug,
   getBrand,
   getMyOrders,
-  getAllBlogs
+  getAllBlogs,
+  getSingleBlog
 };

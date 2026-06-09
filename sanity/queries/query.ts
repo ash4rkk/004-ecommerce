@@ -50,10 +50,12 @@ const SHOP_QUERY = defineQuery(`
   }
   `);
 
+const ADDRESSES_QUERY = defineQuery(
+  `*[_type =='address' && email == $userEmail] | order(publishedAt desc)`,
+);
 
-const ADDRESSES_QUERY = defineQuery(`*[_type =='address' && email == $userEmail] | order(publishedAt desc)`);
-
-const MY_ORDERS_QUERY = defineQuery(`*[_type == 'order' && clerkUserId == $userId] | order(orderDate desc) {
+const MY_ORDERS_QUERY =
+  defineQuery(`*[_type == 'order' && clerkUserId == $userId] | order(orderDate desc) {
   ...,
   products[] {
     ...,
@@ -61,13 +63,24 @@ const MY_ORDERS_QUERY = defineQuery(`*[_type == 'order' && clerkUserId == $userI
   }
 }`);
 
-
-const ALL_BLOGS_QUERY = defineQuery(`*[_type == 'blog'] | order(publishedAt desc) [0...$quantity]{
+const ALL_BLOGS_QUERY =
+  defineQuery(`*[_type == 'blog'] | order(publishedAt desc) [0...$quantity]{
   ...,
   blogcategories[]->{title}
-}`)
+}`);
 
-
+const SINGLE_BLOG_QUERY =
+  defineQuery(`*[_type == 'blog' && slug.current == $slug][0]{
+  ...,
+  author -> {
+    name,
+    image,
+  },
+  blogcategories[] -> {
+    title,
+    "slug": slug.current,
+  },
+} `);
 
 export {
   BRANDS_QUERY,
@@ -79,5 +92,6 @@ export {
   SHOP_QUERY,
   ADDRESSES_QUERY,
   MY_ORDERS_QUERY,
-  ALL_BLOGS_QUERY
+  ALL_BLOGS_QUERY,
+  SINGLE_BLOG_QUERY,
 };
