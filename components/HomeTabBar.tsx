@@ -12,7 +12,7 @@ const HomeTabBar = ({ selectedTab, onTabSelect }: Props) => {
   return (
     <div className="flex flex-wrap items-center justify-between gap-5">
       <Link href="/shop">
-        <Button className="rounded-full md:px-6" size="lg">
+        <Button className="rounded-full font-medium text-white md:px-6" size="lg">
           See all
         </Button>
       </Link>

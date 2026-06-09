@@ -23,10 +23,10 @@ async function Header() {
     orders = result ?? [];
   }
   return (
-    <header className="sticky border-b top-0 z-50 bg-white py-5 backdrop-blur-md border-border">
-      <Container className="text-lightColor flex items-center justify-between">
+    <header className="sticky border-b top-0 z-50 bg-white py-3 backdrop-blur-md border-border">
+      <Container className="text-lightColor mx-4 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex w-auto items-center justify-start gap-2.5 md:w-1/3 md:gap-0">
+        <div className="flex w-auto shrink-0 items-center justify-start gap-2.5">
           <MobileMenu />
           <Logo />
         </div>
@@ -34,7 +34,7 @@ async function Header() {
         {/* NavButton */}
         <HeaderMenu />
         <TooltipProvider>
-          <div className="flex w-auto items-center justify-end gap-2 md:w-1/3">
+          <div className="flex w-auto shrink-0 items-center justify-end gap-2">
             <SearchBar />
             <CartIcon />
             <FavoriteButton />
@@ -55,7 +55,9 @@ async function Header() {
                 />
               </Show>
               <Show when="signed-out">
-                <SignIn />
+                <SignIn 
+                  
+                />
               </Show>
             </ClerkLoaded>
           </div>

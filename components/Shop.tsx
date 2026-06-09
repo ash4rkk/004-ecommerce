@@ -126,7 +126,7 @@ const Shop = ({ categories, brands }: Props) => {
       <Container className="mt-5 mb-10">
         <div className="sticky top-0 z-10 mb-5">
           <div className="flex items-center justify-between">
-            <Title className="text-lg font-semibold tracking-wide uppercase">
+            <Title className="font-bold tracking-wide uppercase">
               Get the products as your needs
             </Title>
             <motion.button
@@ -169,7 +169,7 @@ const Shop = ({ categories, brands }: Props) => {
                   </p>
                 </div>
               ) : products.length > 0 ? (
-                <div className="grid grid-cols-2 gap-2.5 md:grid-cols-3 lg:grid-cols-3">
+                <div className="grid grid-cols-2 gap-2.5 md:grid-cols-2 lg:grid-cols-3">
                   {products.map((product, index) => (
                     <ProductCard
                       key={product._id}
