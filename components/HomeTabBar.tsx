@@ -1,7 +1,7 @@
-import { DATA_productType } from '@/constants/data';
-import Link from 'next/link';
-import React from 'react';
-import { Button } from './ui/button';
+import { DATA_productType } from "@/constants/data";
+import Link from "next/link";
+import React from "react";
+import { Button } from "./ui/button";
 
 interface Props {
   selectedTab: string;
@@ -9,24 +9,22 @@ interface Props {
 }
 const HomeTabBar = ({ selectedTab, onTabSelect }: Props) => {
   return (
-    <div className='flex items-center justify-between flex-wrap gap-5'>
-      <div className='flex items-center gap-3 text-sm font-semibold'>
+    <div className="flex flex-wrap items-center justify-between gap-5">
+      <Link href={"/shop"}>
+        <Button className=" rounded-full md:px-6" size='lg'>See all</Button>
+      </Link>
+      <div className="flex items-center gap-3 text-sm font-semibold">
         {DATA_productType?.map((item) => (
           <Button
             key={item?.title}
+            size="sm"
             onClick={() => onTabSelect(item?.title)}
-            className={`border border-shop_light_green/20 px-4 py-1.5 md:px-6 md:py-2 rounded-full hover:bg-shop_dark_green/80 hover:border-shop_light_green hover:text-white hoverEffect bg-white text-black ${selectedTab === item?.title ? 'bg-shop_dark_green/80 text-white border-shop_light_green' : 'bg-shop_light_green/20'}`}
+            className={`hover:bg-surface  hoverEffect rounded-full border-none px-4 py-1.5 text-ink md:px-6 md:py-2 ${selectedTab === item?.title ? "bg-ink text-muted pointer-events-none" : "bg-surface-2 "}`}
           >
             {item?.title}
           </Button>
         ))}
       </div>
-      <Link
-        href={'/shop'}
-        className='border border-shop_light_green/20 px-4 py-1.5 md:px-6 md:py-2 rounded-full hover:bg-shop_dark_green/80 hover:border-shop_light_green hover:text-white hoverEffect bg-white text-black'
-      >
-        See all
-      </Link>
     </div>
   );
 };

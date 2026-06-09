@@ -14,7 +14,7 @@ interface Props {
 const BrandList = ({ brands, selectedBrand, setSelectedBrand }: Props) => {
   return (
     <div className="w-full p-2">
-      <Title className="text-base font-semibold text-black">
+      <Title className="text-base uppercase font-semibold text-black">
         Brands
       </Title>
       <RadioGroup value={selectedBrand || ""} className="mt-2 space-y-1">
@@ -33,7 +33,7 @@ const BrandList = ({ brands, selectedBrand, setSelectedBrand }: Props) => {
             />
             <Label
               htmlFor={brand?.slug?.current}
-              className={` cursor-pointer ${selectedBrand === brand?.slug?.current ? "text-shop_dark_green font-semibold" : "font-normal"}`}
+              className={` cursor-pointer ${selectedBrand === brand?.slug?.current ? "text-accent-p font-semibold" : "font-normal"}`}
             >
               {brand?.title}
             </Label>
@@ -43,7 +43,7 @@ const BrandList = ({ brands, selectedBrand, setSelectedBrand }: Props) => {
             animate={{ opacity: selectedBrand ? 1 : 0 }}
             transition={{ duration: 0.5 }}
             onClick={() => setSelectedBrand?.(null)}
-            className={`hover:text-shop_dark_green hoverEffect mt-2 text-sm font-medium underline decoration-1 underline-offset-2 ${!selectedBrand && "invisible"}`}
+            className={`hover:text-accent-p hoverEffect mt-2 text-sm font-medium underline decoration-1 underline-offset-2 ${!selectedBrand && "invisible"}`}
           >
             Reset Selection
           </motion.button>

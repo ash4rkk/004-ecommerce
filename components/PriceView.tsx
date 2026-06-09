@@ -7,17 +7,17 @@ interface Props {
 }
 const PriceView = ({ price, discount, className }: Props) => {
   return (
-      <div className='flex items-center gap-2'>
-        <PriceFormatter
-          amount={price}
-          className='text-shop_dark_green'
-        />
+      <div className='flex flex-col items-center'>
         {price && discount && (
           <PriceFormatter
             amount={price + (discount * price) / 100}
             className='text-shop_light_text font-normal line-through '
           />
         )}
+        <PriceFormatter
+          amount={price}
+          className='text-ink text-lg'
+        />
       </div>
   );
 };

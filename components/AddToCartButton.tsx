@@ -1,5 +1,5 @@
 "use client";
-import { Product } from "@/sanity.types";
+import type { ProductCardProduct } from "@/lib/product-types";
 import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { ShoppingBag } from "lucide-react";
@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import PriceFormatter from "./PriceFormatter";
 import QuantityButtons from "./QuantityButtons";
 interface Props {
-  product: Product;
+  product: ProductCardProduct;
   className?: string;
 }
 const AddToCartButton = ({ product, className }: Props) => {
@@ -33,7 +33,7 @@ const AddToCartButton = ({ product, className }: Props) => {
     setIsMounted(true);
   }, []);
   return (
-    <div className={cn("w-full h-12 flex items-center", className)}>
+    <div className={cn("w-full h-12 flex relative items-center", className)}>
       {itemCount ? (
         <div className="text-sm w-full">
           <div className="flex items-center justify-between">
@@ -49,8 +49,9 @@ const AddToCartButton = ({ product, className }: Props) => {
         <Button
           onClick={handleAddToCart}
           disabled={isOutOfStock}
+          size='lg'
           className={cn(
-            "bg-shop_dark_green/80 text-shop_light_bg border-shop_dark_green/80 hover:bg-shop_dark_green hover:border-shop_dark_green hoverEffect w-full border font-semibold tracking-wide shadow-none hover:text-white",
+            "bg-ink absolute right-2 rounded-full px-4 text-shop_light_bg hover:bg-accent-p hover:border-accent-p hoverEffect  font-semibold tracking-wide shadow-none hover:text-white",
           )}
         >
           <ShoppingBag />

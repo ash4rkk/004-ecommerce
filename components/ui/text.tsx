@@ -9,7 +9,7 @@ export const Title = ({
 }) => {
   return (
     <h2
-      className={cn('text-3xl font-sans text-shop_dark_green capitalize tracking-wide', className)}
+      className={cn('text-3xl font-sans text-ink capitalize tracking-wide', className)}
     >
       {children}
     </h2>

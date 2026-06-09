@@ -1,10 +1,8 @@
 import { Metadata } from "@/actions/createCheckoutSession";
 import stripe from "@/lib/stripe";
 import { backendClient } from "@/sanity/lib/backendClient";
-import { number } from "motion/react";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { parse } from "path";
 import Stripe from "stripe";
 
 export async function POST(req: NextRequest) {
@@ -68,6 +66,7 @@ async function createOrderInSanity(
     currency,
     metadata,
     payment_intent,
+    customer,
     total_details,
   } = session;
   const { orderNumber, customerName, customerEmail, clerkUserId, address } =
@@ -100,7 +99,7 @@ async function createOrderInSanity(
       quantity,
     });
   }
-
+  const stripeCustomerId = typeof customer === 'string' ? customer : (customer?.id ?? null)
   // Create order in Sanity
   const order = await backendClient.create({
     _type: "order",
@@ -108,7 +107,7 @@ async function createOrderInSanity(
     stripeCheckoutSessionId: id,
     stripePaymentIntentId: payment_intent,
     customerName,
-    stripeCustomerId: customerEmail,
+    stripeCustomerId: stripeCustomerId,
     clerkUserId: clerkUserId,
     email: customerEmail,
     currency,

@@ -41,7 +41,7 @@ const SingleProductPage = async ({ params }: { params: Promise<{ slug: string }>
               <StarIcon
                 key={index}
                 size={12}
-                className='text-shop_light_green'
+                className='text-accent-p'
                 fill={index < (product?.averageRating as number) - 1 ? '#93D991' : '#ababab'}
               />
             ))}

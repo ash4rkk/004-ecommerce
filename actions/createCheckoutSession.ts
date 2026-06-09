@@ -39,7 +39,7 @@ export async function createCheckoutSession(
       },
       mode: "payment",
       allow_promotion_codes: true,
-      payment_method_types: ["card", 'blik'],
+      payment_method_types: ["card"],
       invoice_creation: {
         enabled: true,
       },

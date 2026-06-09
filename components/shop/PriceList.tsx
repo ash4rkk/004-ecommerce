@@ -1,54 +1,74 @@
-import React from 'react'
-import { Title } from '../ui/text';
-import { DATA_PRICE_RANGE_ARRAY } from '@/constants/data';
-import { RadioGroup ,RadioGroupItem } from '../ui/radio-group';
-import { Label } from '../ui/label';
-import { motion } from 'motion/react'
+import React from "react";
+import { Title } from "../ui/text";
+import { Label } from "../ui/label";
+import { Slider } from "../ui/slider";
+import { Input } from "../ui/input";
+import { EllipsisIcon } from "lucide-react";
+import { clamp } from "@/lib/price-bounds";
+
 interface Props {
-  selectedPrice?: string | null;
-  setSelectedPrice?: React.Dispatch<React.SetStateAction<string | null>>;
-}
-const priceArray = DATA_PRICE_RANGE_ARRAY
-const PriceList = ({selectedPrice, setSelectedPrice}: Props) => {
-  return (
-    <div className="w-full p-2">
-      <Title className="text-base font-semibold text-black">
-        Price
-      </Title>
-      <RadioGroup value={selectedPrice || ''} className="mt-2 space-y-1">
-        {priceArray?.map((price, index) => (
-          <div
-            onClick={() => {
-              setSelectedPrice?.(price.value);
-            }}
-            key={index}
-            className="flex items-center space-x-2 hover:cursor-pointer"
-          >
-            <RadioGroupItem
-              value={price?.value}
-              id={price?.value}
-              className="rounded-md"
-            />
-            <Label
-              htmlFor={price?.value}
-              className='cursor-pointer'
-              // className={`${selectedCategory === category?.slug?.current ? "text-shop_dark_green font-semibold" : "font-normal"}`}
-            >
-              {price?.title}
-            </Label>
-          </div>
-        ))}
-          <motion.button
-            animate={{ opacity: selectedPrice ? 1 : 0 }}
-            transition={{ duration: 0.3 }}
-            onClick={() => setSelectedPrice?.(null)}
-            className={`hover:text-shop_dark_green hoverEffect mt-2 text-sm font-medium underline decoration-1 underline-offset-2 ${!selectedPrice && "invisible"}`}
-          >
-            Reset Selection
-          </motion.button>
-        
-      </RadioGroup>
-    </div>  )
+  selectedPrice: number[];
+  setSelectedPrice: React.Dispatch<React.SetStateAction<number[]>>;
+  bounds: [number, number];
 }
 
-export default PriceList
+const PriceList = ({ selectedPrice, setSelectedPrice, bounds }: Props) => {
+  const [minBound, maxBound] = bounds;
+  const [minSelected, maxSelected] = selectedPrice;
+
+  const updateMin = (raw: string) => {
+    const parsed = Number(raw.replace(/\D/g, "").slice(0, 5) || 0);
+    const nextMin = clamp(parsed, minBound, maxSelected);
+    setSelectedPrice([nextMin, Math.max(nextMin, maxSelected)]);
+  };
+
+  const updateMax = (raw: string) => {
+    const parsed = Number(raw.replace(/\D/g, "").slice(0, 5) || 0);
+    const nextMax = clamp(parsed, minSelected, maxBound);
+    setSelectedPrice([Math.min(minSelected, nextMax), nextMax]);
+  };
+
+  return (
+    <div className="w-full p-2">
+      <Title className="text-base font-semibold text-black uppercase">
+        Price
+      </Title>
+      <Label className="m-2" htmlFor="slider">
+        Range
+      </Label>
+      <div className="mb-4 flex items-center justify-start gap-3 pl-2 md:justify-center">
+        <Input
+          className="w-18 text-center"
+          type="text"
+          inputMode="numeric"
+          maxLength={5}
+          pattern="[0-9]*"
+          value={String(minSelected)}
+          onChange={(e) => updateMin(e.target.value)}
+        />
+        <EllipsisIcon className="text-muted-foreground shrink-0" />
+        <Input
+          className="w-18 text-center"
+          type="text"
+          inputMode="numeric"
+          maxLength={5}
+          pattern="[0-9]*"
+          value={String(maxSelected)}
+          onChange={(e) => updateMax(e.target.value)}
+        />
+      </div>
+      <Slider
+        className="max-w-100 md:max-w-full"
+        id="slider"
+        value={selectedPrice}
+        onValueChange={setSelectedPrice}
+        min={minBound}
+        max={maxBound}
+        step={1}
+        minStepsBetweenThumbs={0}
+      />
+    </div>
+  );
+};
+
+export default PriceList;

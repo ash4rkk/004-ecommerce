@@ -11,11 +11,14 @@ function CartIcon() {
     <Tooltip>
     <TooltipTrigger asChild>
     <Link href={"/cart"} className="group relative">
-      <ShoppingBag className="hover:text-shop_light_green hoverEffect h-5 w-5" />
-      <span className="bg-shop_dark_green absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full font-semibold text-white">
+    <div className='bg-surface hover:bg-surface-2 p-3 rounded-xl hover:cursor-pointer'>
+
+      <ShoppingBag className="hover:text-accent-p text-ink hoverEffect h-4 w-4" />
+      <span className="text-muted absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center text-sm rounded-full font-poppins font-medium p-2 bg-accent-p">
         {" "}
-        {items?.length ? items.length : 0}
+        {items?.length ? items.length : '0'}
       </span>
+      </div>
     </Link>
     </TooltipTrigger>
     <TooltipContent>

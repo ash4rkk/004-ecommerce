@@ -1,13 +1,13 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Product } from "@/sanity.types";
+import type { ProductCardProduct } from "@/lib/product-types";
 import useStore from "@/store";
 import { Heart } from "lucide-react";
 import React from "react";
 import toast from "react-hot-toast";
 
 interface Props {
-  product: Product;
+  product: ProductCardProduct;
   className?: string;
 }
 
@@ -28,13 +28,13 @@ const AddToWishlistButton = ({ product, className }: Props) => {
   return (
     <div
       className={cn(
-        "absolute top-2 right-2 z-10 hover:cursor-pointer",
+        "absolute top-4 right-4 z-10 hover:cursor-pointer",
         className,
       )}
     >
       <div
         onClick={handleFavorite}
-        className={`hover:bg-shop_dark_green/80 hoverEffect rounded-full p-1 hover:text-white ${existingProduct ? "bg-shop_dark_green/80 text-white" : "bg-shop_light_text/20"}`}
+        className={`hover:bg-surface p-2 shadow hoverEffect rounded-full p-1 ${existingProduct ? "bg-ink text-white" : "bg-white"}`}
       >
         <Heart size={18} />
       </div>

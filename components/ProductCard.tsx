@@ -1,92 +1,104 @@
-import { Product } from '@/sanity.types';
-import { urlFor } from '@/sanity/lib/image';
-import { FlameIcon, StarIcon } from 'lucide-react';
-import Link from 'next/link';
-import Image from 'next/image';
-import React from 'react';
-import AddToWishlistButton from './AddToWishlistButton';
-import { Title } from './ui/text';
-import PriceView from './PriceView';
-import AddToCartButton from './AddToCartButton';
+import type { ProductCardProduct } from "@/lib/product-types";
+import { urlFor } from "@/sanity/lib/image";
+import { StarIcon } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import React from "react";
+import AddToWishlistButton from "./AddToWishlistButton";
+import { Title } from "./ui/text";
+import ProductCardActions from "@/actions/ProductCardActions";
 
 interface Props {
-  product: Product;
+  product: ProductCardProduct;
+  index?: number;
 }
 
-const ProductCard = ({ product }: Props) => {
+const formatCategories = (
+  categories: ProductCardProduct["categories"],
+): string => {
+  if (!categories?.length) return "";
+  return categories
+    .map((cat) => (typeof cat === "string" ? cat : null))
+    .filter(Boolean)
+    .join(", ");
+};
+
+const ProductCard = ({ product, index = 0 }: Props) => {
+  const toneNumber = (index % 8) + 1; // 1-8 cycle
+  const categoryLabel = formatCategories(product?.categories);
   return (
-    <div className='text-sm border border-dark_blue/20 rounded-md bg-white group'>
-      <div className='relative group overflow-hidden bg-shop_light_bg'>
+    <div className="bg-surface group rounded-lg text-sm">
+      <div className="group bg-shop_light_bg relative overflow-hidden rounded-lg">
         {product?.images?.[0] && (
-          <Link href={`/product/${product?.slug?.current}`}>
-          <Image
-            src={urlFor(product?.images[0]).url()}
-            alt='ProductImage'
-            loading='lazy'
-            width={700}
-            height={700}
-            className={`w-full h-64 bg-muted object-contain overflow-hidden transition-transform bg-shop_light_bg hoverEffect ${product?.stock !== 0 ? 'group-hover:scale-105' : 'opacity-50'}`}
-            />
+          <div
+            style={{ backgroundColor: `var(--tone-${toneNumber})/20` }}
+            className="rounded-lg p-2 md:px-3 md:pt-3"
+          >
+            <Link className="" href={`/product/${product?.slug?.current}`}>
+              <Image
+                src={urlFor(product?.images[0]).url()}
+                alt="ProductImage"
+                loading="lazy"
+                style={{ backgroundColor: `var(--tone-${toneNumber})` }}
+                width={700}
+                height={700}
+                className={`hoverEffect h-64 w-full overflow-hidden rounded-lg object-contain transition-transform ${product?.stock !== 0 ? "hover:scale-110" : "opacity-50"}`}
+              />
             </Link>
+          </div>
         )}
         <AddToWishlistButton product={product} />
-        {product?.status === 'sale' && (
-          <p className='absolute top-2 left-2 z-10 text-sm border border-darkColor/50 px-2 rounded-full group-hover:border-shop_light_green group-hover:text-shop_light_green hoverEffect'>
+        {product?.status === "sale" && (
+          <p className="hoverEffect absolute top-4 left-4 z-10 rounded-full bg-white p-1 px-2 shadow">
             Sale!
           </p>
         )}
-        {product?.status === 'new' && (
-          <p className='absolute top-2 left-2 z-10 text-sm border border-darkColor/50 px-2 rounded-full group-hover:border-shop_light_green group-hover:text-shop_light_green hoverEffect'>
+        {product?.status === "new" && (
+          <p className="hoverEffect absolute top-4 left-4 z-10 rounded-full bg-white p-1 px-2 shadow">
             New Arrival
           </p>
         )}
-        {product?.status === 'hot' && (
+        {product?.status === "hot" && (
           <Link
-            href={'/deal'}
-            className='absolute top-2 left-2 z-10 border border-shop_orange/50 p-1 rounded-full group-hover:border-shop_orange hover:text-shop_dark_green hoverEffect'
+            href={"/deal"}
+            className="hoverEffect absolute top-4 left-4 z-10 rounded-full bg-white p-1 px-2 shadow"
           >
-            <FlameIcon
-              size={18}
-              fill='#fb6c08'
-              className='text-shop_orange/50 group-hover:text-shop_orange hoverEffect'
-            />
+            <p>Bestseller</p>
           </Link>
         )}
       </div>
-      <div className='p-3 flex flex-col gap-2'>
-        {product?.categories && (
-          <p className='uppercase line-clamp-1 text-xs text-shop_light_text'>
-            {product?.categories?.map((cat) => cat).join(', ')}
+      <div className="flex flex-col gap-2 p-3">
+        {categoryLabel && (
+          <p className="text-shop_light_text line-clamp-1 text-xs uppercase">
+            {categoryLabel}
           </p>
         )}
-        <Title className='text-sm line-clamp-1'>{product?.name}</Title>
-        <div className='flex items-center gap-2'>
-          <div className='flex items-center gap-0.5'>
-            {[...Array(5)].map((_, index) => (
-              <StarIcon
-                size={13}
-                key={index}
-                className={index < 4 ? 'text-shop_lighter_green' : 'text-shop_lighter_text'}
-                fill={index < 4 ? '#93D991' : '#ababab'}
-              />
-            ))}
-          </div>
-          <p className='text-shop_light_text text-xs tracking-wide'>{product?.totalReviews}</p>
-        </div>
-        <div className='flex items-center gap-2.5'>
-          <p className='font-medium'>In Stock</p>
-          <p
-            className={`font-semibold ${product?.stock === 0 ? 'text-red-600' : 'text-shop_light_green'}`}
-          >
-            {(product?.stock as number) > 0 ? product?.stock : 'unavailable'}
-          </p>
-        </div>
-        <PriceView
-          price={product?.price}
-          discount={ product?.discount && product.discount > 0 ? product.discount : undefined}
-          className='text-sm'
-        />
-        <AddToCartButton product={product} className='rounded-full'/>
+
+<div className="flex justify-between items-center gap-3">
+  <Title className="line-clamp-2 min-w-0 flex-1 text-lg font-semibold">
+    {product?.name}
+  </Title>
+  <div className="flex shrink-0 flex-col items-end gap-1.5">
+    <div className="flex items-center gap-1">
+      <StarIcon size={13} className="fill-ink" />
+      <p className="text-shop_light_text text-xs tracking-wide">
+        {product?.averageRating}
+      </p>
+    </div>
+    <div className="flex items-center gap-2 text-xs">
+      <p className="font-medium">In Stock</p>
+      <p
+        className={`font-semibold ${
+          product?.stock === 0 ? "text-red-600" : "text-accent-soft"
+        }`}
+      >
+        {(product?.stock as number) > 0 ? product?.stock : "unavailable"}
+      </p>
+    </div>
+  </div>
+</div>
+        <div className="flex items-center justify-end gap-2.5"></div>
+        <ProductCardActions product={product} />
       </div>
     </div>
   );

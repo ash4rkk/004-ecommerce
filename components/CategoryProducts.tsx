@@ -1,5 +1,6 @@
 'use client';
-import { Category, Product } from '@/sanity.types';
+import type { ProductListItem } from '@/lib/product-types';
+import { Category } from '@/sanity.types';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { Button } from './ui/button';
@@ -16,7 +17,7 @@ interface Props {
 
 const CategoryProducts = ({ categories, slug }: Props) => {
   const [currentSlug, setCurrentSlug] = useState(slug);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<ProductListItem[]>([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -69,7 +70,7 @@ const CategoryProducts = ({ categories, slug }: Props) => {
           </div>
         : products?.length > 0 ?
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5'>
-            {products?.map((product: Product) => (
+            {products?.map((product) => (
               <AnimatePresence key={product?._id}>
                 <motion.div>
                   <ProductCard  product={product}/>

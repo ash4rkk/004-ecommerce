@@ -15,13 +15,13 @@ const NotFoundPage = () => {
           <div className='rounded-md shadow-sm space-y-4'>
           <Link
               href='/'
-              className='w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-semibold rounded-md text-white bg-shop_dark_green/80 hover:bg-shop_dark_green focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-shop_light_green hoverEffect'
+              className='w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-semibold rounded-md text-white bg-accent-p/80 hover:bg-accent-p focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-p hoverEffect'
             >
             Go to Shopek&apos;s home page
             </Link>
             <Link
               href='/help'
-              className='w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-semibold rounded-md text-shop_light_green bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-shop_light_green hoverEffect'
+              className='w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-semibold rounded-md text-accent-p bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-p hoverEffect'
             >
               Help
             </Link>
@@ -31,14 +31,14 @@ const NotFoundPage = () => {
           <p className='text-sm text-gray-600'>Need help? Visit the {' '}
           <Link
             href='/help'
-            className='font-medium text-shop_light_green hover:text-shop_dark_green'
+            className='font-medium text-accent-p hover:text-accent-p'
           >
             Help section
           </Link>{' '}
           or{' '}
           <Link
             href='/contact'
-            className='font-medium text-shop_light_green hover:text-shop_dark_green'
+            className='font-medium text-accent-p hover:text-accent-p'
           >
           Contact
           </Link>

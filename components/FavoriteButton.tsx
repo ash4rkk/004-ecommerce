@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import Link from "next/link";
 import { Heart } from "lucide-react";
@@ -14,28 +14,25 @@ function FavoriteButton({ showProduct = false, product }: Props) {
   const { favoriteProduct } = useStore();
   return (
     <>
-
-            <Tooltip>
-            <TooltipTrigger asChild>
-            {!showProduct ? (
+      <Tooltip>
+        <TooltipTrigger asChild>
+          {!showProduct ? (
             <Link href={"/wishlist"} className="group relative">
-          <Heart className="hover:text-shop_light_green hoverEffect h-5 w-5" />
-          <span className=" bg-shop_btn_dark_green absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full  font-semibold text-white">
-            {favoriteProduct?.length ? favoriteProduct.length : 0}
-          </span>
-        </Link>
-      ) : (
-        <button className="group hover:border-shop_light_green hoverEffect border-shop_light_green/80 hover:text-shop_light_green relative rounded-sm border p-1 px-1.5">
-          <Heart className="text-shop_light_green/80 group-hover:text-shop_light_green hoverEffect mt-0.5 h-5 w-5" />
-        </button>
-              )}
-            </TooltipTrigger>
-            <TooltipContent>
-              Wishlist
-            </TooltipContent>
-          </Tooltip>
-
-
+            <div className="bg-surface hover:bg-surface-2 rounded-xl p-3 hover:cursor-pointer">
+                <Heart className="hover:text-accent-p hoverEffect h-4 w-4" />
+                <span className="text-muted font-poppins bg-accent-p absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full p-2 text-sm font-medium">
+                  {favoriteProduct?.length ? favoriteProduct.length : 0}
+                </span>
+            </div>
+              </Link>
+          ) : (
+            <button className="group hover:border-accent-p hoverEffect border-accent-p/80 hover:text-accent-p relative rounded-sm border p-1 px-1.5">
+              <Heart className="text-accent-p/80 group-hover:text-accent-p hoverEffect mt-0.5 h-5 w-5" />
+            </button>
+          )}
+        </TooltipTrigger>
+        <TooltipContent>Wishlist</TooltipContent>
+      </Tooltip>
     </>
   );
 }
