@@ -10,7 +10,7 @@ interface Props {
 const HomeCategories = ({ categories }: Props) => {
   return (
     <div className='bg-ink border border-dark_blue/20 my-10 md:my-20 p-5 lg:p-7 rounded-md'>
-      <Title className='text-muted pb-3'>Popular Categories</Title>
+      <Title className='text-ink-muted pb-3'>Popular Categories</Title>
       <div className='mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
         {categories?.map((category) => (
           <div

@@ -14,7 +14,7 @@ function CartIcon() {
     <div className='bg-surface hover:bg-surface-2 p-3 rounded-xl hover:cursor-pointer'>
 
       <ShoppingBag className="hover:text-accent-p text-ink hoverEffect h-4 w-4" />
-      <span className="text-muted absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center text-sm rounded-full font-poppins font-medium p-2 bg-accent-p">
+      <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-accent-p p-2 font-poppins text-sm font-medium text-white">
         {" "}
         {items?.length ? items.length : '0'}
       </span>

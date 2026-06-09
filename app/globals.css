@@ -70,6 +70,7 @@
   --color-surface-2: var(--surface-2);
   --color-line: var(--line);
   --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
   --color-accent-p: var(--accent-p);
   --color-accent-soft: var(--accent-soft);
   --color-ok: var(--ok);
@@ -127,7 +128,7 @@
   --line: #E6E6E8;
   --ink-2: #0B0B0C;
   --ink:#242424;
-  --muted: #6E6E73;
+  --ink-muted: #6E6E73;
   --accent-p: #24875d;
   --accent-soft: #38c98c;
   --ok: #1FA463;
