@@ -45,14 +45,14 @@ function SocialMedia({ className, iconClassName, tooltipClassName }: Props) {
                 rel='noopener noreferrer'
                 href={item?.href}
                 className={cn(
-                  'p-2 border rounded-full hover:text-white hover:border-accent-p hoverEffects',
+                  'p-2 border rounded-full hover:text-accent-p hover:border-accent-p hoverEffects',
                   iconClassName
                 )}
               >
                 {item?.icon}
               </Link>
             </TooltipTrigger>
-            <TooltipContent className={cn('text-darkColor bg-white font-semibold', tooltipClassName)}>
+            <TooltipContent classNameArrow={'fill-surface-2 bg-surface-2'} className={cn('text-darkColor bg-surface-2 font-semibold', tooltipClassName)}>
               {item?.title}
             </TooltipContent>
           </Tooltip>

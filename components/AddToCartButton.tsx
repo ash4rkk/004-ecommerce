@@ -11,8 +11,9 @@ import QuantityButtons from "./QuantityButtons";
 interface Props {
   product: ProductCardProduct;
   className?: string;
+  classNameButton?: string;
 }
-const AddToCartButton = ({ product, className }: Props) => {
+const AddToCartButton = ({ product, className, classNameButton }: Props) => {
   const [isMounted, setIsMounted] = useState(false);
   const { addItem, getItemCount } = useStore();
   const itemCount = isMounted ? getItemCount(product?._id ?? "") : 0;
@@ -33,16 +34,18 @@ const AddToCartButton = ({ product, className }: Props) => {
     setIsMounted(true);
   }, []);
   return (
-    <div className={cn("w-full h-12 flex relative items-center", className)}>
+    <div className={cn("relative flex w-full items-center", className)}>
       {itemCount ? (
-        <div className="text-sm w-full">
+        <div className="w-full text-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-darkColor/80">Quantity</span>
-            <QuantityButtons product={product}/>
+            <span className="text-darkColor/80 text-xs">Quantity</span>
+            <QuantityButtons product={product} />
           </div>
           <div className="flex items-center justify-between border-t pt-2">
             <span className="text-xs font-semibold">Subtotal</span>
-            <PriceFormatter amount={product?.price ? product?.price * itemCount : 0} />
+            <PriceFormatter
+              amount={product?.price ? product?.price * itemCount : 0}
+            />
           </div>
         </div>
       ) : (
@@ -50,13 +53,12 @@ const AddToCartButton = ({ product, className }: Props) => {
           onClick={handleAddToCart}
           disabled={isOutOfStock}
           className={cn(
-            "bg-ink ml-auto right-1 rounded-full px-4 py-1 text-shop_light_bg hover:bg-accent-p hover:border-accent-p hoverEffect  font-semibold tracking-wide shadow-none   hover:text-white",
+            "bg-ink text-shop_light_bg hover:bg-accent-p hover:border-accent-p hoverEffect right-1 ml-auto rounded-full px-4 py-1 font-semibold tracking-wide shadow-none hover:text-white", classNameButton
           )}
         >
           <div className="flex gap-1 align-bottom">
-
-          <ShoppingBag/>
-          {isOutOfStock ? "Out of stock" : "Buy"}
+            <ShoppingBag />
+            {isOutOfStock ? "Out of stock" : "Buy"}
           </div>
         </Button>
       )}

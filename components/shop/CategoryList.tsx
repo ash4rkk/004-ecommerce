@@ -1,8 +1,7 @@
 import { Category } from "@/sanity.types";
 import React from "react";
 import { Title } from "../ui/text";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Label } from "../ui/label";
+import { Checkbox } from "../ui/checkbox";
 import {
   Collapsible,
   CollapsibleContent,
@@ -14,16 +13,22 @@ import { ChevronDown, X } from "lucide-react";
 
 interface Props {
   categories?: Category[];
-  selectedCategory?: string | null;
-  setSelectedCategory?: React.Dispatch<React.SetStateAction<string | null>>;
+  selectedCategories: string[];
+  setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const CategoryList = ({
   categories,
-  selectedCategory,
-  setSelectedCategory,
+  selectedCategories,
+  setSelectedCategories,
 }: Props) => {
   const [isOpen, setIsOpen] = React.useState(true);
+
+  const toggleCategory = (slug: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug],
+    );
+  };
 
   return (
     <div className="w-full border-b border-border">
@@ -34,14 +39,14 @@ const CategoryList = ({
           </Title>
           <div className="flex items-center gap-2">
             <AnimatePresence>
-              {selectedCategory && (
+              {selectedCategories.length > 0 && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                 >
                   <Badge variant="secondary" className="h-6">
-                    1
+                    {selectedCategories.length}
                   </Badge>
                 </motion.div>
               )}
@@ -51,42 +56,43 @@ const CategoryList = ({
         </CollapsibleTrigger>
 
         <CollapsibleContent className="space-y-1 px-4 py-3">
-          <RadioGroup value={selectedCategory || ""}>
-            {categories?.map((category) => (
-              <div
-                onClick={() => {
-                  setSelectedCategory?.(category?.slug?.current ?? null);
-                }}
-                key={category?._id}
-                className="flex items-center space-x-2 rounded-md px-2 py-1.5 hover:cursor-pointer hover:bg-muted transition-colors"
-              >
-                <RadioGroupItem
-                  value={category?.slug?.current ?? ""}
-                  id={category?.slug?.current ?? ""}
-                  className="h-4 w-4"
-                />
-                <Label
-                  htmlFor={category?.slug?.current}
-                  className={`cursor-pointer text-sm transition-colors ${
-                    selectedCategory === category?.slug?.current
-                      ? "font-semibold text-accent-p"
-                      : "font-normal text-foreground hover:text-accent-p"
-                  }`}
+          <div className="space-y-1">
+            {categories?.map((category) => {
+              const slug = category?.slug?.current ?? "";
+              const checked = selectedCategories.includes(slug);
+              return (
+                <div
+                  onClick={() => toggleCategory(slug)}
+                  key={category?._id}
+                  className="flex items-center space-x-2 rounded-md px-2 py-1.5 hover:cursor-pointer hover:bg-muted transition-colors"
                 >
-                  {category?.title}
-                </Label>
-              </div>
-            ))}
-          </RadioGroup>
+                  <Checkbox
+                    checked={checked}
+                    tabIndex={-1}
+                    className="pointer-events-none h-4 w-4"
+                  />
+                  <span
+                    className={`text-sm transition-colors ${
+                      checked
+                        ? "font-semibold text-accent-p"
+                        : "font-normal text-foreground hover:text-accent-p"
+                    }`}
+                  >
+                    {category?.title}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
 
           <AnimatePresence>
-            {selectedCategory && (
+            {selectedCategories.length > 0 && (
               <motion.button
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.2 }}
-                onClick={() => setSelectedCategory?.(null)}
+                onClick={() => setSelectedCategories([])}
                 className="mt-2 flex items-center gap-1 text-xs font-semibold text-accent-p hover:text-accent-p/80 transition-colors"
               >
                 <X className="h-3 w-3" />

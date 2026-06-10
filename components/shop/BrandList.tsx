@@ -1,8 +1,7 @@
 import { BRANDS_QUERY_RESULT } from "@/sanity.types";
 import React from "react";
 import { Title } from "../ui/text";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Label } from "../ui/label";
+import { Checkbox } from "../ui/checkbox";
 import {
   Collapsible,
   CollapsibleContent,
@@ -14,30 +13,36 @@ import { ChevronDown, X } from "lucide-react";
 
 interface Props {
   brands?: BRANDS_QUERY_RESULT;
-  selectedBrand?: string | null;
-  setSelectedBrand?: React.Dispatch<React.SetStateAction<string | null>>;
+  selectedBrands: string[];
+  setSelectedBrands: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const BrandList = ({ brands, selectedBrand, setSelectedBrand }: Props) => {
+const BrandList = ({ brands, selectedBrands, setSelectedBrands }: Props) => {
   const [isOpen, setIsOpen] = React.useState(true);
 
+  const toggleBrand = (slug: string) => {
+    setSelectedBrands((prev) =>
+      prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug],
+    );
+  };
+
   return (
-    <div className="w-full border-b border-border">
+    <div className="border-border w-full border-b">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        <CollapsibleTrigger className="group flex w-full items-center justify-between px-4 py-3 hover:bg-muted">
-          <Title className="text-sm font-semibold uppercase text-foreground">
+        <CollapsibleTrigger className="group hover:bg-muted flex w-full items-center justify-between px-4 py-3">
+          <Title className="text-foreground text-sm font-semibold uppercase">
             Brands
           </Title>
           <div className="flex items-center gap-2">
             <AnimatePresence>
-              {selectedBrand && (
+              {selectedBrands.length > 0 && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                 >
                   <Badge variant="secondary" className="h-6">
-                    1
+                    {selectedBrands.length}
                   </Badge>
                 </motion.div>
               )}
@@ -47,43 +52,44 @@ const BrandList = ({ brands, selectedBrand, setSelectedBrand }: Props) => {
         </CollapsibleTrigger>
 
         <CollapsibleContent className="space-y-1 px-4 py-3">
-          <RadioGroup value={selectedBrand || ""}>
-            {brands?.map((brand) => (
-              <div
-                onClick={() => {
-                  setSelectedBrand?.(brand?.slug?.current ?? null);
-                }}
-                key={brand?._id}
-                className="flex items-center space-x-2 rounded-md px-2 py-1.5 hover:cursor-pointer hover:bg-muted transition-colors"
-              >
-                <RadioGroupItem
-                  value={brand?.slug?.current ?? ""}
-                  id={brand?.slug?.current ?? ""}
-                  className="h-4 w-4"
-                />
-                <Label
-                  htmlFor={brand?.slug?.current}
-                  className={`cursor-pointer text-sm transition-colors ${
-                    selectedBrand === brand?.slug?.current
-                      ? "font-semibold text-accent-p"
-                      : "font-normal text-foreground hover:text-accent-p"
-                  }`}
+          <div className="space-y-1">
+            {brands?.map((brand) => {
+              const slug = brand?.slug?.current ?? "";
+              const checked = selectedBrands.includes(slug);
+              return (
+                <div
+                  onClick={() => toggleBrand(slug)}
+                  key={brand?._id}
+                  className="hover:bg-muted flex items-center space-x-2 rounded-md px-2 py-1.5 transition-colors hover:cursor-pointer"
                 >
-                  {brand?.title}
-                </Label>
-              </div>
-            ))}
-          </RadioGroup>
+                  <Checkbox
+                    checked={checked}
+                    tabIndex={-1}
+                    className="pointer-events-none h-4 w-4"
+                  />
+                  <span
+                    className={`text-sm transition-colors ${
+                      checked
+                        ? "text-accent-p font-semibold"
+                        : "text-foreground hover:text-accent-p font-normal"
+                    }`}
+                  >
+                    {brand?.title}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
 
           <AnimatePresence>
-            {selectedBrand && (
+            {selectedBrands.length > 0 && (
               <motion.button
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.2 }}
-                onClick={() => setSelectedBrand?.(null)}
-                className="mt-2 flex items-center gap-1 text-xs font-semibold text-accent-p hover:text-accent-p/80 transition-colors"
+                onClick={() => setSelectedBrands([])}
+                className="text-accent-p hover:text-accent-p/80 mt-2 flex items-center gap-1 text-xs font-semibold transition-colors"
               >
                 <X className="h-3 w-3" />
                 Reset Selection

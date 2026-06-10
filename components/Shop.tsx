@@ -27,18 +27,12 @@ interface Props {
 
 const Shop = ({ categories, brands }: Props) => {
   const searchParams = useSearchParams();
-  const brandParams = searchParams?.get("brand");
-  const categoryParams = searchParams?.get("category");
 
   const [products, setProducts] = useState<ProductListItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [priceReady, setPriceReady] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(
-    categoryParams || null,
-  );
-  const [selectedBrand, setSelectedBrand] = useState<string | null>(
-    brandParams || null,
-  );
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(searchParams?.getAll('category') ?? [])
+  const [selectedBrands, setSelectedBrands] = useState<string[]>(searchParams?.getAll('brand') ?? [])
   const [priceBounds, setPriceBounds] = useState<[number, number]>(
     DEFAULT_PRICE_BOUNDS,
   );
@@ -54,7 +48,7 @@ const Shop = ({ categories, brands }: Props) => {
       try {
         const result = await client.fetch(
           SHOP_PRICE_BOUNDS_QUERY,
-          { selectedCategory, selectedBrand },
+          { selectedCategories, selectedBrands },
           { next: { revalidate: 0 } },
         );
         if (cancelled) return;
@@ -80,7 +74,7 @@ const Shop = ({ categories, brands }: Props) => {
     return () => {
       cancelled = true;
     };
-  }, [selectedCategory, selectedBrand]);
+  }, [selectedCategories, selectedBrands]);
 
   useEffect(() => {
     if (!priceReady) return;
@@ -93,7 +87,7 @@ const Shop = ({ categories, brands }: Props) => {
         const [minPrice, maxPrice] = selectedPrice;
         const data = await client.fetch(
           SHOP_QUERY,
-          { selectedCategory, selectedBrand, minPrice, maxPrice },
+          { selectedCategories, selectedBrands, minPrice, maxPrice },
           { next: { revalidate: 0 } },
         );
         if (!cancelled) setProducts(data);
@@ -108,17 +102,17 @@ const Shop = ({ categories, brands }: Props) => {
     return () => {
       cancelled = true;
     };
-  }, [selectedCategory, selectedBrand, selectedPrice, priceReady]);
+  }, [selectedCategories, selectedBrands, selectedPrice, priceReady]);
 
   const hasPriceFilter =
     selectedPrice[0] !== priceBounds[0] ||
     selectedPrice[1] !== priceBounds[1];
   const hasActiveFilters =
-    Boolean(selectedBrand || selectedCategory || hasPriceFilter);
+    Boolean(selectedBrands.length || selectedCategories.length || hasPriceFilter);
 
   const handleResetFilters = () => {
-    setSelectedBrand(null);
-    setSelectedCategory(null);
+    setSelectedBrands([]);
+    setSelectedCategories([]);
   };
 
   return (
@@ -143,13 +137,13 @@ const Shop = ({ categories, brands }: Props) => {
           <div className="md:border-r-accent-p/50 scrollbar-hide pb-5 md:sticky md:top-20 md:h-[calc(100vh-160px)] md:min-w-64 md:self-start md:overflow-auto">
             <CategoryList
               categories={categories}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
+              selectedCategories={selectedCategories}
+              setSelectedCategories={setSelectedCategories}
             />
             <BrandList
               brands={brands}
-              selectedBrand={selectedBrand}
-              setSelectedBrand={setSelectedBrand}
+              selectedBrands={selectedBrands}
+              setSelectedBrands={setSelectedBrands}
             />
             {priceReady && (
               <PriceList

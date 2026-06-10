@@ -27,22 +27,22 @@ const BRAND_QUERY = defineQuery(
 const SHOP_PRICE_BOUNDS_QUERY = defineQuery(`{
   "minPrice": math::min(*[
     _type == "product"
-    && (!defined($selectedCategory) || references(*[_type == "category" && slug.current == $selectedCategory]._id))
-    && (!defined($selectedBrand) || references(*[_type == "brand" && slug.current == $selectedBrand]._id))
+    && (count($selectedCategories) == 0 || references(*[_type == "category" && slug.current in $selectedCategories]._id))
+    && (count($selectedBrands) == 0 || references(*[_type == "brand" && slug.current in $selectedBrands]._id))
     && defined(price)
   ].price),
   "maxPrice": math::max(*[
     _type == "product"
-    && (!defined($selectedCategory) || references(*[_type == "category" && slug.current == $selectedCategory]._id))
-    && (!defined($selectedBrand) || references(*[_type == "brand" && slug.current == $selectedBrand]._id))
+    && (count($selectedCategories) == 0 || references(*[_type == "category" && slug.current in $selectedCategories]._id))
+    && (count($selectedBrands) == 0 || references(*[_type == "brand" && slug.current in $selectedBrands]._id))
     && defined(price)
   ].price)
 }`);
 
 const SHOP_QUERY = defineQuery(`
   *[_type == 'product'
-    && (!defined($selectedCategory) || references(*[_type == "category" && slug.current == $selectedCategory]._id))
-    && (!defined($selectedBrand) || references(*[_type == "brand" && slug.current == $selectedBrand]._id))
+    && (count($selectedCategories) == 0 || references(*[_type == "category" && slug.current in $selectedCategories]._id))
+    && (count($selectedBrands) == 0 || references(*[_type == "brand" && slug.current in $selectedBrands]._id))
     && price >= $minPrice && price <= $maxPrice
   ]
   | order(name asc) {

@@ -13,7 +13,7 @@ function HeaderMenu({ className }: { className?: string }) {
         <Link
           href={item?.href}
           key={item?.title}
-          className={`hover:text-accent-p py-2 text-[16px] hoverEffect text-nowrap relative group ${pathname === item?.href && 'text-ink font-semibold'}`}
+          className={`hover:text-accent-p active:scale-95 py-2 text-[16px] hoverEffect text-nowrap relative group ${pathname === item?.href && 'text-ink font-semibold'}`}
         >
           {item?.title}
         </Link>

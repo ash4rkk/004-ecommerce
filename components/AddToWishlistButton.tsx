@@ -17,8 +17,9 @@ const AddToWishlistButton = ({ product, className }: Props) => {
   const existingProduct =
     favoriteProduct?.find((item) => item?._id === product?._id) ?? null;
 
-  const handleFavorite = (e: React.MouseEvent<HTMLSpanElement>) => {
+  const handleFavorite = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
     if (!product?._id) return;
     const isExisting = !!existingProduct;
     addToFavorite(product).then(() => {
@@ -28,16 +29,22 @@ const AddToWishlistButton = ({ product, className }: Props) => {
   return (
     <div
       className={cn(
-        "absolute top-4 right-4 z-10 hover:cursor-pointer",
         className,
       )}
     >
-      <div
-        onClick={handleFavorite}
-        className={`hover:bg-surface p-2 shadow hoverEffect rounded-full p-1 ${existingProduct ? "bg-ink text-white" : "bg-white"}`}
-      >
-        <Heart size={18} />
-      </div>
+<button
+  type="button"
+  aria-pressed={!!existingProduct}
+  aria-label={existingProduct ? "Remove from wishlist" : "Add to wishlist"}
+  onClick={handleFavorite}
+  className={cn(
+    " p-2 active:scale-95 shadow hoverEffect rounded-full",
+    "hover:cursor-pointer transition-colors",
+    existingProduct ? "bg-ink text-white" : "bg-white "
+  )}
+>
+  <Heart size={18} aria-hidden="true" />
+</button>
     </div>
   );
 };

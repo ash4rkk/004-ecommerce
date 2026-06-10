@@ -15,7 +15,7 @@ function Logo({ className, spanDesign }: { className?: string; spanDesign?: stri
         <span className={cn('text-accent-p group-hover:text-ink hoverEffect', spanDesign)}>
           e
         </span>
-        <span className=' text-ink font-black tracking-wider uppercase group-hover:text-accent-p hoverEffect font-sans'>k</span>
+        <span className={cn('text-ink font-black tracking-wider uppercase group-hover:text-accent-p hoverEffect font-sans', className)}>k</span>
       </h2>
     </Link>
   );
