@@ -5,7 +5,7 @@ interface Props {
   price?: number | undefined;
   discount?: number | undefined;
   className?: string;
-  clasNamePrev?: string;
+  classNamePrev?: string;
 }
 const PriceView = ({ price, discount, className, classNamePrev }: Props) => {
   return (
