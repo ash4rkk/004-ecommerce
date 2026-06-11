@@ -44,6 +44,8 @@ const SideMenu: FC<SidebarProps> = ({ isOpen, onClose }) => {
               className={`transition-colors active:scale-95 duration-200 ease-out hover:text-accent-p ${pathname === item?.href && "text-accent-p"}`}
               href={item?.href}
               key={item?.title}
+              onNavigate={onClose}
+              
             >
               {item?.title}
             </Link>

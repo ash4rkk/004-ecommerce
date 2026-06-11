@@ -42,7 +42,7 @@ const ProductCard = ({ product, index = 0 }: Props) => {
                 style={{ backgroundColor: `var(--tone-${toneNumber})` }}
                 width={700}
                 height={700}
-                className={`h-64 w-full overflow-hidden rounded-lg object-contain transition-transform  duration-200 ease-out ${product?.stock !== 0 ? "hover:scale-104" : "opacity-50"}`}
+                className={`h-50 md:h-64 w-full overflow-hidden rounded-lg object-contain transition-transform  duration-200 ease-out ${product?.stock !== 0 ? "hover:scale-104" : "opacity-50"}`}
               />
             </Link>
           </div>
@@ -75,7 +75,7 @@ const ProductCard = ({ product, index = 0 }: Props) => {
         )}
 
         <div className="flex items-center justify-between gap-3">
-          <Title className="line-clamp-2 min-w-0 flex-1 text-lg font-semibold">
+          <Title className="line-clamp-2 min-w-0 min-h-[2lh] flex-1 text-lg font-semibold">
             {product?.name}
           </Title>
           <div className="flex shrink-0 flex-col items-end gap-1.5">
@@ -99,8 +99,9 @@ const ProductCard = ({ product, index = 0 }: Props) => {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-end gap-2.5"></div>
+
         <ProductCardActions product={product} />
+      
       </div>
     </div>
   );

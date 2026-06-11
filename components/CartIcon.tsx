@@ -11,7 +11,7 @@ function CartIcon() {
     <Tooltip>
     <TooltipTrigger asChild>
     <Link href={"/cart"} className="group relative">
-    <div className='bg-surface active:scale-95 hover:bg-surface-2 p-3 rounded-xl hover:cursor-pointer'>
+    <div className='bg-surface active:scale-95 hover:bg-surface-2 p-2 md:p-3 md:rounded-xl rounded-md hover:cursor-pointer'>
 
       <ShoppingBag className="hover:text-accent-p text-ink hoverEffect h-4 w-4" />
       <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-accent-p p-2 font-poppins text-sm font-medium text-white">

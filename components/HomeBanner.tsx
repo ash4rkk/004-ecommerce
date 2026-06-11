@@ -9,12 +9,12 @@ function HomeBanner() {
   return (
     <div className="flex flex-col items-center justify-between space-y-4 rounded-lg bg-white px-10 py-16 md:pt-22 md:pb-14 lg:px-24">
       <p className="text-accent-p uppercase">new collection·2026</p>
-      <Title className="text-center text-7xl tracking-tight">
+      <Title className="text-center text-5xl md:text-7xl tracking-tight">
         Technology,
         <br />
         Simplified.
       </Title>
-      <p className="max-w-2xl text-center text-lg">
+      <p className="max-w-2xl text-center text-sm md:text-lg">
         Only the gear we&apos;d choose ourselves. No noise,
         <br /> no compromises.
       </p>

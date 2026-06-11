@@ -28,7 +28,7 @@ const ImageView = ({ images = [], isStock }: Props) => {
             width={700}
             height={700}
             priority
-            className={`bg-surface h-96 max-h-137.5 min-h-125 w-full rounded-md object-contain transition-transform duration-300 ease-[cubic-bezier(0.77,0,0.175,1)] hover:scale-105 ${!isStock && "opacity-50"}`}
+            className={`bg-surface h-96 max-h-137.5 min-h-125 w-full rounded-md object-contain transition-transform duration-300 ease-[cubic-bezier(0.0,0,0.5,1)] hover:scale-105 ${!isStock && "opacity-50"}`}
           />
         </motion.div>
       </AnimatePresence>

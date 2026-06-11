@@ -24,7 +24,7 @@ async function Header() {
   }
   return (
     <header className="sticky border-b top-0 z-50 bg-white py-3 border-border">
-      <Container className="text-lightColor mx-4 flex items-center justify-between">
+      <Container className="text-lightColor mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex w-auto shrink-0 items-center justify-start gap-2.5">
           <MobileMenu />
@@ -32,6 +32,7 @@ async function Header() {
         </div>
 
         {/* NavButton */}
+
         <HeaderMenu />
         <TooltipProvider>
           <div className="flex w-auto shrink-0 items-center justify-end gap-2">
@@ -44,12 +45,7 @@ async function Header() {
                 <UserButton
                   appearance={{
                     elements: {
-                      avatarBox: {
-                        width: "40px",
-                        height: "40px",
-                        borderRadius: "30%",
-                        backgroundColor: "",
-                      },
+                      avatarBox: "size-7.5 md:size-10 rounded-[30%]",
                     },
                   }}
                 />
