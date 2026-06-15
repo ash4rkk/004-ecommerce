@@ -25,7 +25,7 @@ const ProductCardActions = ({ product }: { product: ProductCardProduct }) => {
               ? product.discount
               : undefined
           }
-          className="text-sm"
+          className="text-lg"
         />
       </div>
       <AddToCartButton product={product} className="rounded-full" />

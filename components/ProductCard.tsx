@@ -1,6 +1,6 @@
 import type { ProductCardProduct } from "@/lib/product-types";
 import { urlFor } from "@/sanity/lib/image";
-import { StarIcon } from "lucide-react";
+import { CircleSmall, StarIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
@@ -27,12 +27,12 @@ const ProductCard = ({ product, index = 0 }: Props) => {
   const toneNumber = (index % 8) + 1; // 1-8 cycle
   const categoryLabel = formatCategories(product?.categories);
   return (
-    <div className="bg-surface duration-200 group rounded-lg text-sm">
+    <div className="bg-surface group rounded-lg text-sm duration-200">
       <div className="group bg-shop_light_bg relative overflow-hidden rounded-lg">
         {product?.images?.[0] && (
           <div
             style={{ backgroundColor: `var(--tone-${toneNumber})/20` }}
-            className="rounded-lg  p-2 md:px-3 md:pt-3"
+            className="rounded-lg p-2 md:px-3 md:pt-3"
           >
             <Link className="" href={`/product/${product?.slug?.current}`}>
               <Image
@@ -42,12 +42,15 @@ const ProductCard = ({ product, index = 0 }: Props) => {
                 style={{ backgroundColor: `var(--tone-${toneNumber})` }}
                 width={700}
                 height={700}
-                className={`h-50 md:h-64 w-full overflow-hidden rounded-lg object-contain transition-transform  duration-200 ease-out ${product?.stock !== 0 ? "hover:scale-104" : "opacity-50"}`}
+                className={`h-44 w-full overflow-hidden rounded-lg object-contain transition-transform duration-200 ease-out md:h-64 ${product?.stock !== 0 ? "hover:scale-104" : "opacity-50"}`}
               />
             </Link>
           </div>
         )}
-        <AddToWishlistButton className="absolute top-4 right-4 z-10" product={product} />
+        <AddToWishlistButton
+          className="absolute top-4 right-4 z-10"
+          product={product}
+        />
         {product?.status === "sale" && (
           <p className="absolute top-4 left-4 z-10 rounded-full bg-white p-1 px-2 shadow">
             Sale!
@@ -68,40 +71,35 @@ const ProductCard = ({ product, index = 0 }: Props) => {
         )}
       </div>
       <div className="flex flex-col gap-2 p-3">
-        {categoryLabel && (
-          <p className="text-shop_light_text line-clamp-1 text-xs uppercase">
-            {categoryLabel}
-          </p>
-        )}
-
-        <div className="flex items-center justify-between gap-3">
-          <Title className="line-clamp-2 min-w-0 min-h-[2lh] flex-1 text-lg font-semibold">
-            {product?.name}
-          </Title>
-          <div className="flex shrink-0 flex-col items-end gap-1.5">
-            <div className="flex items-center gap-1">
-              <StarIcon size={13} className="fill-ink" />
-              <p className="text-shop_light_text text-xs tracking-wide">
-                {product?.averageRating}
-              </p>
-            </div>
-            <div className="flex items-center gap-2 text-xs">
-              <p className="font-medium">In Stock</p>
-              <p
-                className={`font-semibold ${
-                  product?.stock === 0 ? "text-red-600" : "text-accent-soft"
-                }`}
-              >
-                {(product?.stock as number) > 0
-                  ? product?.stock
-                  : "unavailable"}
-              </p>
-            </div>
+        <div className="flex items-center justify-between gap-1">
+          {categoryLabel && (
+            <p className="text-shop_light_text line-clamp-1 text-xs uppercase">
+              {categoryLabel}
+            </p>
+          )}
+          <div className="flex items-center gap-0.5">
+            <StarIcon size={13} className="fill-ink" />
+            <p className="text-shop_light_text text-xs tracking-wide">
+              {product?.averageRating}
+            </p>
+            <p
+              className={`text-xs font-semibold ${
+                product?.stock === 0 ? "text-red-600" : "text-accent-soft"
+              }`}
+            >
+              <CircleSmall />
+            </p>
           </div>
         </div>
 
+        <div className="flex items-center justify-between gap-3">
+          <Title className="line-clamp-2 min-h-[2lh] min-w-0 flex-1 text-sm md:text-lg font-semibold">
+            {product?.name}
+          </Title>
+          <div className="flex shrink-0 flex-col items-end gap-1.5"></div>
+        </div>
+
         <ProductCardActions product={product} />
-      
       </div>
     </div>
   );
