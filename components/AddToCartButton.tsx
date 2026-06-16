@@ -49,18 +49,23 @@ const AddToCartButton = ({ product, className, classNameButton }: Props) => {
           </div>
         </div>
       ) : (
-        <Button
-          onClick={handleAddToCart}
-          disabled={isOutOfStock}
-          className={cn(
-            "bg-ink text-shop_light_bg hover:bg-accent-p hover:border-accent-p hoverEffect right-1 ml-auto rounded-full px-4 py-1 font-semibold tracking-wide shadow-none hover:text-white", classNameButton
-          )}
-        >
-          <div className="flex gap-1 align-bottom">
-            <ShoppingBag />
-            {isOutOfStock ? "Out of stock" : "Buy"}
-          </div>
-        </Button>
+<Button
+  onClick={handleAddToCart}
+  disabled={isOutOfStock}
+  className={cn(
+    "bg-ink text-shop_light_bg hover:bg-accent-p ml-auto gap-1.5 rounded-full px-4 py-1 font-semibold tracking-wide shadow-none hover:text-white",
+    classNameButton,
+  )}
+>
+  {isOutOfStock ? (
+    "Sold Out"
+  ) : (
+    <>
+      <ShoppingBag className="size-4 shrink-0" aria-hidden="true" />
+      Buy
+    </>
+  )}
+</Button>
       )}
     </div>
   );
