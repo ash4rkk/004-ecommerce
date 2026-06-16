@@ -13,7 +13,7 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { Loader2, Send } from 'lucide-react';
 import React, { useState } from 'react';
-import toast from 'react-hot-toast';
+import { toast } from "sonner";
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);

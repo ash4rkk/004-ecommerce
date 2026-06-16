@@ -7,6 +7,8 @@ import React from "react";
 import AddToWishlistButton from "./AddToWishlistButton";
 import { Title } from "./ui/text";
 import ProductCardActions from "@/actions/ProductCardActions";
+import { cn } from "@/lib/utils";
+import ProductStockIcon from "./ProductStockIcon";
 
 interface Props {
   product: ProductCardProduct;
@@ -82,18 +84,12 @@ const ProductCard = ({ product, index = 0 }: Props) => {
             <p className="text-shop_light_text text-xs tracking-wide">
               {product?.averageRating}
             </p>
-            <p
-              className={`text-xs font-semibold ${
-                product?.stock === 0 ? "text-red-600" : "text-accent-soft"
-              }`}
-            >
-              <CircleSmall />
-            </p>
+            <ProductStockIcon stock={product?.stock} lowStockThreshold={100}/>
           </div>
         </div>
 
         <div className="flex items-center justify-between gap-3">
-          <Title className="line-clamp-2 min-h-[2lh] min-w-0 flex-1 text-sm md:text-lg font-semibold">
+          <Title className="line-clamp-2 min-h-[2lh] min-w-0 flex-1 text-sm font-semibold md:text-lg">
             {product?.name}
           </Title>
           <div className="flex shrink-0 flex-col items-end gap-1.5"></div>

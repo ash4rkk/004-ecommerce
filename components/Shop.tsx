@@ -13,7 +13,7 @@ import { useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
 import { SHOP_PRICE_BOUNDS_QUERY, SHOP_QUERY } from "@/sanity/queries/query";
 import { client } from "@/sanity/lib/client";
-import { Loader2, X } from "lucide-react";
+import { ListFilter, Loader2, X } from "lucide-react";
 import NoProductAvailable from "./NoProductAvailable";
 import ProductCard from "./ProductCard";
 import { Button } from "./ui/button";
@@ -152,9 +152,9 @@ const Shop = ({ categories, brands }: Props) => {
             className="bg-surface text-ink rounded-lg py-1 font-semibold shadow"
             size={'lg'}
           >
-            Filters{" "}
+            <ListFilter />{" "}
             <span
-              className={`bg-accent-p ${!activeFilterCount && "invisible"} text-surface ml-2 rounded-full px-2 py-0.5 text-xs`}
+              className={`bg-accent-p ${!activeFilterCount && "hidden"} text-surface ml-2 rounded-full px-2 py-0.5 text-xs`}
             >
               {activeFilterCount}
             </span>
@@ -214,7 +214,7 @@ const Shop = ({ categories, brands }: Props) => {
             </motion.button>
           </div>
           <div className="mb:pt-5 flex-1 pt-1">
-            <div className="scrollbar-hide md:h-[calc(100vh)] md:overflow-y-auto pr-2">
+            <div className="scrollbar-hide md:h-[calc(100vh)] md:overflow-y-auto">
               {loading || !priceReady ? (
                 <div className="flex flex-col items-center justify-center gap-2 p-20">
                   <Loader2 className="text-accent-p h-10 w-10 animate-spin" />

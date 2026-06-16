@@ -5,6 +5,7 @@ import AddToWishlistButton from "@/components/AddToWishlistButton";
 import Container from "@/components/Container";
 import EmptyCart from "@/components/EmptyCart";
 import NoAccess from "@/components/NoAccess";
+import { AddAddressDialog } from "@/components/AddAddressDialog";
 import PriceFormatter from "@/components/PriceFormatter";
 import QuantityButtons from "@/components/QuantityButtons";
 import { Button } from "@/components/ui/button";
@@ -31,7 +32,7 @@ import { ShoppingBag, Trash } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 const CartPage = () => {
   const {
@@ -47,6 +48,7 @@ const CartPage = () => {
   const { user } = useUser();
   const [addresses, setAddresses] = useState<Address[] | null>(null);
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
+  const [addressDialogOpen, setAddressDialogOpen] = useState(false);
 
   const confirm = useConfirm();
   const isHydrated = useCartHydrated();
@@ -89,8 +91,15 @@ const CartPage = () => {
       toast.success("Cart cleared");
     }
   };
-
+  const handleAddressAdded = (newAddress: Address) => {
+    setAddresses((prev) => [newAddress, ...(prev ?? [])]);
+    setSelectedAddress(newAddress);
+  };
   const handleCheckout = async () => {
+    if (!selectedAddress) {
+      toast.error("No delivery address");
+      return;
+    }
     setLoading(true);
     try {
       const metadata = {
@@ -121,15 +130,15 @@ const CartPage = () => {
     );
   }
   return (
-    <div className="pb-52 mx-4 md:pb-10">
+    <div className="mx-4 pb-64 md:pb-10">
       {isSignedIn ? (
         <Container>
           {groupedItems?.length ? (
             <>
-              <div className="flex items-center gap-2 py-10">
+              <div className="mt-5 mb-3 flex items-center gap-2 md:mb-7">
                 {" "}
-                <ShoppingBag className="text-darkColor" />
-                <Title>Shopping Cart</Title>
+                <ShoppingBag className="text-ink" />
+                <Title className="font-bold tracking-wide">Shopping Cart</Title>
               </div>
               <div className="grid md:gap-8 lg:grid-cols-3">
                 <div className="rounded-lg bg-white lg:col-span-2">
@@ -140,93 +149,104 @@ const CartPage = () => {
                       return (
                         <div
                           key={product?._id}
-                          className="bg-surface border my-2 flex items-center justify-between gap-5 rounded-xl p-2.5"
+                          className="bg-surface my-2 flex flex-col gap-3 rounded-xl border p-2.5"
                         >
-                          <div className="flex h-26 flex-1 items-center gap-2 md:h-44">
-                            {product?.images && (
-                              <Link
-                                href={`/product/${product?.slug?.current}`}
-                                className="group hover:scale-110 hoverEffect overflow-hidden rounded-l-xl"
-                              >
-                                <Image
-                                  src={urlFor(product?.images[0]).url()}
-                                  alt="Product Image"
-                                  style={{ backgroundColor: `var(--tone-${toneNumber})` }}
-
-                                  width={500}
-                                  height={500}
-                                  loading="lazy"
-                                  className="hoverEffect h-36 w-34 border-r object-contain group-hover:scale-110 md:h-44 md:w-42 bg-tone-1 rounded-xl"
-                                />
-                              </Link>
-                            )}
-                            <div className="flex h-full flex-1 flex-col justify-between px-2 py-1">
-                              <div className="flex flex-col gap-0.5 md:gap-1.5">
-                                <h2 className="line-clamp-1 text-base font-semibold">
-                                  {product?.name}
-                                </h2>
-                                <p className="text-sm capitalize">
-                                  Variant:{" "}
-                                  <span className="font-semibold">
-                                    {product?.variant}
-                                  </span>
-                                </p>
-                                <p className="text-sm capitalize">
-                                  Status:{" "}
-                                  <span className="font-semibold">
-                                    {product?.status}
-                                  </span>
-                                </p>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <TooltipProvider>
-                                  <Tooltip>
-                                    <TooltipTrigger>
-                                      <AddToWishlistButton
-                                        product={product}
-                                        className="relative top-0 right-0"
-                                      />
-                                    </TooltipTrigger>
-                                    <TooltipContent
-                                      className="bg-[#386453] font-bold"
-                                      classNameArrow="bg-[#386453] fill-[#386453]"
-                                    >
-                                      Add to Favorite
-                                    </TooltipContent>
-                                  </Tooltip>
-                                  <Tooltip>
-                                    <TooltipTrigger>
-                                      <Trash
-                                        onClick={() => {
-                                          handleDeleteProduct(product?._id);
-                                          toast.success("Product deleted");
-                                        }}
-                                        className="hoverEffect mr-1 h-4 w-4 text-gray-500 hover:text-red-500 md:h-5 md:w-5"
-                                      />
-                                    </TooltipTrigger>
-                                    <TooltipContent
-                                      className="bg-red-600 font-bold"
-                                      classNameArrow="bg-red-600 fill-red-600"
-                                    >
-                                      Delete product
-                                    </TooltipContent>
-                                  </Tooltip>
-                                </TooltipProvider>
+                          <div className="flex items-start justify-between gap-3 md:gap-5">
+                            <div className="flex min-w-0 flex-1 items-center gap-2">
+                              {product?.images && (
+                                <Link
+                                  href={`/product/${product?.slug?.current}`}
+                                  className="group hoverEffect shrink-0 overflow-hidden rounded-xl hover:scale-110"
+                                >
+                                  <Image
+                                    src={urlFor(product?.images[0]).url()}
+                                    alt="Product Image"
+                                    style={{
+                                      backgroundColor: `var(--tone-${toneNumber})`,
+                                    }}
+                                    width={500}
+                                    height={500}
+                                    loading="lazy"
+                                    className="hoverEffect bg-tone-1 h-28 w-24 rounded-xl object-contain group-hover:scale-110 md:h-44 md:w-42"
+                                  />
+                                </Link>
+                              )}
+                              <div className="min-w-0 flex-1 px-1 py-0.5">
+                                <div className="flex flex-col gap-0.5 md:gap-1.5">
+                                  <h2 className="line-clamp-2 text-base font-semibold">
+                                    {product?.name}
+                                  </h2>
+                                  <p className="text-sm capitalize">
+                                    Variant:{" "}
+                                    <span className="font-semibold">
+                                      {product?.variant}
+                                    </span>
+                                  </p>
+                                  <p className="text-sm capitalize">
+                                    Status:{" "}
+                                    <span className="font-semibold">
+                                      {product?.status}
+                                    </span>
+                                  </p>
+                                </div>
                               </div>
                             </div>
                           </div>
-                          <div className="flex h-36 flex-col items-center justify-end gap-5 p-0.5 md:h-44 md:p-1">
-                            <PriceFormatter
-                              amount={(product?.price as number) * itemCount}
-                              className="text-xl font-bold lg:text-2xl"
-                            />
-                            <QuantityButtons product={product} />
+                          <div className="flex items-center justify-between border-t pt-2">
+                            <TooltipProvider>
+                              <div className="flex items-center gap-2">
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <AddToWishlistButton product={product} />
+                                  </TooltipTrigger>
+                                  <TooltipContent
+                                    className="bg-ink text-gray-200"
+                                    classNameArrow="bg-ink fill-ink"
+                                  >
+                                    Add to Favorite
+                                  </TooltipContent>
+                                </Tooltip>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <Button
+                                      type="button"
+                                      variant="ghost"
+                                      size="icon"
+                                      aria-label="Delete product"
+                                      onClick={() => {
+                                        handleDeleteProduct(product?._id);
+                                        toast.success("Product deleted");
+                                      }}
+                                      className="hoverEffect h-8 w-8 text-gray-500 hover:text-red-500"
+                                    >
+                                      <Trash className="h-4 w-4 md:h-5 md:w-5" />
+                                    </Button>
+                                  </TooltipTrigger>
+                                  <TooltipContent
+                                    className="bg-ink text-gray-200"
+                                    classNameArrow="bg-ink fill-ink"
+                                  >
+                                    Delete product
+                                  </TooltipContent>
+                                </Tooltip>
+                              </div>
+                            </TooltipProvider>
+                            <div className="flex w-full justify-between pl-4">
+                              <QuantityButtons
+                                product={product}
+                                className="pb-0"
+                              />
+                              <PriceFormatter
+                                amount={(product?.price as number) * itemCount}
+                                className="shrink-0 text-lg font-bold md:text-xl lg:text-2xl"
+                              />
+                            </div>
                           </div>
                         </div>
                       );
                     })}
                     <Button
-                      className="m-5 font-semibold"
+                      className="bg-ink my-5 font-semibold hover:bg-red-500"
                       size="lg"
                       onClick={handleResetCart}
                     >
@@ -275,8 +295,8 @@ const CartPage = () => {
                     </div>
                     {addresses && (
                       <div className="mt-5 rounded-md bg-white">
-                        <Card>
-                          <CardHeader>
+                        <Card className="p-4">
+                          <CardHeader >
                             <CardTitle>Delivery Address</CardTitle>
                           </CardHeader>
                           <CardContent>
@@ -289,6 +309,7 @@ const CartPage = () => {
                                 )
                               }
                             >
+                              {addresses.length === 0 && <div className="flex justify-center text-gray-500 font-semibold">No delivery address</div>}
                               {addresses?.map((addr) => (
                                 <div
                                   className={`mb-4 flex cursor-pointer items-center space-x-2 ${selectedAddress?._id === addr?._id ? "text-accent-p" : "opacity-50"}`}
@@ -313,9 +334,18 @@ const CartPage = () => {
                                 </div>
                               ))}
                             </RadioGroup>
-                            <Button variant="outline" className="mt-4 w-full">
+                            <Button
+                              variant="outline"
+                              onClick={() => setAddressDialogOpen(true)}
+                              className="mt-4 w-full"
+                            >
                               Add New Address
                             </Button>
+                            <AddAddressDialog
+                              open={addressDialogOpen}
+                              onOpenChange={setAddressDialogOpen}
+                              onSuccess={handleAddressAdded}
+                            />
                           </CardContent>
                         </Card>
                       </div>
@@ -323,19 +353,23 @@ const CartPage = () => {
                   </div>
                 </div>
                 {/* Order summary for mobile view */}
-                <div className="fixed bottom-0 left-0 w-full border-t bg-white shadow-[0_-4px_12px_rgba(0,0,0,0.08)] md:hidden">
+                <div className="fixed bottom-0 left-0 w-full border-t bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_12px_rgba(0,0,0,0.08)] md:hidden">
                   <div className="mx-auto max-w-lg space-y-2 px-4 py-3">
                     <p>Order Summary</p>
                     <div className="flex items-center justify-between text-sm text-gray-500">
                       <span>Subtotal</span>
-                      <PriceFormatter amount={getSubTotalPrice()} />
+                      <PriceFormatter
+                        className="text-gray-500"
+                        amount={getSubTotalPrice()}
+                      />
                     </div>
                     {getSubTotalPrice() - getTotalPrice() > 0 && (
-                      <div className="flex items-center justify-between text-sm text-green-600">
+                      <div className="flex items-center justify-between text-sm text-gray-500">
                         <span>Discount</span>
                         <span className="flex items-center gap-0.5">
                           -
                           <PriceFormatter
+                            className="text-gray-500"
                             amount={getSubTotalPrice() - getTotalPrice()}
                           />
                         </span>

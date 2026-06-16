@@ -1,6 +1,6 @@
 import { SanityLive } from "@/sanity/lib/live"
 import './globals.css';
-import { Toaster } from 'react-hot-toast'
+import { Toaster } from "@/components/ui/sonner"
 import { Poppins, Nunito } from 'next/font/google'
 import { ConfirmProvider } from "@/hooks/use-confirm";
 
@@ -25,16 +25,7 @@ const RootLayout=({children}: Readonly<{children: React.ReactNode}>)=>{
         <ConfirmProvider>
         {children}
         </ConfirmProvider>
-        <Toaster 
-          position="bottom-right"
-          toastOptions={{
-            style: {
-              borderRadius: '10px',
-              background: '#333',
-              color: '#fff'
-            }
-          }}
-        />
+        <Toaster position="bottom-right" richColors closeButton />
         <SanityLive />
       </body>
     </html>

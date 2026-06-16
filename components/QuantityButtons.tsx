@@ -4,7 +4,7 @@ import React from "react";
 import { Button } from "./ui/button";
 import { MinusIcon, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 interface Props {
   product: ProductCardProduct;
@@ -39,7 +39,7 @@ const QuantityButtons = ({ product, className }: Props) => {
         variant="outline"
         size="icon"
         disabled={itemCount === 0 || isOutOfStock}
-        className="hover:bg-accent-p/20 hoverEffect h-6 w-6"
+        className="hover:bg-ink hover:text-white hoverEffect h-6 w-6"
       >
         <MinusIcon />
       </Button>
@@ -51,7 +51,7 @@ const QuantityButtons = ({ product, className }: Props) => {
         variant="outline"
         size="icon"
         disabled={isOutOfStock}
-        className="hover:bg-accent-p/20 hoverEffect h-6 w-6"
+        className="hover:bg-ink hover:text-white hoverEffect h-6 w-6"
       >
         <Plus />
       </Button>

@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { TableBody, TableCell, TableRow } from './ui/table'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip'
 import PriceFormatter from './PriceFormatter'
-import toast from 'react-hot-toast'
+import { toast } from "sonner"
 import { format } from 'date-fns'
 import { X } from 'lucide-react'
 import OrderDetailDialog from './OrderDetailDialog'
