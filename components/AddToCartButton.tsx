@@ -38,7 +38,7 @@ const AddToCartButton = ({ product, className, classNameButton }: Props) => {
       {itemCount ? (
         <div className="w-full text-sm">
           <div className="flex items-center justify-between">
-            <span className="text-darkColor/80 text-xs">Quantity</span>
+            <span className="text-ink/80 text-xs">Quantity</span>
             <QuantityButtons product={product} />
           </div>
           <div className="flex items-center justify-between border-t pt-2">
@@ -53,7 +53,7 @@ const AddToCartButton = ({ product, className, classNameButton }: Props) => {
   onClick={handleAddToCart}
   disabled={isOutOfStock}
   className={cn(
-    "bg-ink text-shop_light_bg hover:bg-accent-p ml-auto gap-1.5 rounded-full px-4 py-1 font-semibold tracking-wide shadow-none hover:text-white",
+    "bg-ink text-secondary hover:bg-accent-p ml-auto gap-1.5 rounded-full px-4 py-1 font-semibold tracking-wide shadow-none hover:text-white",
     classNameButton,
   )}
 >

@@ -14,7 +14,7 @@ const PriceView = ({ price, discount, className, classNamePrev }: Props) => {
     <PriceFormatter
       amount={price + ((discount ?? 0) * price) / 100}
       className={cn(
-        "text-shop_light_text/50 font-normal line-through",
+        "text-ink-muted/50 font-normal line-through",
         !discount && "invisible",
         classNamePrev,
       )}

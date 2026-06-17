@@ -150,8 +150,9 @@ const Shop = ({ categories, brands }: Props) => {
           <Button
             onClick={() => setIsOpen(!isOpen)}
             className="bg-surface text-ink rounded-lg py-1 font-semibold shadow"
-            size={'lg'}
+            size={"lg"}
           >
+            <span>Filters</span>
             <ListFilter />{" "}
             <span
               className={`bg-accent-p ${!activeFilterCount && "hidden"} text-surface ml-2 rounded-full px-2 py-0.5 text-xs`}
@@ -178,7 +179,7 @@ const Shop = ({ categories, brands }: Props) => {
           />
         </div>
         {/* End Mobile */}
-        <div className="relative md:sticky top-0 z-10 mb-1 md:mb-5">
+        <div className="relative top-0 z-10 mb-1 md:sticky md:mb-5">
           <div className="flex w-full items-center justify-between">
             <Title className="w-full font-bold tracking-wide">
               Get the products as your needs
@@ -208,7 +209,7 @@ const Shop = ({ categories, brands }: Props) => {
               animate={{ opacity: hasActiveFilters ? 1 : 0 }}
               transition={{ duration: 0.3 }}
               onClick={handleResetFilters}
-              className="text-ink mt-5 hoverEffect w-full  hover:text-accent-p hover:bg-surface-2 bg-surface hidden rounded-full px-2 py-1 text-sm tracking-wide md:block"
+              className="text-ink hoverEffect hover:text-accent-p hover:bg-surface-2 bg-surface mt-5 hidden w-full rounded-full px-2 py-1 text-sm tracking-wide md:block"
             >
               Reset Filters
             </motion.button>

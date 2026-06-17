@@ -72,25 +72,25 @@ const WishlistProducts = () => {
                       alt={product?.name ?? "Product image"}
                       width={80}
                       height={80}
-                      className="hoverEffect rounded-md object-contain"
+                      className="hoverEffect rounded-md h-full object-contain"
                     />
                   </Link>
                 )}
                 <div className="flex flex-1 flex-col gap-1.5 pr-6">
                   <p className="text-sm font-semibold leading-tight">{product?.name}</p>
                   {product?.variant && (
-                    <p className="text-muted-foreground text-xs">{product?.variant}</p>
+                    <p className="text-muted-foreground capitalize text-xs">{product?.variant}</p>
                   )}
                   <span
-                    className={`w-fit rounded px-2 py-0.5 text-xs font-semibold ${
-                      (product?.stock as number) > 0
-                        ? "bg-green-100 text-green-600"
-                        : "bg-red-100 text-red-600"
+                    className={`w-fit rounded  py-0.5 text-xs font-semibold ${
+                      (!product?.stock as number) > 0
+                        ? "text-accent-p"
+                        : "text-red-400"
                     }`}
                   >
                     {(product?.stock as number) > 0 ? "In Stock" : "Out of Stock"}
                   </span>
-                  <PriceFormatter amount={product?.price} />
+                  <PriceFormatter className="font-bold" amount={product?.price} />
                   <AddToCartButton product={product} />
                 </div>
               </div>
@@ -138,25 +138,25 @@ const WishlistProducts = () => {
                               />
                             </Link>
                           )}
-                          <p className="text-sm font-medium">{product?.name}</p>
+                          <p className="text-sm font-semibold">{product?.name}</p>
                         </div>
                       </TableCell>
                       <TableCell>
-                        <p className="text-center">{product?.variant}</p>
+                        <p className="text-center capitalize">{product?.variant}</p>
                       </TableCell>
                       <TableCell className="text-center">
                         <span
                           className={`inline-block rounded-lg px-4 py-1.5 text-sm font-semibold ${
                             (product?.stock as number) > 0
-                              ? "bg-green-100 text-green-600"
-                              : "bg-red-100 text-red-600"
+                              ? " text-accent-soft"
+                              : " text-red-400"
                           }`}
                         >
                           {(product?.stock as number) > 0 ? "In Stock" : "Out of Stock"}
                         </span>
                       </TableCell>
                       <TableCell className="text-center">
-                        <PriceFormatter amount={product?.price} />
+                        <PriceFormatter className="font-bold" amount={product?.price} />
                       </TableCell>
                       <TableCell className="text-center">
                         <AddToCartButton product={product} />

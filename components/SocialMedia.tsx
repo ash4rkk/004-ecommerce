@@ -52,7 +52,7 @@ function SocialMedia({ className, iconClassName, tooltipClassName }: Props) {
                 {item?.icon}
               </Link>
             </TooltipTrigger>
-            <TooltipContent classNameArrow={'fill-surface-2 bg-surface-2'} className={cn('text-darkColor bg-surface-2 font-semibold', tooltipClassName)}>
+            <TooltipContent classNameArrow={'fill-surface-2 bg-surface-2'} className={cn('text-ink bg-surface-2 font-semibold', tooltipClassName)}>
               {item?.title}
             </TooltipContent>
           </Tooltip>

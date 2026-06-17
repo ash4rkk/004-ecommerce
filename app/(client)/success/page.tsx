@@ -70,10 +70,10 @@ function SuccessContent() {
           </div>
 
           <div className="mb-10 text-center">
-            <h1 className="mb-2 text-3xl font-bold text-darkColor">
+            <h1 className="mb-2 text-3xl font-bold text-ink">
               Thank you for your order!
             </h1>
-            <p className="text-base text-lightColor">
+            <p className="text-base text-ink-muted">
               {user?.firstName ? `Hi ${user.firstName}! ` : ""}
               Your payment has been confirmed. We&apos;ll send you a
               confirmation email with your order details shortly.
@@ -93,9 +93,9 @@ function SuccessContent() {
                 <div className="flex items-center justify-between border-b border-gray-50 py-3">
                   <div className="flex items-center gap-3">
                     <Package className="h-5 w-5 text-gray-400" />
-                    <span className="text-sm text-lightColor">Order Number</span>
+                    <span className="text-sm text-ink-muted">Order Number</span>
                   </div>
-                  <span className="rounded-lg bg-gray-50 px-3 py-1 font-mono text-sm font-semibold text-darkColor">
+                  <span className="rounded-lg bg-gray-50 px-3 py-1 font-mono text-sm font-semibold text-ink">
                     {orderNumber}
                   </span>
                 </div>
@@ -114,15 +114,15 @@ function SuccessContent() {
                 <>
                   {sessionData.customerEmail && (
                     <div className="flex items-center justify-between border-b border-gray-50 py-3">
-                      <span className="text-sm text-lightColor">Email</span>
-                      <span className="text-sm font-medium text-darkColor">
+                      <span className="text-sm text-ink-muted">Email</span>
+                      <span className="text-sm font-medium text-ink">
                         {sessionData.customerEmail}
                       </span>
                     </div>
                   )}
 
                   <div className="flex items-center justify-between border-b border-gray-50 py-3">
-                    <span className="text-sm text-lightColor">
+                    <span className="text-sm text-ink-muted">
                       Payment Status
                     </span>
                     <span className="rounded-full bg-accent-p/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent-p">
@@ -134,10 +134,10 @@ function SuccessContent() {
 
                   {formattedAmount && (
                     <div className="flex items-center justify-between py-3">
-                      <span className="text-sm text-lightColor">
+                      <span className="text-sm text-ink-muted">
                         Total Amount
                       </span>
-                      <span className="text-lg font-bold text-darkColor">
+                      <span className="text-lg font-bold text-ink">
                         {formattedAmount}
                       </span>
                     </div>

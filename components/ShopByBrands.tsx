@@ -46,17 +46,17 @@ const ShopByBrands = async () => {
           return (
             <div
               key={index}
-              className="group text-lightColor hover:text-accent-p flex items-center gap-3 border-r"
+              className="group text-ink-muted hover:text-accent-p flex items-center gap-3 border-r"
             >
               <span className="hoverEffect inline-flex scale-100 group-hover:scale-90">
                 {" "}
                 <Icon size={45} />
               </span>
               <div className="text-sm">
-                <p className="text-darkColor/90 font-bold capitalize">
+                <p className="text-ink/90 font-bold capitalize">
                   {item?.title}
                 </p>
-                <p className="text-lightColor">{item?.description}</p>
+                <p className="text-ink-muted">{item?.description}</p>
               </div>
             </div>
           );

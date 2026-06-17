@@ -1,7 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { CircleSmall } from "lucide-react";
+import { CircleSmall, X } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 type StockFraction = 0 | 0.25 | 0.5 | 0.75 | 1;
 
@@ -28,10 +29,7 @@ function getClockwiseClipPath(fraction: StockFraction): string | undefined {
   }
 }
 
-function stockToFraction(
-  stock: number,
-  threshold: number,
-): StockFraction {
+function stockToFraction(stock: number, threshold: number): StockFraction {
   if (stock <= 0) return 0;
   if (stock >= threshold) return 1;
 
@@ -45,8 +43,9 @@ function stockToFraction(
 
 function getStockColor(stock: number, threshold: number): string {
   if (stock === 0) return "text-red-600";
-  if (stock < threshold * 0.4) return "text-red-500";
-  if (stock < threshold * 0.7) return "text-amber-500";
+  if (stock < threshold * 0.25) return "text-amber-500";
+  if (stock < threshold * 0.5) return "text-purple-500";
+  if (stock < threshold * 0.75) return "text-sky-500";
   return "text-accent-soft";
 }
 
@@ -59,7 +58,7 @@ const ProductStockIcon = ({
   const fraction = stockToFraction(safeStock, lowStockThreshold);
   const clipPath = getClockwiseClipPath(fraction);
   const color = getStockColor(safeStock, lowStockThreshold);
-  const iconSize = 20
+  const iconSize = 20;
   const label =
     safeStock === 0
       ? "Out of stock"
@@ -70,42 +69,58 @@ const ProductStockIcon = ({
   // Pełne kółko (stock >= threshold lub blisko pełne)
   if (safeStock > 0 && fraction === 1) {
     return (
-      <span
-        className={cn(`inline-flex  shrink-0 size-${iconSize / 4}`, className)}
-        aria-label={label}
-        title={label}
-      >
-        <CircleSmall size={iconSize} className={cn("fill-current", color)} />
-      </span>
+      <Tooltip>
+        <TooltipTrigger>
+          <CircleSmall size={iconSize} className={cn("", color)} />
+
+          <TooltipContent
+            className="bg-white"
+            classNameArrow="fill-white bg-white"
+          >
+            {label}
+          </TooltipContent>
+        </TooltipTrigger>
+      </Tooltip>
     );
   }
 
   // Out of stock — puste/szare kółko
   if (safeStock === 0) {
     return (
-      <span
-        className={cn(`inline-flex size-${iconSize / 4} shrink-0 `, className)}
-        aria-label={label}
-        title={label}
-      >
-        <CircleSmall size={iconSize} className="fill-current text-surface-2" />
-      </span>
+      <Tooltip>
+        <TooltipTrigger>
+          <X size={iconSize - 2} className={cn("", color)} />
+
+          <TooltipContent
+            className="bg-white"
+            classNameArrow="fill-white bg-white"
+          >
+            {label}
+          </TooltipContent>
+        </TooltipTrigger>
+      </Tooltip>
     );
   }
 
   // Niski stan — szare tło + kolorowy wycinek tortu
   return (
-    <span
-      className={cn(`relative inline-flex size-${iconSize / 4} shrink-0`, className)}
-      aria-label={label}
-      title={label}
-    >
-      <CircleSmall size={iconSize} className="fill-current text-surface-2" />
-      <CircleSmall size={iconSize}
-        className={cn("absolute inset-0 fill-current", color)}
-        style={clipPath ? { clipPath } : undefined}
-      />
-    </span>
+    <Tooltip>
+      <TooltipTrigger>
+        <span className={cn("relative flex", className)}>
+          <CircleSmall size={iconSize} className="text-surface-2" />
+
+          <CircleSmall
+            size={iconSize}
+            className={cn("absolute inset-0", color)}
+            style={clipPath ? { clipPath } : undefined}
+          />
+        </span>
+      </TooltipTrigger>
+
+      <TooltipContent className="bg-white" classNameArrow="fill-white bg-white">
+        {label}
+      </TooltipContent>
+    </Tooltip>
   );
 };
 

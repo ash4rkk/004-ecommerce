@@ -19,7 +19,7 @@ const NoAccess = ({
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          <p className="text-center font-medium text-darkColor/80">{details}</p>
+          <p className="text-center font-medium text-ink/80">{details}</p>
         <SignInButton mode="modal">
           <Button className="w-full" size='lg'>Sign in</Button>
         </SignInButton>

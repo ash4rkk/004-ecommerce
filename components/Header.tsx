@@ -24,7 +24,7 @@ async function Header() {
   }
   return (
     <header className="sticky border-b top-0 z-50 bg-white py-3 border-border">
-      <Container className="text-lightColor mx-auto flex items-center justify-between">
+      <Container className="text-ink-muted mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex w-auto shrink-0 items-center justify-start gap-2.5">
           <MobileMenu />

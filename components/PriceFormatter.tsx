@@ -12,7 +12,7 @@ const PriceFormatter = ({amount, className}: Props) => {
   })
 
   return (
-    <span className={cn('text-sm font-semibold text-darkColor', className)}>{formattedPrice}</span>
+    <span className={cn('text-sm font-semibold text-ink', className)}>{formattedPrice}</span>
   )
 }
 

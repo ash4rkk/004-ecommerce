@@ -24,9 +24,9 @@ function Footer() {
                 elevate your living spaces.
               </SubText>
               <SocialMedia
-                className='text-darkColor/60'
-                iconClassName='border-darkColor/60 hover:border-accent-p hover:text-accent-p'
-                tooltipClassName='bg-darkColor text-white'
+                className='text-ink/60'
+                iconClassName='border-ink/60 hover:border-accent-p hover:text-accent-p'
+                tooltipClassName='bg-ink text-white'
               />
             </div>
             <div>

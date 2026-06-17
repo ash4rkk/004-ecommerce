@@ -48,7 +48,7 @@ const EmptyCart = () => {
         <div>
           <Link
             href="/"
-            className="block bg-accent-p/80 border text-white text-center py-2.5 rounded-full text-sm font-semibold tracking-wide hover:bg-accent-p hover:bg-dark-color hoverEffect"
+            className="block bg-accent-p/80 border text-white text-center py-2.5 rounded-full text-sm font-semibold tracking-wide hover:bg-accent-p hoverEffect"
           >
             Discover Products
           </Link>

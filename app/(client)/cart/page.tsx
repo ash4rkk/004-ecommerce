@@ -97,7 +97,7 @@ const CartPage = () => {
   };
   const handleCheckout = async () => {
     if (!selectedAddress) {
-      toast.error("No delivery address");
+      toast.warning("No delivery address");
       return;
     }
     setLoading(true);

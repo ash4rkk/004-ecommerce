@@ -28,7 +28,7 @@ const NoProductAvailable = ({ selectedTab, className }: Props) => {
         className='text-gray-900'
       >
         We&apos;re sorry, but there are no products matching on{' '}
-        <span className='text-base font-semibold text-darkColor'>{selectedTab}</span> criteria at
+        <span className='text-base font-semibold text-ink'>{selectedTab}</span> criteria at
         the moment.
       </motion.p>
       <motion.div

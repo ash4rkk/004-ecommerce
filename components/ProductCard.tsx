@@ -30,7 +30,7 @@ const ProductCard = ({ product, index = 0 }: Props) => {
   const categoryLabel = formatCategories(product?.categories);
   return (
     <div className="bg-surface group rounded-lg text-sm duration-200">
-      <div className="group bg-shop_light_bg relative overflow-hidden rounded-lg">
+      <div className="group bg-surface relative overflow-hidden rounded-lg">
         {product?.images?.[0] && (
           <div
             style={{ backgroundColor: `var(--tone-${toneNumber})/20` }}
@@ -75,13 +75,13 @@ const ProductCard = ({ product, index = 0 }: Props) => {
       <div className="flex flex-col gap-2 p-3">
         <div className="flex items-center justify-between gap-1">
           {categoryLabel && (
-            <p className="text-shop_light_text line-clamp-1 text-xs uppercase">
+            <p className="text-ink-muted line-clamp-1 text-xs uppercase">
               {categoryLabel}
             </p>
           )}
           <div className="flex items-center gap-0.5">
             <StarIcon size={13} className="fill-ink" />
-            <p className="text-shop_light_text text-xs tracking-wide">
+            <p className="text-ink-muted text-xs tracking-wide">
               {product?.averageRating}
             </p>
             <ProductStockIcon stock={product?.stock} lowStockThreshold={100}/>

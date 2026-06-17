@@ -162,7 +162,7 @@ const ContactPage = () => {
           >
             {faqItems.map((item, index) => (
               <AccordionItem key={item.question} value={`item-${index}`}>
-                <AccordionTrigger className="text-left font-medium text-ink-2 hover:text-accent-p hover:no-underline">
+                <AccordionTrigger className="text-left font-medium text-ink-muted hover:text-accent-p hover:no-underline">
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-ink/60">{item.answer}</AccordionContent>

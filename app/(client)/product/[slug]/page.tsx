@@ -33,7 +33,7 @@ const SingleProductPage = async ({
         {product?.images && (
           <ImageView images={product?.images} isStock={isStock} />
         )}
-        <div className="border-darkColor/10 flex w-full flex-col gap-5 rounded-md bg-white p-5 md:w-1/2">
+        <div className="border-ink/10 flex w-full flex-col gap-5 rounded-md bg-white p-5 md:w-1/2">
           <div className="space-y-1">
             <h2 className="text-2xl font-bold">{product?.name}</h2>
             <p className="text-sm tracking-wide text-gray-900">
@@ -91,8 +91,8 @@ const SingleProductPage = async ({
             </div>
           </div>
           <div className="flex flex-col">
-            <div className="border-lightColor/25 flex items-center gap-2.5 border border-b-0 p-3">
-              <Truck size={30} className="text-shop_orange" />
+            <div className="border-ink-muted/25 flex items-center gap-2.5 border border-b-0 p-3">
+              <Truck size={30} className="text-ink" />
               <div>
                 <p className="text-base font-semibold text-black">
                   Free Delivery
@@ -103,8 +103,8 @@ const SingleProductPage = async ({
                 </p>
               </div>
             </div>
-            <div className="border-lightColor/25 flex items-center gap-2.5 border border-b p-3">
-              <CornerDownLeft size={30} className="text-shop_orange" />
+            <div className="border-ink-muted/25 flex items-center gap-2.5 border border-b p-3">
+              <CornerDownLeft size={30} className="text-ink" />
               <div>
                 <p className="text-base font-semibold text-black">
                   Return Delivery
