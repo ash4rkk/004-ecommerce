@@ -81,6 +81,9 @@ const SINGLE_BLOG_QUERY =
     "slug": slug.current,
   },
 } `);
+const SEARCH_PRODUCTS_QUERY = defineQuery(`*[_type == 'product' && name match $q] | order(name asc) [0...8] {
+  _id, name, slug, price, images, 'categories': categories[]->title
+}`)
 
 export {
   BRANDS_QUERY,
@@ -94,4 +97,5 @@ export {
   MY_ORDERS_QUERY,
   ALL_BLOGS_QUERY,
   SINGLE_BLOG_QUERY,
+  SEARCH_PRODUCTS_QUERY
 };

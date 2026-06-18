@@ -83,7 +83,7 @@ const WishlistProducts = () => {
                   )}
                   <span
                     className={`w-fit rounded  py-0.5 text-xs font-semibold ${
-                      (!product?.stock as number) > 0
+                      (product?.stock as number) > 0
                         ? "text-accent-p"
                         : "text-red-400"
                     }`}
