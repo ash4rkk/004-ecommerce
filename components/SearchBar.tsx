@@ -20,7 +20,7 @@ import {
 function SearchBar() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<SEARCH_PRODUCTS_QUERY_RESULT[]>([]);
+  const [results, setResults] = useState<SEARCH_PRODUCTS_QUERY_RESULT>([]);
   const [loading, setLoading] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
 

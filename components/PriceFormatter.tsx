@@ -1,7 +1,6 @@
 import { cn } from '@/lib/utils';
-import React from 'react'
 interface Props {
-  amount: number | undefined;
+  amount: number | null;
   className?: string;
 }
 const PriceFormatter = ({amount, className}: Props) => {
