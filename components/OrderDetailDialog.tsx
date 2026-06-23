@@ -90,7 +90,7 @@ const OrderDetailDialog: React.FC<OrderDetailsDialogProps> = ({
                 <TableCell>{product?.quantity}</TableCell>
                 <TableCell>
                   <PriceFormatter
-                    amount={product?.product?.price}
+                    amount={product?.product?.price ?? null}
                     className="text-black font-medium"
                   />
                 </TableCell>
@@ -104,7 +104,7 @@ const OrderDetailDialog: React.FC<OrderDetailsDialogProps> = ({
               <div className="w-full flex items-center justify-between">
                 <strong>Discount: </strong>
                 <PriceFormatter
-                  amount={order?.amountDiscount}
+                  amount={order?.amountDiscount ?? null}
                   className="text-black font-bold"
                 />
               </div>
@@ -124,7 +124,7 @@ const OrderDetailDialog: React.FC<OrderDetailsDialogProps> = ({
             <div className="w-full flex items-center justify-between">
               <strong>Total: </strong>
               <PriceFormatter
-                amount={order?.totalPrice}
+                amount={order?.totalPrice ?? null}
                 className="text-black font-bold"
               />
             </div>
