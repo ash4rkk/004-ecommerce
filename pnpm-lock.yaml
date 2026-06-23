@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      004-ecommerce:
+        specifier: 'link:'
+        version: 'link:'
       '@base-ui/react':
         specifier: ^1.4.1
         version: 1.4.1(@date-fns/tz@1.4.1)(@types/react@19.2.14)(date-fns@4.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)

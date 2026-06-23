@@ -88,7 +88,7 @@ const WishlistProducts = () => {
                   >
                     {(product?.stock as number) > 0 ? "In Stock" : "Out of Stock"}
                   </span>
-                  <PriceFormatter className="font-bold" amount={product?.price} />
+                  <PriceFormatter className="font-bold" amount={product?.price ?? null} />
                   <AddToCartButton product={product} />
                 </div>
               </div>
@@ -154,7 +154,7 @@ const WishlistProducts = () => {
                         </span>
                       </TableCell>
                       <TableCell className="text-center">
-                        <PriceFormatter className="font-bold" amount={product?.price} />
+                        <PriceFormatter className="font-bold" amount={product?.price ?? null} />
                       </TableCell>
                       <TableCell className="text-center">
                         <AddToCartButton product={product} />

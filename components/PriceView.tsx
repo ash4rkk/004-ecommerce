@@ -20,7 +20,7 @@ const PriceView = ({ price, discount, className, classNamePrev }: Props) => {
       )}
     />
   )}
-  <PriceFormatter amount={price} className={cn("text-ink text-lg", className)} />
+  <PriceFormatter amount={price ?? null} className={cn("text-ink text-lg", className)} />
 </div>
   );
 };

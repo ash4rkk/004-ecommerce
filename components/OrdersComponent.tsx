@@ -42,7 +42,7 @@ const OrdersComponent = ({orders}:Props) => {
                   </TableCell>
                   <TableCell>
                     <PriceFormatter
-                      amount={order?.totalPrice}
+                      amount={order?.totalPrice ?? null}
                       className="text-black font-medium"
                     />
                   </TableCell>
