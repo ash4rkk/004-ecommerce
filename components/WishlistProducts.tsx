@@ -1,26 +1,24 @@
 "use client";
+import { useConfirm } from "@/hooks/use-confirm";
+import { urlFor } from "@/sanity/lib/image";
 import useStore from "@/store";
-import React, { useState } from "react";
-import Container from "./Container";
 import { ArrowDownNarrowWide, ArrowUpNarrowWide, Heart, X } from "lucide-react";
-import { Button } from "./ui/button";
+import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { toast } from "sonner";
+import AddToCartButton from "./AddToCartButton";
+import Container from "./Container";
+import PriceFormatter from "./PriceFormatter";
+import { Button } from "./ui/button";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from "./ui/table";
-import type { ProductCardProduct } from "@/lib/product-types";
-import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
-import PriceFormatter from "./PriceFormatter";
-import AddToCartButton from "./AddToCartButton";
-import { toast } from "sonner";
-import { useConfirm } from "@/hooks/use-confirm";
 
 
 const WishlistProducts = () => {
@@ -36,16 +34,16 @@ const WishlistProducts = () => {
 
   const handleResetWishlist = async () => {
     const ok = await confirm({
-      title: "Wyczyścić wishlist?",
-      description: "Wszystkie produkty z wishlist zostaną usunięte.",
-      confirmLabel: "Wyczyść",
-      cancelLabel: "Anuluj",
+      title: "Clear wishlist?",
+      description: "All products will be cleared.",
+      confirmLabel: "Clear",
+      cancelLabel: "Cancel",
       variant: "destructive",
     });
 
     if (ok) {
       resetFavorite();
-      toast.success("Wishlist wyczyszczony");
+      toast.success("Wishlist cleared.");
     }
   };
   return (
@@ -102,7 +100,7 @@ const WishlistProducts = () => {
             <Table className="w-full border-collapse">
               <TableHeader>
                 <TableRow >
-                  <TableHead className="w-10font-semibold"></TableHead>
+                  <TableHead className="w-10 font-semibold"></TableHead>
                   <TableHead className="font-semibold">Image</TableHead>
                   <TableHead className="text-center font-semibold">Category</TableHead>
                   <TableHead className="text-center font-semibold">Status</TableHead>
@@ -208,7 +206,7 @@ const WishlistProducts = () => {
                 Your wishlist is empty
               </h2>
               <p className="text-muted-foreground text-sm">
-                Items added to your wishlist will apear here
+                Items added to your wishlist will appear here
               </p>
             </div>
             <Button size="lg" asChild className="my-5">

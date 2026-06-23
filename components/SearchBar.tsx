@@ -1,7 +1,13 @@
 "use client";
 
+import { SEARCH_PRODUCTS_QUERY_RESULT } from "@/sanity.types";
+import { urlFor } from "@/sanity/lib/image";
+import { Command } from "cmdk";
 import { Search } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import PriceFormatter from "./PriceFormatter";
 import {
   CommandDialog,
   CommandEmpty,
@@ -10,33 +16,34 @@ import {
   CommandItem,
   CommandList,
 } from "./ui/command";
-import Link from "next/link";
-import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
-import PriceFormatter from "./PriceFormatter";
-import { Command } from "cmdk";
 
 function SearchBar() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<SEARCH_PRODUCTS_QUERY_RESULT[]>([]);
   const [loading, setLoading] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
 
+  const trimmedQuery = query.trim()
+  const shouldSearch = trimmedQuery.length >= 2
+  const visibleResults = shouldSearch ? results : []
+  const visibleLoading = shouldSearch && loading
   useEffect(() => {
-    if (query.trim().length < 2) {
-      setResults([]);
+    if (!shouldSearch) {
+      abortRef.current?.abort();
       return;
     }
+  
     const t = setTimeout(async () => {
       abortRef.current?.abort();
       const controller = new AbortController();
       abortRef.current = controller;
       setLoading(true);
       try {
-        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`, {
-          signal: controller.signal,
-        });
+        const res = await fetch(
+          `/api/search?q=${encodeURIComponent(trimmedQuery)}`,
+          { signal: controller.signal }
+        );
         setResults(await res.json());
       } catch (error) {
         console.log("Abort Error", error);
@@ -44,8 +51,9 @@ function SearchBar() {
         setLoading(false);
       }
     }, 300);
+  
     return () => clearTimeout(t);
-  }, [query]);
+  }, [trimmedQuery, shouldSearch]);
   return (
     <>
       <button

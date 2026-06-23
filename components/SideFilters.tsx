@@ -1,11 +1,9 @@
-import React from "react";
+import { X } from "lucide-react";
 import { ShopFiltersProps } from "./Shop";
-import CategoryList from "./shop/CategoryList";
 import BrandList from "./shop/BrandList";
+import CategoryList from "./shop/CategoryList";
 import PriceList from "./shop/PriceList";
 import { ScrollArea, ScrollBar } from "./ui/scroll-area";
-import { X } from "lucide-react";
-import { Button } from "./ui/button";
 import { Title } from "./ui/text";
 interface Props {
   isOpen: boolean;

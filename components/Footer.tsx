@@ -1,14 +1,12 @@
-import React from 'react';
-import Container from './Container';
-import FooterTop from './FooterTop';
-import FooterBottom from './FooterBottom';
-import Logo from './Logo';
-import SocialMedia from './SocialMedia';
-import { SubText, SubTitle } from './ui/text';
 import { DATA_categories, DATA_quickLinks } from '@/constants/data';
 import Link from 'next/link';
-import { Input } from './ui/input';
+import Container from './Container';
+import FooterTop from './FooterTop';
+import Logo from './Logo';
+import SocialMedia from './SocialMedia';
 import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { SubText, SubTitle } from './ui/text';
 
 function Footer() {
   return (

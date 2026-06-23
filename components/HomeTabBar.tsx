@@ -2,7 +2,6 @@ import { DATA_productType } from "@/constants/data";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { Scroll } from "lucide-react";
 import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 
 interface Props {

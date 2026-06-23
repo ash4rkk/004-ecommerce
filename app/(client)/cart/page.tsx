@@ -1,11 +1,11 @@
 "use client";
 import { createCheckoutSession } from "@/actions/createCheckoutSession";
 import getMyAddresses from "@/actions/getMyAddresses";
+import { AddAddressDialog } from "@/components/AddAddressDialog";
 import AddToWishlistButton from "@/components/AddToWishlistButton";
 import Container from "@/components/Container";
 import EmptyCart from "@/components/EmptyCart";
 import NoAccess from "@/components/NoAccess";
-import { AddAddressDialog } from "@/components/AddAddressDialog";
 import PriceFormatter from "@/components/PriceFormatter";
 import QuantityButtons from "@/components/QuantityButtons";
 import { Button } from "@/components/ui/button";
@@ -22,16 +22,13 @@ import {
 } from "@/components/ui/tooltip";
 import { useConfirm } from "@/hooks/use-confirm";
 import { Address } from "@/sanity.types";
-import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
-import { ADDRESSES_QUERY } from "@/sanity/queries/query";
 import useStore, { useCartHydrated } from "@/store";
 import { useAuth, useUser } from "@clerk/nextjs";
-import { add } from "date-fns";
 import { ShoppingBag, Trash } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const CartPage = () => {

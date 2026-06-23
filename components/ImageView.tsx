@@ -3,8 +3,7 @@ import { Product } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import React, { useState } from "react";
-import { Button } from "./ui/button";
+import { useState } from "react";
 interface Props {
   images?: Product["images"];
   isStock?: boolean;

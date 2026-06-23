@@ -3,6 +3,7 @@ import type { ProductCardProduct } from "@/lib/product-types";
 import useStore, { useCartHydrated } from "@/store";
 import PriceView from "@/components/PriceView";
 import AddToCartButton from "@/components/AddToCartButton";
+import { cn } from "@/lib/utils";
 
 const ProductCardActions = ({ product }: { product: ProductCardProduct }) => {
   const isHydrated = useCartHydrated();
@@ -10,26 +11,34 @@ const ProductCardActions = ({ product }: { product: ProductCardProduct }) => {
   const inCart = isHydrated && itemCount > 0;
 
   return (
-    <div className="flex items-center align-middle">
-      <div
-        className={`transition-[display,opacity,filter] transition-discrete duration-200 ease-out ${
-          inCart
-            ? "hidden opacity-0 blur-[2px]"
-            : "opacity-100 starting:opacity-0 starting:blur-[2px]"
-        }`}
-      >
-        <PriceView
-          price={product?.price}
-          discount={
-            product?.discount && product.discount > 0
-              ? product.discount
-              : undefined
-          }
-          className="text-sm md:text-lg"
-          classNamePrev="text-xs"
-        />
+    <div
+      className={cn(
+        "grid w-full min-w-0 items-center gap-2 transition-[grid-template-columns] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
+        inCart ? "grid-cols-[0fr_1fr]" : "grid-cols-[1fr_1fr]",
+      )}
+    >
+      <div className="min-w-0 overflow-hidden">
+        <div
+          className={cn(
+            "transition-[opacity,filter] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
+            inCart ? "pointer-events-none opacity-0 blur-[2px]" : "opacity-100 blur-0",
+          )}
+        >
+          <PriceView
+            price={product?.price}
+            discount={
+              product?.discount && product.discount > 0
+                ? product.discount
+                : undefined
+            }
+            className="text-sm md:text-lg"
+            classNamePrev="text-xs"
+          />
+        </div>
       </div>
-      <AddToCartButton product={product} className="rounded-full" />
+      <div className="min-w-0">
+        <AddToCartButton product={product} className="rounded-full" />
+      </div>
     </div>
   );
 };

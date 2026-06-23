@@ -1,20 +1,17 @@
 import AddToCartButton from "@/components/AddToCartButton";
+import AddToWishlistButton from "@/components/AddToWishlistButton";
 import Container from "@/components/Container";
-import FavoriteButton from "@/components/FavoriteButton";
 import ImageView from "@/components/ImageView";
 import PriceView from "@/components/PriceView";
 import ProductCharacteristics from "@/components/ProductCharacteristics";
+import ProductDetailsReviews from "@/components/ProductDetailsReviews";
 import { getProductBySlug } from "@/sanity/queries";
 import { CornerDownLeft, Dot, StarIcon, Truck } from "lucide-react";
-import React from "react";
+import { notFound } from "next/navigation";
 import { FaRegQuestionCircle } from "react-icons/fa";
+import { FiShare2 } from "react-icons/fi";
 import { RxBorderSplit } from "react-icons/rx";
 import { TbTruckDelivery } from "react-icons/tb";
-import { FiShare2 } from "react-icons/fi";
-import { Button } from "@/components/ui/button";
-import ProductDetailsReviews from "@/components/ProductDetailsReviews";
-import { notFound } from "next/navigation";
-import AddToWishlistButton from "@/components/AddToWishlistButton";
 
 const SingleProductPage = async ({
   params,
@@ -59,7 +56,7 @@ const SingleProductPage = async ({
               </div>
             </div>
           </div>
-          <div className="flex flex justify-between items-center space-y-2 border-t border-b border-gray-200 py-2">
+          <div className="flex justify-between items-center space-y-2 border-t border-b border-gray-200 py-2">
             <PriceView
               className="text-3xl font-bold"
               price={product?.price}

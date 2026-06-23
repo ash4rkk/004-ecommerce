@@ -800,6 +800,25 @@ export type SINGLE_BLOG_QUERY_RESULT = {
   body?: BlockContent;
 } | null;
 
+// Source: sanity/queries/query.ts
+// Variable: SEARCH_PRODUCTS_QUERY
+// Query: *[_type == 'product' && name match $q] | order(name asc) [0...8] {  _id, name, slug, price, images, 'categories': categories[]->title}
+export type SEARCH_PRODUCTS_QUERY_RESULT = Array<{
+  _id: string;
+  name: string | null;
+  slug: Slug | null;
+  price: number | null;
+  images: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }> | null;
+  categories: Array<string | null> | null;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -815,5 +834,6 @@ declare module "@sanity/client" {
     "*[_type == 'order' && clerkUserId == $userId] | order(orderDate desc) {\n  ...,\n  products[] {\n    ...,\n    product->\n  }\n}": MY_ORDERS_QUERY_RESULT;
     "*[_type == 'blog'] | order(publishedAt desc) [0...$quantity]{\n  ...,\n  blogcategories[]->{title}\n}": ALL_BLOGS_QUERY_RESULT;
     "*[_type == 'blog' && slug.current == $slug][0]{\n  ...,\n  author -> {\n    name,\n    image,\n  },\n  blogcategories[] -> {\n    title,\n    \"slug\": slug.current,\n  },\n} ": SINGLE_BLOG_QUERY_RESULT;
+    "*[_type == 'product' && name match $q] | order(name asc) [0...8] {\n  _id, name, slug, price, images, 'categories': categories[]->title\n}": SEARCH_PRODUCTS_QUERY_RESULT;
   }
 }

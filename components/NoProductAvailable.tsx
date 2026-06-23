@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
-import { animate, motion } from 'motion/react';
 import { Loader2 } from 'lucide-react';
+import { motion } from 'motion/react';
 
 interface Props {
   selectedTab?: string;

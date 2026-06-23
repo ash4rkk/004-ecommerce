@@ -1,9 +1,8 @@
-import Image from 'next/image';
-import { Title } from './ui/text';
-import { Category, Product } from '@/sanity.types';
 import { urlFor } from '@/sanity/lib/image';
-import Link from 'next/link';
 import { CategoryWithCount } from '@/sanity/queries';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Title } from './ui/text';
 interface Props {
   categories: CategoryWithCount[];
 }

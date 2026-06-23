@@ -1,14 +1,12 @@
+import ProductCardActions from "@/actions/ProductCardActions";
 import type { ProductCardProduct } from "@/lib/product-types";
 import { urlFor } from "@/sanity/lib/image";
-import { CircleSmall, StarIcon } from "lucide-react";
-import Link from "next/link";
+import { StarIcon } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
 import AddToWishlistButton from "./AddToWishlistButton";
-import { Title } from "./ui/text";
-import ProductCardActions from "@/actions/ProductCardActions";
-import { cn } from "@/lib/utils";
 import ProductStockIcon from "./ProductStockIcon";
+import { Title } from "./ui/text";
 
 interface Props {
   product: ProductCardProduct;

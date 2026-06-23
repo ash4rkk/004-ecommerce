@@ -2,7 +2,6 @@
 import { client } from '@/sanity/lib/client'
 import { ADDRESSES_QUERY } from '@/sanity/queries/query'
 import { currentUser } from '@clerk/nextjs/server'
-import React from 'react'
 
 const getMyAddresses = async () => {
   const user = await currentUser()

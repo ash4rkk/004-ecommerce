@@ -1,8 +1,7 @@
-import type { Metadata } from 'next';
-import { cn } from '@/lib/utils';
-import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 import { ClerkProvider } from '@clerk/nextjs';
+import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: {
     template: '%s - Shopek store',

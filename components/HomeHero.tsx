@@ -1,9 +1,6 @@
-import React from "react";
-import Container from "./Container";
-import Image from "next/image";
 import { hero2 } from "@/images";
-import { Title } from "./ui/text";
-import Link from "next/link";
+import Image from "next/image";
+import Container from "./Container";
 
 const HomeHero = () => {
   return (

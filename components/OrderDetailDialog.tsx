@@ -1,8 +1,11 @@
-import { MY_ORDERS_QUERY_RESULT } from '@/sanity.types'
-import React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
-import { Button } from "./ui/button";
+import { MY_ORDERS_QUERY_RESULT } from '@/sanity.types';
+import { urlFor } from "@/sanity/lib/image";
+import Image from "next/image";
 import Link from "next/link";
+import React from "react";
+import PriceFormatter from "./PriceFormatter";
+import { Button } from "./ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import {
   Table,
   TableBody,
@@ -11,12 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
-import PriceFormatter from "./PriceFormatter";
-interface Props {
-  order: MY_ORDERS_QUERY_RESULT[number] | null
-}
+
 interface OrderDetailsDialogProps {
   order: MY_ORDERS_QUERY_RESULT[number] | null;
   isOpen: boolean;

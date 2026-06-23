@@ -39,7 +39,7 @@ const QuantityButtons = ({ product, className }: Props) => {
         variant="outline"
         size="icon"
         disabled={itemCount === 0 || isOutOfStock}
-        className="hover:bg-ink hover:text-white hoverEffect h-6 w-6"
+        className="hover:bg-ink hover:text-white hoverEffect h-6 w-6 active:scale-[0.97] transition-transform duration-150 ease-out"
       >
         <MinusIcon />
       </Button>
@@ -51,7 +51,7 @@ const QuantityButtons = ({ product, className }: Props) => {
         variant="outline"
         size="icon"
         disabled={isOutOfStock}
-        className="hover:bg-ink hover:text-white hoverEffect h-6 w-6"
+        className="hover:bg-ink hover:text-white hoverEffect h-6 w-6 active:scale-[0.97] transition-transform duration-150 ease-out"
       >
         <Plus />
       </Button>
