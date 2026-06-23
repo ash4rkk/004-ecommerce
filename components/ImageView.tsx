@@ -43,7 +43,7 @@ const ImageView = ({ images = [], isStock }: Props) => {
               alt={`Thumbnail ${image._key}`}
               width={100}
               height={100}
-              className="h-full w-full object-cover transition-transform  active:scale-98 active:scale-97"
+              className="h-full w-full object-cover transition-transform  active:scale-98"
             />
           </button>
         ))}

@@ -17,7 +17,7 @@ const HomeTabBar = ({ selectedTab, onTabSelect }: Props) => {
   </Link>
         <ScrollArea className="min-w-0 rounded-lg flex-1">
           <div className="flex w-max flex-nowrap items-center gap-1 md:gap-3">
-            {DATA_productType?.map((item, index) => (
+            {DATA_productType?.map((item, _) => (
               <Button
                 key={item?.title}
                 variant="ghost"

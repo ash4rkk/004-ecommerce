@@ -11,7 +11,7 @@ const eslintConfig = defineConfig([
     extends: [eslintPluginTailwindcss.configs.recommended],
     settings: {
       tailwindcss: {
-        cssConfigPath: "./app/globals.css", // ścieżka do Twojego głównego pliku CSS z @import "tailwindcss"
+        cssConfigPath: "./app/globals.css", 
       },
     },
   },
@@ -24,7 +24,15 @@ const eslintConfig = defineConfig([
       "unused-imports/no-unused-vars": "warn",
     },
   },
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
-]);
+  globalIgnores([
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+    "sanity.types.ts",   
+    "schema.json",         
+    "dist/**",
+    "coverage/**",
+  ]),]);
 
 export default eslintConfig;
